@@ -1,0 +1,35 @@
+[workspace]
+channels = ["conda-forge"]
+name = "lerobot-robocasa"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[activation.env]
+MUJOCO_GL = "egl"
+
+[tasks]
+
+[dependencies]
+python = "3.12.*"
+
+[pypi-dependencies]
+lerobot = ">=0.6.1, <0.7"
+torch = { version = "==2.7.1", index = "https://download.pytorch.org/whl/cu118" }
+torchvision = { version = "==0.22.1", index = "https://download.pytorch.org/whl/cu118" }
+torchcodec = ">=0.5.0,<0.6"
+robosuite = { path = "third_party/robosuite", editable = true }
+robocasa = { path = "third_party/robocasa", editable = true }
+# lerobot 0.6.1 extras dataset, pi, and evaluation. The override below drops
+# extras from every lerobot requirement, so they are listed here instead.
+datasets = ">=4.8.0, <5.0.0"
+pandas = ">=2.0.0, <3.0.0"
+pyarrow = ">=21.0.0, <30.0.0"
+jsonlines = ">=4.0.0, <5.0.0"
+av = ">=15.0.0, <16.0.0"
+transformers = ">=5.4.0, <5.6.0"
+scipy = ">=1.14.0, <2.0.0"
+
+[pypi-options.dependency-overrides]
+# robocasa pins lerobot==0.3.3 and tianshou==0.4.10 pins protobuf~=3.19.
+lerobot = ">=0.6.1, <0.7"
+protobuf = ">=4"

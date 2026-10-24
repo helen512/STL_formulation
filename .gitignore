@@ -1,4 +1,10 @@
 # pixi environments
-.pixi/*
-!.pixi/config.toml
+**/.pixi/*
+!**/.pixi/config.toml
 
+.cursor/*
+
+# RoboCasa365 checkouts and their kitchen assets
+robocasa_ws/third_party/
+plan.md
+agentdoc.md
