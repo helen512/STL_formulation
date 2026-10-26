@@ -8,3 +8,5 @@
 robocasa_ws/third_party/
 plan.md
 agentdoc.md
+# python bytecode
+__pycache__/
