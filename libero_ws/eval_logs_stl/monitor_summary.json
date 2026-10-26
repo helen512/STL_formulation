@@ -1,0 +1,3235 @@
+[
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 122,
+  "variant": "nl",
+  "task": 0,
+  "prompt": "open the middle drawer of the cabinet",
+  "file": "libero_goal_0_ep0.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [
+   "akita_black_bowl",
+   "cream_cheese",
+   "plate"
+  ],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "nl",
+  "task": 0,
+  "prompt": "open the middle drawer of the cabinet",
+  "file": "libero_goal_0_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 118,
+  "variant": "nl",
+  "task": 0,
+  "prompt": "open the middle drawer of the cabinet",
+  "file": "libero_goal_0_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 129,
+  "variant": "nl",
+  "task": 0,
+  "prompt": "open the middle drawer of the cabinet",
+  "file": "libero_goal_0_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 135,
+  "variant": "nl",
+  "task": 0,
+  "prompt": "open the middle drawer of the cabinet",
+  "file": "libero_goal_0_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 87,
+  "variant": "nl",
+  "task": 1,
+  "prompt": "put the bowl on the stove",
+  "file": "libero_goal_1_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 85,
+  "variant": "nl",
+  "task": 1,
+  "prompt": "put the bowl on the stove",
+  "file": "libero_goal_1_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 83,
+  "variant": "nl",
+  "task": 1,
+  "prompt": "put the bowl on the stove",
+  "file": "libero_goal_1_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 83,
+  "variant": "nl",
+  "task": 1,
+  "prompt": "put the bowl on the stove",
+  "file": "libero_goal_1_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 83,
+  "variant": "nl",
+  "task": 1,
+  "prompt": "put the bowl on the stove",
+  "file": "libero_goal_1_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 80,
+  "variant": "nl",
+  "task": 2,
+  "prompt": "put the wine bottle on top of the cabinet",
+  "file": "libero_goal_2_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 96,
+  "variant": "nl",
+  "task": 2,
+  "prompt": "put the wine bottle on top of the cabinet",
+  "file": "libero_goal_2_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 94,
+  "variant": "nl",
+  "task": 2,
+  "prompt": "put the wine bottle on top of the cabinet",
+  "file": "libero_goal_2_ep2.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "nl",
+  "task": 2,
+  "prompt": "put the wine bottle on top of the cabinet",
+  "file": "libero_goal_2_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 88,
+  "variant": "nl",
+  "task": 2,
+  "prompt": "put the wine bottle on top of the cabinet",
+  "file": "libero_goal_2_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 264,
+  "variant": "nl",
+  "task": 3,
+  "prompt": "open the top drawer and put the bowl inside",
+  "file": "libero_goal_3_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 182,
+  "variant": "nl",
+  "task": 3,
+  "prompt": "open the top drawer and put the bowl inside",
+  "file": "libero_goal_3_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 173,
+  "variant": "nl",
+  "task": 3,
+  "prompt": "open the top drawer and put the bowl inside",
+  "file": "libero_goal_3_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 175,
+  "variant": "nl",
+  "task": 3,
+  "prompt": "open the top drawer and put the bowl inside",
+  "file": "libero_goal_3_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 296,
+  "variant": "nl",
+  "task": 3,
+  "prompt": "open the top drawer and put the bowl inside",
+  "file": "libero_goal_3_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 83,
+  "variant": "nl",
+  "task": 4,
+  "prompt": "put the bowl on top of the cabinet",
+  "file": "libero_goal_4_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 84,
+  "variant": "nl",
+  "task": 4,
+  "prompt": "put the bowl on top of the cabinet",
+  "file": "libero_goal_4_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 85,
+  "variant": "nl",
+  "task": 4,
+  "prompt": "put the bowl on top of the cabinet",
+  "file": "libero_goal_4_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 85,
+  "variant": "nl",
+  "task": 4,
+  "prompt": "put the bowl on top of the cabinet",
+  "file": "libero_goal_4_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 89,
+  "variant": "nl",
+  "task": 4,
+  "prompt": "put the bowl on top of the cabinet",
+  "file": "libero_goal_4_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 138,
+  "variant": "nl",
+  "task": 5,
+  "prompt": "push the plate to the front of the stove",
+  "file": "libero_goal_5_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 136,
+  "variant": "nl",
+  "task": 5,
+  "prompt": "push the plate to the front of the stove",
+  "file": "libero_goal_5_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 123,
+  "variant": "nl",
+  "task": 5,
+  "prompt": "push the plate to the front of the stove",
+  "file": "libero_goal_5_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 116,
+  "variant": "nl",
+  "task": 5,
+  "prompt": "push the plate to the front of the stove",
+  "file": "libero_goal_5_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 133,
+  "variant": "nl",
+  "task": 5,
+  "prompt": "push the plate to the front of the stove",
+  "file": "libero_goal_5_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 85,
+  "variant": "nl",
+  "task": 6,
+  "prompt": "put the cream cheese in the bowl",
+  "file": "libero_goal_6_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 91,
+  "variant": "nl",
+  "task": 6,
+  "prompt": "put the cream cheese in the bowl",
+  "file": "libero_goal_6_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 95,
+  "variant": "nl",
+  "task": 6,
+  "prompt": "put the cream cheese in the bowl",
+  "file": "libero_goal_6_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 88,
+  "variant": "nl",
+  "task": 6,
+  "prompt": "put the cream cheese in the bowl",
+  "file": "libero_goal_6_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 84,
+  "variant": "nl",
+  "task": 6,
+  "prompt": "put the cream cheese in the bowl",
+  "file": "libero_goal_6_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 82,
+  "variant": "nl",
+  "task": 7,
+  "prompt": "turn on the stove",
+  "file": "libero_goal_7_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 73,
+  "variant": "nl",
+  "task": 7,
+  "prompt": "turn on the stove",
+  "file": "libero_goal_7_ep1.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "nl",
+  "task": 7,
+  "prompt": "turn on the stove",
+  "file": "libero_goal_7_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 70,
+  "variant": "nl",
+  "task": 7,
+  "prompt": "turn on the stove",
+  "file": "libero_goal_7_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 83,
+  "variant": "nl",
+  "task": 7,
+  "prompt": "turn on the stove",
+  "file": "libero_goal_7_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 76,
+  "variant": "nl",
+  "task": 8,
+  "prompt": "put the bowl on the plate",
+  "file": "libero_goal_8_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 77,
+  "variant": "nl",
+  "task": 8,
+  "prompt": "put the bowl on the plate",
+  "file": "libero_goal_8_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 76,
+  "variant": "nl",
+  "task": 8,
+  "prompt": "put the bowl on the plate",
+  "file": "libero_goal_8_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 68,
+  "variant": "nl",
+  "task": 8,
+  "prompt": "put the bowl on the plate",
+  "file": "libero_goal_8_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 75,
+  "variant": "nl",
+  "task": 8,
+  "prompt": "put the bowl on the plate",
+  "file": "libero_goal_8_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 141,
+  "variant": "nl",
+  "task": 9,
+  "prompt": "put the wine bottle on the rack",
+  "file": "libero_goal_9_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 127,
+  "variant": "nl",
+  "task": 9,
+  "prompt": "put the wine bottle on the rack",
+  "file": "libero_goal_9_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 130,
+  "variant": "nl",
+  "task": 9,
+  "prompt": "put the wine bottle on the rack",
+  "file": "libero_goal_9_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 132,
+  "variant": "nl",
+  "task": 9,
+  "prompt": "put the wine bottle on the rack",
+  "file": "libero_goal_9_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 142,
+  "variant": "nl",
+  "task": 9,
+  "prompt": "put the wine bottle on the rack",
+  "file": "libero_goal_9_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 123,
+  "variant": "stl_nl",
+  "task": 0,
+  "prompt": "open the middle drawer within 15 seconds",
+  "file": "libero_goal_0_ep0.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [
+   "akita_black_bowl",
+   "plate"
+  ],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl_nl",
+  "task": 0,
+  "prompt": "open the middle drawer within 15 seconds",
+  "file": "libero_goal_0_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 127,
+  "variant": "stl_nl",
+  "task": 0,
+  "prompt": "open the middle drawer within 15 seconds",
+  "file": "libero_goal_0_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 125,
+  "variant": "stl_nl",
+  "task": 0,
+  "prompt": "open the middle drawer within 15 seconds",
+  "file": "libero_goal_0_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 142,
+  "variant": "stl_nl",
+  "task": 0,
+  "prompt": "open the middle drawer within 15 seconds",
+  "file": "libero_goal_0_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 85,
+  "variant": "stl_nl",
+  "task": 1,
+  "prompt": "put the black bowl on the stove within 15 seconds",
+  "file": "libero_goal_1_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 83,
+  "variant": "stl_nl",
+  "task": 1,
+  "prompt": "put the black bowl on the stove within 15 seconds",
+  "file": "libero_goal_1_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 81,
+  "variant": "stl_nl",
+  "task": 1,
+  "prompt": "put the black bowl on the stove within 15 seconds",
+  "file": "libero_goal_1_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 85,
+  "variant": "stl_nl",
+  "task": 1,
+  "prompt": "put the black bowl on the stove within 15 seconds",
+  "file": "libero_goal_1_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 80,
+  "variant": "stl_nl",
+  "task": 1,
+  "prompt": "put the black bowl on the stove within 15 seconds",
+  "file": "libero_goal_1_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 80,
+  "variant": "stl_nl",
+  "task": 2,
+  "prompt": "put the wine bottle on the top of the cabinet within 15 seconds",
+  "file": "libero_goal_2_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 94,
+  "variant": "stl_nl",
+  "task": 2,
+  "prompt": "put the wine bottle on the top of the cabinet within 15 seconds",
+  "file": "libero_goal_2_ep1.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl_nl",
+  "task": 2,
+  "prompt": "put the wine bottle on the top of the cabinet within 15 seconds",
+  "file": "libero_goal_2_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 88,
+  "variant": "stl_nl",
+  "task": 2,
+  "prompt": "put the wine bottle on the top of the cabinet within 15 seconds",
+  "file": "libero_goal_2_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 90,
+  "variant": "stl_nl",
+  "task": 2,
+  "prompt": "put the wine bottle on the top of the cabinet within 15 seconds",
+  "file": "libero_goal_2_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 243,
+  "variant": "stl_nl",
+  "task": 3,
+  "prompt": "open the top drawer, then put the black bowl in the top drawer within 15 seconds",
+  "file": "libero_goal_3_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 174,
+  "variant": "stl_nl",
+  "task": 3,
+  "prompt": "open the top drawer, then put the black bowl in the top drawer within 15 seconds",
+  "file": "libero_goal_3_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 159,
+  "variant": "stl_nl",
+  "task": 3,
+  "prompt": "open the top drawer, then put the black bowl in the top drawer within 15 seconds",
+  "file": "libero_goal_3_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 169,
+  "variant": "stl_nl",
+  "task": 3,
+  "prompt": "open the top drawer, then put the black bowl in the top drawer within 15 seconds",
+  "file": "libero_goal_3_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 173,
+  "variant": "stl_nl",
+  "task": 3,
+  "prompt": "open the top drawer, then put the black bowl in the top drawer within 15 seconds",
+  "file": "libero_goal_3_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 84,
+  "variant": "stl_nl",
+  "task": 4,
+  "prompt": "put the black bowl on the top of the cabinet within 15 seconds",
+  "file": "libero_goal_4_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 84,
+  "variant": "stl_nl",
+  "task": 4,
+  "prompt": "put the black bowl on the top of the cabinet within 15 seconds",
+  "file": "libero_goal_4_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 81,
+  "variant": "stl_nl",
+  "task": 4,
+  "prompt": "put the black bowl on the top of the cabinet within 15 seconds",
+  "file": "libero_goal_4_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 88,
+  "variant": "stl_nl",
+  "task": 4,
+  "prompt": "put the black bowl on the top of the cabinet within 15 seconds",
+  "file": "libero_goal_4_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 89,
+  "variant": "stl_nl",
+  "task": 4,
+  "prompt": "put the black bowl on the top of the cabinet within 15 seconds",
+  "file": "libero_goal_4_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 138,
+  "variant": "stl_nl",
+  "task": 5,
+  "prompt": "put the plate on the front of the stove within 15 seconds",
+  "file": "libero_goal_5_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [
+   "cream_cheese"
+  ],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 115,
+  "variant": "stl_nl",
+  "task": 5,
+  "prompt": "put the plate on the front of the stove within 15 seconds",
+  "file": "libero_goal_5_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 115,
+  "variant": "stl_nl",
+  "task": 5,
+  "prompt": "put the plate on the front of the stove within 15 seconds",
+  "file": "libero_goal_5_ep2.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [
+   "akita_black_bowl"
+  ],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl_nl",
+  "task": 5,
+  "prompt": "put the plate on the front of the stove within 15 seconds",
+  "file": "libero_goal_5_ep3.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [
+   "akita_black_bowl"
+  ],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl_nl",
+  "task": 5,
+  "prompt": "put the plate on the front of the stove within 15 seconds",
+  "file": "libero_goal_5_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 83,
+  "variant": "stl_nl",
+  "task": 6,
+  "prompt": "put the cream cheese on the black bowl within 15 seconds",
+  "file": "libero_goal_6_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 90,
+  "variant": "stl_nl",
+  "task": 6,
+  "prompt": "put the cream cheese on the black bowl within 15 seconds",
+  "file": "libero_goal_6_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 94,
+  "variant": "stl_nl",
+  "task": 6,
+  "prompt": "put the cream cheese on the black bowl within 15 seconds",
+  "file": "libero_goal_6_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 83,
+  "variant": "stl_nl",
+  "task": 6,
+  "prompt": "put the cream cheese on the black bowl within 15 seconds",
+  "file": "libero_goal_6_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 85,
+  "variant": "stl_nl",
+  "task": 6,
+  "prompt": "put the cream cheese on the black bowl within 15 seconds",
+  "file": "libero_goal_6_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 77,
+  "variant": "stl_nl",
+  "task": 7,
+  "prompt": "turn on the stove within 15 seconds",
+  "file": "libero_goal_7_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 79,
+  "variant": "stl_nl",
+  "task": 7,
+  "prompt": "turn on the stove within 15 seconds",
+  "file": "libero_goal_7_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 70,
+  "variant": "stl_nl",
+  "task": 7,
+  "prompt": "turn on the stove within 15 seconds",
+  "file": "libero_goal_7_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 71,
+  "variant": "stl_nl",
+  "task": 7,
+  "prompt": "turn on the stove within 15 seconds",
+  "file": "libero_goal_7_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 81,
+  "variant": "stl_nl",
+  "task": 7,
+  "prompt": "turn on the stove within 15 seconds",
+  "file": "libero_goal_7_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 74,
+  "variant": "stl_nl",
+  "task": 8,
+  "prompt": "put the black bowl on the plate within 15 seconds",
+  "file": "libero_goal_8_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 76,
+  "variant": "stl_nl",
+  "task": 8,
+  "prompt": "put the black bowl on the plate within 15 seconds",
+  "file": "libero_goal_8_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 76,
+  "variant": "stl_nl",
+  "task": 8,
+  "prompt": "put the black bowl on the plate within 15 seconds",
+  "file": "libero_goal_8_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 68,
+  "variant": "stl_nl",
+  "task": 8,
+  "prompt": "put the black bowl on the plate within 15 seconds",
+  "file": "libero_goal_8_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 76,
+  "variant": "stl_nl",
+  "task": 8,
+  "prompt": "put the black bowl on the plate within 15 seconds",
+  "file": "libero_goal_8_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 123,
+  "variant": "stl_nl",
+  "task": 9,
+  "prompt": "put the wine bottle on the wine rack within 15 seconds",
+  "file": "libero_goal_9_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 127,
+  "variant": "stl_nl",
+  "task": 9,
+  "prompt": "put the wine bottle on the wine rack within 15 seconds",
+  "file": "libero_goal_9_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 132,
+  "variant": "stl_nl",
+  "task": 9,
+  "prompt": "put the wine bottle on the wine rack within 15 seconds",
+  "file": "libero_goal_9_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 131,
+  "variant": "stl_nl",
+  "task": 9,
+  "prompt": "put the wine bottle on the wine rack within 15 seconds",
+  "file": "libero_goal_9_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 141,
+  "variant": "stl_nl",
+  "task": 9,
+  "prompt": "put the wine bottle on the wine rack within 15 seconds",
+  "file": "libero_goal_9_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 128,
+  "variant": "stl",
+  "task": 0,
+  "prompt": "F[0,15] open(middle_drawer)",
+  "file": "libero_goal_0_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 143,
+  "variant": "stl",
+  "task": 0,
+  "prompt": "F[0,15] open(middle_drawer)",
+  "file": "libero_goal_0_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 123,
+  "variant": "stl",
+  "task": 0,
+  "prompt": "F[0,15] open(middle_drawer)",
+  "file": "libero_goal_0_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 122,
+  "variant": "stl",
+  "task": 0,
+  "prompt": "F[0,15] open(middle_drawer)",
+  "file": "libero_goal_0_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 127,
+  "variant": "stl",
+  "task": 0,
+  "prompt": "F[0,15] open(middle_drawer)",
+  "file": "libero_goal_0_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 84,
+  "variant": "stl",
+  "task": 1,
+  "prompt": "F[0,15] on(black_bowl, stove)",
+  "file": "libero_goal_1_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 87,
+  "variant": "stl",
+  "task": 1,
+  "prompt": "F[0,15] on(black_bowl, stove)",
+  "file": "libero_goal_1_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 83,
+  "variant": "stl",
+  "task": 1,
+  "prompt": "F[0,15] on(black_bowl, stove)",
+  "file": "libero_goal_1_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 84,
+  "variant": "stl",
+  "task": 1,
+  "prompt": "F[0,15] on(black_bowl, stove)",
+  "file": "libero_goal_1_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 83,
+  "variant": "stl",
+  "task": 1,
+  "prompt": "F[0,15] on(black_bowl, stove)",
+  "file": "libero_goal_1_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 76,
+  "variant": "stl",
+  "task": 2,
+  "prompt": "F[0,15] on(wine_bottle, top_of_the_cabinet)",
+  "file": "libero_goal_2_ep0.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl",
+  "task": 2,
+  "prompt": "F[0,15] on(wine_bottle, top_of_the_cabinet)",
+  "file": "libero_goal_2_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 94,
+  "variant": "stl",
+  "task": 2,
+  "prompt": "F[0,15] on(wine_bottle, top_of_the_cabinet)",
+  "file": "libero_goal_2_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 87,
+  "variant": "stl",
+  "task": 2,
+  "prompt": "F[0,15] on(wine_bottle, top_of_the_cabinet)",
+  "file": "libero_goal_2_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 83,
+  "variant": "stl",
+  "task": 2,
+  "prompt": "F[0,15] on(wine_bottle, top_of_the_cabinet)",
+  "file": "libero_goal_2_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 241,
+  "variant": "stl",
+  "task": 3,
+  "prompt": "F[0,15] (open(top_drawer) & F[0,15] in(black_bowl, top_drawer))",
+  "file": "libero_goal_3_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 234,
+  "variant": "stl",
+  "task": 3,
+  "prompt": "F[0,15] (open(top_drawer) & F[0,15] in(black_bowl, top_drawer))",
+  "file": "libero_goal_3_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 171,
+  "variant": "stl",
+  "task": 3,
+  "prompt": "F[0,15] (open(top_drawer) & F[0,15] in(black_bowl, top_drawer))",
+  "file": "libero_goal_3_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 172,
+  "variant": "stl",
+  "task": 3,
+  "prompt": "F[0,15] (open(top_drawer) & F[0,15] in(black_bowl, top_drawer))",
+  "file": "libero_goal_3_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 171,
+  "variant": "stl",
+  "task": 3,
+  "prompt": "F[0,15] (open(top_drawer) & F[0,15] in(black_bowl, top_drawer))",
+  "file": "libero_goal_3_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 83,
+  "variant": "stl",
+  "task": 4,
+  "prompt": "F[0,15] on(black_bowl, top_of_the_cabinet)",
+  "file": "libero_goal_4_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 86,
+  "variant": "stl",
+  "task": 4,
+  "prompt": "F[0,15] on(black_bowl, top_of_the_cabinet)",
+  "file": "libero_goal_4_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 80,
+  "variant": "stl",
+  "task": 4,
+  "prompt": "F[0,15] on(black_bowl, top_of_the_cabinet)",
+  "file": "libero_goal_4_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 87,
+  "variant": "stl",
+  "task": 4,
+  "prompt": "F[0,15] on(black_bowl, top_of_the_cabinet)",
+  "file": "libero_goal_4_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 92,
+  "variant": "stl",
+  "task": 4,
+  "prompt": "F[0,15] on(black_bowl, top_of_the_cabinet)",
+  "file": "libero_goal_4_ep4.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [
+   "akita_black_bowl"
+  ],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl",
+  "task": 5,
+  "prompt": "F[0,15] on(plate, front_of_the_stove)",
+  "file": "libero_goal_5_ep0.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl",
+  "task": 5,
+  "prompt": "F[0,15] on(plate, front_of_the_stove)",
+  "file": "libero_goal_5_ep1.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [
+   "cream_cheese"
+  ],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl",
+  "task": 5,
+  "prompt": "F[0,15] on(plate, front_of_the_stove)",
+  "file": "libero_goal_5_ep2.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [
+   "akita_black_bowl"
+  ],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl",
+  "task": 5,
+  "prompt": "F[0,15] on(plate, front_of_the_stove)",
+  "file": "libero_goal_5_ep3.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [
+   "akita_black_bowl"
+  ],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl",
+  "task": 5,
+  "prompt": "F[0,15] on(plate, front_of_the_stove)",
+  "file": "libero_goal_5_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 128,
+  "variant": "stl",
+  "task": 6,
+  "prompt": "F[0,15] on(cream_cheese, black_bowl)",
+  "file": "libero_goal_6_ep0.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl",
+  "task": 6,
+  "prompt": "F[0,15] on(cream_cheese, black_bowl)",
+  "file": "libero_goal_6_ep1.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl",
+  "task": 6,
+  "prompt": "F[0,15] on(cream_cheese, black_bowl)",
+  "file": "libero_goal_6_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 86,
+  "variant": "stl",
+  "task": 6,
+  "prompt": "F[0,15] on(cream_cheese, black_bowl)",
+  "file": "libero_goal_6_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 294,
+  "variant": "stl",
+  "task": 6,
+  "prompt": "F[0,15] on(cream_cheese, black_bowl)",
+  "file": "libero_goal_6_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 80,
+  "variant": "stl",
+  "task": 7,
+  "prompt": "F[0,15] turnon(stove)",
+  "file": "libero_goal_7_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 80,
+  "variant": "stl",
+  "task": 7,
+  "prompt": "F[0,15] turnon(stove)",
+  "file": "libero_goal_7_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 74,
+  "variant": "stl",
+  "task": 7,
+  "prompt": "F[0,15] turnon(stove)",
+  "file": "libero_goal_7_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 73,
+  "variant": "stl",
+  "task": 7,
+  "prompt": "F[0,15] turnon(stove)",
+  "file": "libero_goal_7_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 80,
+  "variant": "stl",
+  "task": 7,
+  "prompt": "F[0,15] turnon(stove)",
+  "file": "libero_goal_7_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 76,
+  "variant": "stl",
+  "task": 8,
+  "prompt": "F[0,15] on(black_bowl, plate)",
+  "file": "libero_goal_8_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 76,
+  "variant": "stl",
+  "task": 8,
+  "prompt": "F[0,15] on(black_bowl, plate)",
+  "file": "libero_goal_8_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 76,
+  "variant": "stl",
+  "task": 8,
+  "prompt": "F[0,15] on(black_bowl, plate)",
+  "file": "libero_goal_8_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 73,
+  "variant": "stl",
+  "task": 8,
+  "prompt": "F[0,15] on(black_bowl, plate)",
+  "file": "libero_goal_8_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 76,
+  "variant": "stl",
+  "task": 8,
+  "prompt": "F[0,15] on(black_bowl, plate)",
+  "file": "libero_goal_8_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 120,
+  "variant": "stl",
+  "task": 9,
+  "prompt": "F[0,15] on(wine_bottle, wine_rack)",
+  "file": "libero_goal_9_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 121,
+  "variant": "stl",
+  "task": 9,
+  "prompt": "F[0,15] on(wine_bottle, wine_rack)",
+  "file": "libero_goal_9_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 119,
+  "variant": "stl",
+  "task": 9,
+  "prompt": "F[0,15] on(wine_bottle, wine_rack)",
+  "file": "libero_goal_9_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 129,
+  "variant": "stl",
+  "task": 9,
+  "prompt": "F[0,15] on(wine_bottle, wine_rack)",
+  "file": "libero_goal_9_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 122,
+  "variant": "stl",
+  "task": 9,
+  "prompt": "F[0,15] on(wine_bottle, wine_rack)",
+  "file": "libero_goal_9_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 121,
+  "variant": "stl_bddl",
+  "task": 0,
+  "prompt": "F[0,15] open(wooden_cabinet_1_middle_region)",
+  "file": "libero_goal_0_ep0.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [
+   "akita_black_bowl",
+   "plate"
+  ],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl_bddl",
+  "task": 0,
+  "prompt": "F[0,15] open(wooden_cabinet_1_middle_region)",
+  "file": "libero_goal_0_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 125,
+  "variant": "stl_bddl",
+  "task": 0,
+  "prompt": "F[0,15] open(wooden_cabinet_1_middle_region)",
+  "file": "libero_goal_0_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 130,
+  "variant": "stl_bddl",
+  "task": 0,
+  "prompt": "F[0,15] open(wooden_cabinet_1_middle_region)",
+  "file": "libero_goal_0_ep3.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [
+   "akita_black_bowl",
+   "plate"
+  ],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl_bddl",
+  "task": 0,
+  "prompt": "F[0,15] open(wooden_cabinet_1_middle_region)",
+  "file": "libero_goal_0_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 86,
+  "variant": "stl_bddl",
+  "task": 1,
+  "prompt": "F[0,15] on(akita_black_bowl_1, flat_stove_1_cook_region)",
+  "file": "libero_goal_1_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 86,
+  "variant": "stl_bddl",
+  "task": 1,
+  "prompt": "F[0,15] on(akita_black_bowl_1, flat_stove_1_cook_region)",
+  "file": "libero_goal_1_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 85,
+  "variant": "stl_bddl",
+  "task": 1,
+  "prompt": "F[0,15] on(akita_black_bowl_1, flat_stove_1_cook_region)",
+  "file": "libero_goal_1_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 83,
+  "variant": "stl_bddl",
+  "task": 1,
+  "prompt": "F[0,15] on(akita_black_bowl_1, flat_stove_1_cook_region)",
+  "file": "libero_goal_1_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 82,
+  "variant": "stl_bddl",
+  "task": 1,
+  "prompt": "F[0,15] on(akita_black_bowl_1, flat_stove_1_cook_region)",
+  "file": "libero_goal_1_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 87,
+  "variant": "stl_bddl",
+  "task": 2,
+  "prompt": "F[0,15] on(wine_bottle_1, wooden_cabinet_1_top_side)",
+  "file": "libero_goal_2_ep0.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [
+   "akita_black_bowl"
+  ],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl_bddl",
+  "task": 2,
+  "prompt": "F[0,15] on(wine_bottle_1, wooden_cabinet_1_top_side)",
+  "file": "libero_goal_2_ep1.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl_bddl",
+  "task": 2,
+  "prompt": "F[0,15] on(wine_bottle_1, wooden_cabinet_1_top_side)",
+  "file": "libero_goal_2_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 91,
+  "variant": "stl_bddl",
+  "task": 2,
+  "prompt": "F[0,15] on(wine_bottle_1, wooden_cabinet_1_top_side)",
+  "file": "libero_goal_2_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 88,
+  "variant": "stl_bddl",
+  "task": 2,
+  "prompt": "F[0,15] on(wine_bottle_1, wooden_cabinet_1_top_side)",
+  "file": "libero_goal_2_ep4.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl_bddl",
+  "task": 3,
+  "prompt": "F[0,15] (open(wooden_cabinet_1_top_region) & F[0,15] in(akita_black_bowl_1, wooden_cabinet_1_top_region))",
+  "file": "libero_goal_3_ep0.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl_bddl",
+  "task": 3,
+  "prompt": "F[0,15] (open(wooden_cabinet_1_top_region) & F[0,15] in(akita_black_bowl_1, wooden_cabinet_1_top_region))",
+  "file": "libero_goal_3_ep1.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl_bddl",
+  "task": 3,
+  "prompt": "F[0,15] (open(wooden_cabinet_1_top_region) & F[0,15] in(akita_black_bowl_1, wooden_cabinet_1_top_region))",
+  "file": "libero_goal_3_ep2.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl_bddl",
+  "task": 3,
+  "prompt": "F[0,15] (open(wooden_cabinet_1_top_region) & F[0,15] in(akita_black_bowl_1, wooden_cabinet_1_top_region))",
+  "file": "libero_goal_3_ep3.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl_bddl",
+  "task": 3,
+  "prompt": "F[0,15] (open(wooden_cabinet_1_top_region) & F[0,15] in(akita_black_bowl_1, wooden_cabinet_1_top_region))",
+  "file": "libero_goal_3_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 91,
+  "variant": "stl_bddl",
+  "task": 4,
+  "prompt": "F[0,15] on(akita_black_bowl_1, wooden_cabinet_1_top_side)",
+  "file": "libero_goal_4_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 88,
+  "variant": "stl_bddl",
+  "task": 4,
+  "prompt": "F[0,15] on(akita_black_bowl_1, wooden_cabinet_1_top_side)",
+  "file": "libero_goal_4_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 85,
+  "variant": "stl_bddl",
+  "task": 4,
+  "prompt": "F[0,15] on(akita_black_bowl_1, wooden_cabinet_1_top_side)",
+  "file": "libero_goal_4_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 89,
+  "variant": "stl_bddl",
+  "task": 4,
+  "prompt": "F[0,15] on(akita_black_bowl_1, wooden_cabinet_1_top_side)",
+  "file": "libero_goal_4_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 87,
+  "variant": "stl_bddl",
+  "task": 4,
+  "prompt": "F[0,15] on(akita_black_bowl_1, wooden_cabinet_1_top_side)",
+  "file": "libero_goal_4_ep4.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [
+   "akita_black_bowl"
+  ],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl_bddl",
+  "task": 5,
+  "prompt": "F[0,15] on(plate_1, main_table_stove_front_region)",
+  "file": "libero_goal_5_ep0.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl_bddl",
+  "task": 5,
+  "prompt": "F[0,15] on(plate_1, main_table_stove_front_region)",
+  "file": "libero_goal_5_ep1.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl_bddl",
+  "task": 5,
+  "prompt": "F[0,15] on(plate_1, main_table_stove_front_region)",
+  "file": "libero_goal_5_ep2.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [
+   "akita_black_bowl"
+  ],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl_bddl",
+  "task": 5,
+  "prompt": "F[0,15] on(plate_1, main_table_stove_front_region)",
+  "file": "libero_goal_5_ep3.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl_bddl",
+  "task": 5,
+  "prompt": "F[0,15] on(plate_1, main_table_stove_front_region)",
+  "file": "libero_goal_5_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 126,
+  "variant": "stl_bddl",
+  "task": 6,
+  "prompt": "F[0,15] on(cream_cheese_1, akita_black_bowl_1)",
+  "file": "libero_goal_6_ep0.json"
+ },
+ {
+  "task_rob": -0.5,
+  "stl_sat": false,
+  "libero": false,
+  "moved": [],
+  "clean": false,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 301,
+  "variant": "stl_bddl",
+  "task": 6,
+  "prompt": "F[0,15] on(cream_cheese_1, akita_black_bowl_1)",
+  "file": "libero_goal_6_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 295,
+  "variant": "stl_bddl",
+  "task": 6,
+  "prompt": "F[0,15] on(cream_cheese_1, akita_black_bowl_1)",
+  "file": "libero_goal_6_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 118,
+  "variant": "stl_bddl",
+  "task": 6,
+  "prompt": "F[0,15] on(cream_cheese_1, akita_black_bowl_1)",
+  "file": "libero_goal_6_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": false
+  },
+  "steps": 234,
+  "variant": "stl_bddl",
+  "task": 6,
+  "prompt": "F[0,15] on(cream_cheese_1, akita_black_bowl_1)",
+  "file": "libero_goal_6_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 78,
+  "variant": "stl_bddl",
+  "task": 7,
+  "prompt": "F[0,15] turnon(flat_stove_1)",
+  "file": "libero_goal_7_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 78,
+  "variant": "stl_bddl",
+  "task": 7,
+  "prompt": "F[0,15] turnon(flat_stove_1)",
+  "file": "libero_goal_7_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 73,
+  "variant": "stl_bddl",
+  "task": 7,
+  "prompt": "F[0,15] turnon(flat_stove_1)",
+  "file": "libero_goal_7_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 71,
+  "variant": "stl_bddl",
+  "task": 7,
+  "prompt": "F[0,15] turnon(flat_stove_1)",
+  "file": "libero_goal_7_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 85,
+  "variant": "stl_bddl",
+  "task": 7,
+  "prompt": "F[0,15] turnon(flat_stove_1)",
+  "file": "libero_goal_7_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 79,
+  "variant": "stl_bddl",
+  "task": 8,
+  "prompt": "F[0,15] on(akita_black_bowl_1, plate_1)",
+  "file": "libero_goal_8_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 79,
+  "variant": "stl_bddl",
+  "task": 8,
+  "prompt": "F[0,15] on(akita_black_bowl_1, plate_1)",
+  "file": "libero_goal_8_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 76,
+  "variant": "stl_bddl",
+  "task": 8,
+  "prompt": "F[0,15] on(akita_black_bowl_1, plate_1)",
+  "file": "libero_goal_8_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 70,
+  "variant": "stl_bddl",
+  "task": 8,
+  "prompt": "F[0,15] on(akita_black_bowl_1, plate_1)",
+  "file": "libero_goal_8_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": true,
+   "10": true
+  },
+  "steps": 78,
+  "variant": "stl_bddl",
+  "task": 8,
+  "prompt": "F[0,15] on(akita_black_bowl_1, plate_1)",
+  "file": "libero_goal_8_ep4.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 120,
+  "variant": "stl_bddl",
+  "task": 9,
+  "prompt": "F[0,15] on(wine_bottle_1, wine_rack_1_top_region)",
+  "file": "libero_goal_9_ep0.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 124,
+  "variant": "stl_bddl",
+  "task": 9,
+  "prompt": "F[0,15] on(wine_bottle_1, wine_rack_1_top_region)",
+  "file": "libero_goal_9_ep1.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 125,
+  "variant": "stl_bddl",
+  "task": 9,
+  "prompt": "F[0,15] on(wine_bottle_1, wine_rack_1_top_region)",
+  "file": "libero_goal_9_ep2.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 129,
+  "variant": "stl_bddl",
+  "task": 9,
+  "prompt": "F[0,15] on(wine_bottle_1, wine_rack_1_top_region)",
+  "file": "libero_goal_9_ep3.json"
+ },
+ {
+  "task_rob": 0.5,
+  "stl_sat": true,
+  "libero": true,
+  "moved": [],
+  "clean": true,
+  "deadline": {
+   "5": false,
+   "10": true
+  },
+  "steps": 122,
+  "variant": "stl_bddl",
+  "task": 9,
+  "prompt": "F[0,15] on(wine_bottle_1, wine_rack_1_top_region)",
+  "file": "libero_goal_9_ep4.json"
+ }
+]
