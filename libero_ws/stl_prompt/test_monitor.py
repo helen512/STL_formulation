@@ -192,6 +192,20 @@ def test_plate_moving_is_ignored():
     assert verdict(move(make(), PLATE, at=100, dist=0.2))["no_move"]
 
 
+def test_grasp_lift_alternative():
+    # carried without a both-pads grasp: contact + lifted 10 cm on steps 50..99, lands at 100
+    tr = make(grasp=None)
+    pos = np.asarray(tr["objects"][BOWL]["pos"])
+    pos[50:100, 2] += 0.10
+    tr["objects"][BOWL]["pos"] = pos.tolist()
+    assert not verdict(tr)["grasp_first"]
+    r = monitor.check_spatial(tr, TH, grasp_lift=0.02)
+    assert r["grasp_first"] and r["first_grasp_s"] == 2.5 and r["rtamt_eq_numpy"]
+    # pushed along the table (contact, no lift) still fails
+    r = monitor.check_spatial(make(grasp=None), TH, grasp_lift=0.02)
+    assert not r["grasp_first"] and r["first_grasp_s"] is None
+
+
 # ------------------------------------------------- velocity from poses ---------
 
 

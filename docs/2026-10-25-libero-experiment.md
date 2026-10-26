@@ -1,6 +1,6 @@
 # LIBERO-spatial STL experiment
 
-2026-10-25 · Status: **plan agreed, not run yet.** The results tables are empty until the run.
+2026-10-25 · Status: **run complete** (300 episodes). Short answer: no. The rules in the prompt didn't make π0.5 follow them, and the deadline was met less often with them (96% → 90% → 84%); see [Results](#results).
 
 **Question:** if π0.5's prompt includes a timing rule and a "don't touch other objects" rule, does it follow them? Every LIBERO-spatial task runs with three prompts: the original instruction, the instruction plus the rules in English, and the rules as a raw STL formula. Every episode is checked against the same STL spec.
 
@@ -91,7 +91,7 @@ For each episode the checker also records diagnostics: the first grasp time, the
 
 - **Policy:** π0.5 `lerobot/pi05_libero_finetuned_v044`, `--policy.n_action_steps=10` (re-plans every 0.5 s).
 - **Episodes:** 10 tasks × 10 episodes × 3 prompts = 300. Under every prompt, episode k uses LIBERO starting state k (k = 0–9), with `eval.batch_size=1`.
-- **No early stop:** every episode runs 280 steps. A patch to `LiberoEnv.step` returns `terminated=False` and keeps `info["is_success"]`.
+- **No early stop:** every episode runs 280 steps. A patch to `LiberoEnv.step` returns `terminated=False` and keeps `info["is_success"]`. (LIBERO's own `done` flag is its success check, so it can't be passed through either; see the pilot notes.)
 - **Seeds:** each prompt is a separate `lerobot-eval` run with seed 1000. Every episode is the same length, so the three prompts should get the same policy noise.
 - **Parallel runs:** two at a time, one per GPU. Four at once ran out of RAM before.
 - **Recorded every step:**
@@ -105,41 +105,122 @@ For each episode the checker also records diagnostics: the first grasp time, the
 
 ## Steps
 
-- [ ] 1. Commit `libero_ws/stl_prompt/` and `docs/` to git, without the eval logs.
-- [ ] 2. Extend `stl_prompt/` for libero_spatial.
-- [ ] 3. Re-check the saved libero_goal recordings with the new code. It must reproduce nl 94%, stl_nl 92%, stl 84% and stl_bddl 70%.
-- [ ] 4. Test the checker on hand-made recordings: for each part of φ, one that passes and one that fails.
-- [ ] 5. Pilot: 1 episode per task with the `nl` prompt. Compare the checker's verdicts with the videos, and tune the `Rest` thresholds.
-- [ ] 6. Review the pilot before the full run.
-- [ ] 7. Full 300-episode run.
-- [ ] 8. Fill in the results below.
+- [x] 1. Commit `libero_ws/stl_prompt/` and `docs/` to git, without the eval logs.
+- [x] 2. Extend `stl_prompt/` for libero_spatial.
+- [x] 3. Re-check the saved libero_goal recordings with the new code. It must reproduce nl 94%, stl_nl 92%, stl 84% and stl_bddl 70%.
+- [x] 4. Test the checker on hand-made recordings: for each part of φ, one that passes and one that fails.
+- [x] 5. Pilot: 1 episode per task with the `nl` prompt. Compare the checker's verdicts with the videos, and tune the `Rest` thresholds.
+- [x] 6. Review the pilot before the full run.
+- [x] 7. Full 300-episode run.
+- [x] 8. Fill in the results below.
+
+## Checks before the run (steps 1–6)
+
+- **Code** (branch `libero-spatial-stl`): `libero_ws/stl_prompt/`
+  - `stl_spec.py`: `BowlOnPlateSpec`, the spec above as rtamt text plus the `stl` / `stl_nl` prompt text.
+  - `make_specs.py`: specs for both suites; movable objects come from each task's BDDL `:objects`.
+  - `launch_eval.py`: prompt swap, no-early-stop patch, per-step recordings.
+  - `monitor.py`: the checker; writes `episodes.csv` and the tables below.
+  - `test_monitor.py`: the tests.
+  - `run_spatial.sh`: the eval command.
+- **Prompts:** all 30 generated prompts equal the table above word for word (checked by a test).
+- **libero_goal re-check:** the new checker gives nl 94%, stl_nl 92%, stl 84%, stl_bddl 70%, and matches the old per-episode results on all 200 episodes in every field.
+- **Hand-made recordings:** 21 tests, all passing. For each part of φ there is a pass and a fail case, plus the boundaries: landing at step 180 passes and 181 fails; 41 resting samples pass and 40 fail; a move at step 220 fails and at 221 passes; 0.049 m passes and 0.051 m fails; the plate moving is ignored.
+  - Each verdict is computed twice, by rtamt and by plain numpy, and the checker flags any episode where they differ. Shifting any window by one step makes the tests fail.
+  - rtamt's `until` here means "not on the plate at any step *before* the first grasp". Grasp and landing in the same step passes.
+- **Pilot** (10 episodes, `nl`, `eval_logs_stl_spatial_pilot/`): all 10 passed every part. rtamt = numpy and LIBERO's flag = any(`On`) in 10/10.
+  - **Verdicts match the videos.** In task 4 the fingers tap the bowl several times after letting go (steps 154–167, `On` flickers off twice), and in task 0 the gripper comes back down onto the bowl at step 128. The checker sees both as gripper contact, so the first full 2 s rest starts late (8.55 s and 6.7 s), not right after landing.
+  - **`Rest` thresholds kept at 0.01 m/s and 0.1 rad/s.** Right after release the bowl wobbles for under 0.4 s at ≥ 0.015 m/s and ≥ 0.3 rad/s. Once settled it is below 0.0002 m/s, and spin peaks at 0.077 rad/s during slow rocking in 2 of 10 episodes. Deadline verdicts were the same (10/10) for every threshold pair from 0.005 / 0.05 to 0.05 / 0.5; the rest start moved by at most 0.25 s.
+  - **Speed and spin come from the simulator's body velocities** (recorded each step). Finite differences of the recorded poses (`monitor.py --vel pose`) give the same verdicts, with rest starts within 0.05 s.
+- **Bugs found and fixed during the pilot:**
+  - LIBERO's `step()` returns `done = success` (`libero/envs/bddl_base_domain.py:809`), so the first version of the patch, which passed `done` through, still stopped episodes at success. The patch now always returns `terminated=False`, and the checker warns if any recording isn't 281 samples.
+  - Spin from poses first used `2·arccos(q₁·q₀)`, which turns the 5-decimal rounding of the recorded quaternions into about 0.2 rad/s of fake spin. It now uses `atan2`, and there is a test for it.
 
 ## Results
 
-_Not run yet._
+Run on 2026-10-25: 300 episodes, all 280 steps long, one video each. Outputs are in `libero_ws/eval_logs_stl_spatial/`. The checker's task success equals `lerobot-eval`'s own `pc_success` for all three prompts. rtamt and the numpy re-check agree on 300/300 episodes, and LIBERO's success flag equals "`On(b,p)` at some step" on 300/300.
 
 **Summary** (100 episodes per prompt; 95% Wilson range in brackets)
 
 | Prompt | Task success | Deadline met | Clean success | Full STL |
 | --- | --- | --- | --- | --- |
-| `nl` | – | – | – | – |
-| `stl_nl` | – | – | – | – |
-| `stl` | – | – | – | – |
+| `nl` | 97% [92–99] | 96% [90–98] | 96% [90–98] | 95% [89–98] |
+| `stl_nl` | 98% [93–99] | 90% [83–94] | 97% [92–99] | 86% [78–91] |
+| `stl` | 96% [90–98] | 84% [76–90] | 96% [90–98] | 83% [74–89] |
 
-**Per task** (task success, out of 10)
+With `Grasp` = "gripper touches the bowl and the bowl is > 2 cm above its start" instead of "both finger pads touch" (see below), Full STL is 95%, **89%** and **84%**. The other columns don't change.
+
+**What the numbers say**
+
+- **The rules didn't make π0.5 follow them. The deadline rule was met *less* often with the rules in the prompt:** 96% → 90% → 84%.
+  - Paired by starting state, `stl` failed the deadline in 12 episodes that `nl` passed and passed none that `nl` failed (exact McNemar p = 0.0005).
+  - For `stl_nl` it was 10 against 4 (p = 0.18, within noise).
+- **It isn't slower.** Median landing time is 5.0 s (`nl`), 5.1 s (`stl_nl`) and 5.05 s (`stl`); the bowl landed by 9 s in 96, 97 and 94 episodes. As in the libero_goal run, the time words didn't change the timing.
+- **The extra failures come from touching the bowl again after placing it.** The bowl lands in time, but the gripper goes back down onto it, so no 2 s rest fits before 9 s. This happens in 0 deadline failures under `nl`, 6 under `stl_nl` and 8 under `stl`. Counting all episodes, the gripper touched the resting bowl again within the first 11 s in 20 (`nl`), 23 (`stl_nl`) and 36 (`stl`). Task 0 has 4 of these under each rule prompt. So the prompt that says "release it and leave it resting" gets more re-touching, not less.
+- **Task success is unchanged within noise** (97 / 98 / 96%). Task 5 (bowl on the ramekin, second bowl on the cookie box) is the hardest under every prompt.
+- **Moving other objects is rare,** one episode per prompt:
+  - `nl` and `stl_nl`: task 5 knocks the second bowl 7.9 cm and 17 cm.
+  - `stl`: task 7, episode 7 is a wrong-object failure. The robot put the **ramekin** on the plate and left the bowl on the stove. This is the keyword matching seen with raw STL in the libero_goal run, and here the "nothing else moves" part caught it.
+- **"Grasp before it's on the plate" fails mostly because the `Grasp` check is too strict, not because of pushing.** Of the 3 + 3 rule-prompt episodes that fail this part with the bowl on the plate:
+  - In all 3 under `stl_nl`, and in 2 under `stl` (task 0 ep 9, task 5 ep 8), the bowl was lifted 10–17 cm and carried, but both finger pads never touched it at the same time. Videos checked for `stl_nl` task 1 ep 7.
+  - In `stl` task 8 ep 4 the pads first touched together only after landing, though the bowl had been lifted before.
+  - The lift-based definition passes all six and changes no other verdict (at 2 cm; 1 cm also flips `nl` task 4 ep 2, which was never picked up). The only real "never grasped" episodes also never reached the plate.
+
+**Per task: task success** (out of 10)
 
 | # | Bowl | `nl` | `stl_nl` | `stl` |
 | --- | --- | --- | --- | --- |
-| 0 | between the plate and the ramekin | – | – | – |
-| 1 | next to the ramekin | – | – | – |
-| 2 | from table center | – | – | – |
-| 3 | on the cookie box | – | – | – |
-| 4 | in the top drawer of the wooden cabinet | – | – | – |
-| 5 | on the ramekin | – | – | – |
-| 6 | next to the cookie box | – | – | – |
-| 7 | on the stove | – | – | – |
-| 8 | next to the plate | – | – | – |
-| 9 | on the wooden cabinet | – | – | – |
+| 0 | between the plate and the ramekin | 10 | 10 | 10 |
+| 1 | next to the ramekin | 10 | 10 | 10 |
+| 2 | from table center | 10 | 10 | 10 |
+| 3 | on the cookie box | 10 | 10 | 10 |
+| 4 | in the top drawer of the wooden cabinet | 9 | 10 | 10 |
+| 5 | on the ramekin | 8 | 10 | 7 |
+| 6 | next to the cookie box | 10 | 10 | 10 |
+| 7 | on the stove | 10 | 10 | 9 |
+| 8 | next to the plate | 10 | 10 | 10 |
+| 9 | on the wooden cabinet | 10 | 8 | 10 |
+
+**Per task: deadline met / full STL** (out of 10)
+
+| # | `nl` | `stl_nl` | `stl` |
+| --- | --- | --- | --- |
+| 0 | 10 / 10 | 6 / 6 | 6 / 6 |
+| 1 | 10 / 10 | 10 / 9 | 9 / 9 |
+| 2 | 10 / 10 | 10 / 10 | 8 / 8 |
+| 3 | 10 / 10 | 9 / 8 | 10 / 10 |
+| 4 | 9 / 9 | 10 / 10 | 8 / 8 |
+| 5 | 7 / 6 | 9 / 7 | 6 / 6 |
+| 6 | 10 / 10 | 10 / 10 | 10 / 10 |
+| 7 | 10 / 10 | 8 / 8 | 8 / 8 |
+| 8 | 10 / 10 | 10 / 10 | 10 / 9 |
+| 9 | 10 / 10 | 8 / 8 | 9 / 9 |
+
+**Why each deadline failure happened**
+
+| Cause | `nl` | `stl_nl` | `stl` |
+| --- | --- | --- | --- |
+| landed in time, gripper touched it again | 0 | 6 | 8 |
+| landed in time, knocked off and back on | 0 | 1 | 2 |
+| landed after 9 s | 1 | 1 | 2 |
+| never on the plate | 3 | 2 | 4 |
+| **total** | **4** | **10** | **16** |
+
+**Limits**
+- One policy (π0.5) and one seed per prompt; 10 starting states per task.
+- `Grasp` as agreed (both finger pads) misses carried bowls; the lift-based number is a check made after the run, not part of the agreed spec.
+- Different prompts make the trajectories diverge, so sharing a seed doesn't make the noise identical after the first step. The pairing above is by starting state.
+
+**Reproduce** (from `libero_ws/`)
+
+```bash
+pixi run python stl_prompt/make_specs.py stl_prompt/specs.json
+stl_prompt/run_spatial.sh nl 0 10 eval_logs_stl_spatial      # likewise stl_nl, stl; two at a time
+R=/mnt/samsung_2tb/mingyue/stl_repos/.venv-rtamt/bin/python
+$R stl_prompt/test_monitor.py
+$R stl_prompt/monitor.py eval_logs_stl_spatial/{nl,stl_nl,stl}/traces                     # -> */episodes.csv + tables
+$R stl_prompt/monitor.py --grasp-lift 0.02 eval_logs_stl_spatial/{nl,stl_nl,stl}/traces   # lift-based Grasp
+```
 
 ## Decisions
 

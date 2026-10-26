@@ -176,15 +176,22 @@ def _quat_angle(q1: np.ndarray, q0: np.ndarray) -> np.ndarray:
     return 2.0 * np.arctan2(np.linalg.norm(v, axis=1), np.abs(w[:, 0]))
 
 
-def derive_signals(trace: dict, s: BowlOnPlateSpec, vel: str = "sim") -> dict[str, np.ndarray]:
+def derive_signals(
+    trace: dict, s: BowlOnPlateSpec, vel: str = "sim", grasp_lift: float | None = None
+) -> dict[str, np.ndarray]:
     """All rtamt signals of the spec: recorded 0/1 signals plus speed, spin and displacement.
 
     vel="sim":  speed/spin are the simulator's body velocities at each sample.
     vel="pose": speed/spin are finite differences of the recorded poses over one step (0.05 s).
+    grasp_lift: if set, Grasp(b) is replaced by "a gripper geom touches the bowl and the bowl is more than
+                grasp_lift metres above its t=0 height" instead of robosuite's both-finger-pads check.
     """
     hz = trace.get("hz", HZ)
     sig = {k: np.asarray(trace["signals"][k], dtype=float) for k in (s.sig_on, s.sig_grasp, s.sig_contact)}
     bowl = trace["objects"][s.bowl]
+    if grasp_lift is not None:
+        z = np.asarray(bowl["pos"])[:, 2]
+        sig[s.sig_grasp] = ((sig[s.sig_contact] > 0.5) & (z - z[0] > grasp_lift)).astype(float)
     if vel == "sim":
         speed = np.linalg.norm(np.asarray(bowl["linvel"]), axis=1)
         spin = np.linalg.norm(np.asarray(bowl["angvel"]), axis=1)
@@ -245,10 +252,10 @@ def python_parts(sig: dict[str, np.ndarray], s: BowlOnPlateSpec, th: Thresholds)
     return out
 
 
-def check_spatial(trace: dict, th: Thresholds, vel: str = "sim") -> dict:
+def check_spatial(trace: dict, th: Thresholds, vel: str = "sim", grasp_lift: float | None = None) -> dict:
     s = bowl_spec(trace["spec"])
     hz = trace.get("hz", HZ)
-    sig = derive_signals(trace, s, vel)
+    sig = derive_signals(trace, s, vel, grasp_lift)
     lists = {k: v.tolist() for k, v in sig.items()}
     parts = {name: holds(f, lists) for name, f in s.parts_rtamt(th).items()}
     py = python_parts(sig, s, th)
@@ -378,7 +385,9 @@ def write_csv(rows: list[dict], path: Path):
 # ------------------------------------------------------------------- main ----
 
 
-def run(dirs: list[str], specs: dict | None, th: Thresholds, vel: str, write: bool = True) -> list[dict]:
+def run(
+    dirs: list[str], specs: dict | None, th: Thresholds, vel: str, write: bool = True, grasp_lift: float | None = None
+) -> list[dict]:
     rows = []
     for d in dirs:
         d_rows = []
@@ -388,14 +397,14 @@ def run(dirs: list[str], specs: dict | None, th: Thresholds, vel: str, write: bo
             if kind == "bddl":
                 r = check_goal(t)
             elif kind == "bowl_on_plate":
-                r = check_spatial(t, th, vel)
+                r = check_spatial(t, th, vel, grasp_lift)
             else:
                 raise ValueError(f"{f}: unknown spec kind {kind!r}")
             meta = dict(suite=t["suite"], kind=kind, variant=t["variant"], task=t["task_id"],
                         episode=t["episode"], init_state=t.get("init_state"), prompt=t["prompt"], file=f.name)
             d_rows.append({**meta, **r})
         if write and d_rows and d_rows[0]["kind"] == "bowl_on_plate":
-            out = Path(d).parent / "episodes.csv"
+            out = Path(d).parent / ("episodes.csv" if grasp_lift is None else f"episodes_grasp_lift_{grasp_lift:g}.csv")
             write_csv(d_rows, out)
             print(f"wrote {out} ({len(d_rows)} episodes)")
         rows += d_rows
@@ -410,18 +419,21 @@ def main(argv=None):
     ap.add_argument("--rest-spin", type=float, default=Thresholds.rest_spin, help="rad/s")
     ap.add_argument("--moved-disp", type=float, default=Thresholds.moved_disp, help="m")
     ap.add_argument("--vel", choices=["sim", "pose"], default="sim", help="bowl speed/spin source")
+    ap.add_argument("--grasp-lift", type=float, default=None,
+                    help="m; if set, Grasp = gripper contact and bowl lifted more than this (default: both finger pads)")
     ap.add_argument("--json-out", help="also write all per-episode rows to this JSON file")
     ap.add_argument("--no-write", action="store_true", help="do not write episodes.csv files")
     a = ap.parse_args(argv)
     specs = json.loads(Path(a.specs).read_text()) if a.specs and Path(a.specs).exists() else None
     th = Thresholds(rest_speed=a.rest_speed, rest_spin=a.rest_spin, moved_disp=a.moved_disp)
-    rows = run(a.dirs, specs, th, a.vel, write=not a.no_write)
+    rows = run(a.dirs, specs, th, a.vel, write=not a.no_write, grasp_lift=a.grasp_lift)
     goal = [r for r in rows if r["kind"] == "bddl"]
     spatial = [r for r in rows if r["kind"] == "bowl_on_plate"]
     if goal:
         report_goal(goal)
     if spatial:
-        print(f"\nthresholds: {th}  velocities: {a.vel}\n")
+        grasp = "both finger pads" if a.grasp_lift is None else f"gripper contact + lifted > {a.grasp_lift:g} m"
+        print(f"\nthresholds: {th}  velocities: {a.vel}  grasp: {grasp}\n")
         report_spatial(spatial, specs)
     if a.json_out:
         Path(a.json_out).write_text(json.dumps(rows, indent=1))
