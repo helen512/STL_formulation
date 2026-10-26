@@ -1,13 +1,20 @@
-"""lerobot-eval on LIBERO with a swapped prompt and per-step STL atom traces.
+"""lerobot-eval on LIBERO with a swapped prompt and per-step STL recordings.
 
 Same CLI as `lerobot-eval`. Extra settings come from environment variables:
-  STL_SPECS      JSON written by make_specs.py
-  STL_VARIANT    which prompt to feed the policy: nl | stl_nl | stl | stl_bddl
-  STL_TRACE_DIR  where to write one JSON trace per episode (optional)
+  STL_SPECS          JSON written by make_specs.py
+  STL_VARIANT        which prompt to feed the policy (a key of the task's "prompts", e.g. nl | stl_nl | stl)
+  STL_TRACE_DIR      where to write one JSON recording per episode (optional)
+  STL_NO_EARLY_STOP  1 = never terminate on success, so every episode runs the suite's full length
+                     (info["is_success"] is still reported each step, so LeRobot's success = goal at any step)
 
-Each trace holds the 0/1 value of every atom in the task's STL spec at every
-env step, plus the xyz of every object in the scene, so specs can be monitored
-offline (monitor.py) without re-running the policy.
+Each recording holds, at every env step (sample 0 = after LIBERO's settle steps, sample k = after k actions):
+  signals   0/1 values evaluated in the simulator
+              kind "bddl"          one per BDDL atom of the task's spec
+              kind "bowl_on_plate" on(bowl, plate) [LIBERO check_ontop], grasp(bowl) [robosuite _check_grasp],
+                                   gripper_contact(bowl) [any gripper geom touches the bowl]
+  objects   pos, quat (wxyz), linvel, angvel (world frame) of every movable BDDL object
+  success   LIBERO's success flag
+so specs can be monitored offline (monitor.py) without re-running the policy.
 
 Works with eval.batch_size=1 (SyncVectorEnv, same process). With async envs the
 patch would have to run inside each worker.
@@ -23,6 +30,7 @@ import lerobot.envs.libero as L
 SPECS = json.loads(Path(os.environ["STL_SPECS"]).read_text())
 VARIANT = os.environ.get("STL_VARIANT", "nl")
 TRACE_DIR = Path(os.environ["STL_TRACE_DIR"]) if os.environ.get("STL_TRACE_DIR") else None
+NO_EARLY_STOP = os.environ.get("STL_NO_EARLY_STOP", "0") == "1"
 
 _init, _reset, _step, _close = (
     L.LiberoEnv.__init__,
@@ -30,6 +38,10 @@ _init, _reset, _step, _close = (
     L.LiberoEnv.step,
     L.LiberoEnv.close,
 )
+
+
+def _r(xs, nd=5):
+    return [round(float(v), nd) for v in xs]
 
 
 def __init__(self, *args, **kwargs):
@@ -44,40 +56,72 @@ def __init__(self, *args, **kwargs):
         print(f"[stl] {self._stl_suite}/{self.task_id} variant={VARIANT} prompt={self.task_description!r}", flush=True)
 
 
+def _signals(self) -> dict[str, bool]:
+    inner = self._env.env
+    spec = self._stl
+    if spec["kind"] == "bddl":
+        return {sig: bool(inner._eval_predicate(pred)) for sig, pred in spec["atoms"].items()}
+    if spec["kind"] == "bowl_on_plate":
+        b, p = spec["bowl"], spec["plate"]
+        gripper = inner.robots[0].gripper
+        bowl = inner.get_object(b)
+        return {
+            f"on_{b}_{p}": bool(inner._eval_predicate(["on", b, p])),
+            f"grasp_{b}": bool(inner._check_grasp(gripper=gripper, object_geoms=bowl)),
+            f"gripper_contact_{b}": bool(inner.check_contact(gripper, bowl)),
+        }
+    raise ValueError(f"unknown spec kind {spec['kind']!r}")
+
+
 def _sample(self, success: bool):
     inner = self._env.env
     t = self._stl_trace
-    for sig, pred in self._stl["atoms"].items():
-        t["atoms"][sig].append(float(bool(inner._eval_predicate(pred))))
-    for name, st in inner.object_states_dict.items():
-        t["pos"].setdefault(name, []).append([round(float(v), 4) for v in st.get_geom_state()["pos"]])
+    for sig, v in _signals(self).items():
+        t["signals"].setdefault(sig, []).append(float(v))
+    data = inner.sim.data
+    for name in self._stl["movable"]:
+        body = inner.sim.model.body_id2name(inner.obj_body_id[name])
+        o = t["objects"].setdefault(name, {"pos": [], "quat": [], "linvel": [], "angvel": []})
+        o["pos"].append(_r(data.get_body_xpos(body)))
+        o["quat"].append(_r(data.get_body_xquat(body)))
+        o["linvel"].append(_r(data.get_body_xvelp(body)))
+        o["angvel"].append(_r(data.get_body_xvelr(body)))
     t["success"].append(bool(success))
 
 
 def _flush(self):
     t = self._stl_trace
     self._stl_trace = None
-    if t is None or TRACE_DIR is None or not t["success"]:
+    # A trace with only the reset sample is a reset that was never stepped; skip it.
+    if t is None or TRACE_DIR is None or len(t["success"]) < 2:
         return
     TRACE_DIR.mkdir(parents=True, exist_ok=True)
     name = f"{self._stl_suite}_{self.task_id}_ep{self._stl_episode}.json"
+    t["episode"] = self._stl_episode
     (TRACE_DIR / name).write_text(json.dumps(t))
     self._stl_episode += 1
 
 
 def reset(self, *args, **kwargs):
+    init_state_id = self.init_state_id
     out = _reset(self, *args, **kwargs)
     if self._stl is not None:
         _flush(self)
+        n_init = len(self._init_states) if self._init_states is not None else None
         self._stl_trace = {
+            "format": 2,
             "suite": self._stl_suite,
             "task_id": self.task_id,
             "variant": VARIANT,
             "prompt": self.task_description,
             "orig_prompt": self._stl_orig_prompt,
-            "rtamt": self._stl["rtamt"],
-            "atoms": {sig: [] for sig in self._stl["atoms"]},
-            "pos": {},
+            "init_state": init_state_id % n_init if n_init else None,
+            "seed": kwargs.get("seed"),
+            "hz": SPECS["hz"],
+            "no_early_stop": NO_EARLY_STOP,
+            "spec": self._stl,
+            "signals": {},
+            "objects": {},
             "success": [],
         }
         _sample(self, False)
@@ -85,10 +129,14 @@ def reset(self, *args, **kwargs):
 
 
 def step(self, action):
-    out = _step(self, action)
+    obs, reward, terminated, truncated, info = _step(self, action)
     if self._stl_trace is not None:
-        _sample(self, out[4]["is_success"])
-    return out
+        _sample(self, info["is_success"])
+    if NO_EARLY_STOP:
+        # LIBERO's step() sets done = success (bddl_base_domain.py), so neither may end the episode.
+        # LeRobot still stops at the suite's max steps; robosuite's 1000-step horizon is never reached.
+        terminated = False
+    return obs, reward, terminated, truncated, info
 
 
 def close(self):

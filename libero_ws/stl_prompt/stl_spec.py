@@ -7,6 +7,9 @@ One formula object gives three views:
 
 Atoms are LIBERO BDDL predicates (on, in, open, close, turnon, turnoff), so the
 simulator can evaluate them each step with `env._eval_predicate`.
+
+The libero_spatial "bowl on plate" spec (BowlOnPlateSpec, at the bottom) uses
+non-BDDL predicates (grasp, rest, moved), so it is written as rtamt text directly.
 """
 
 from __future__ import annotations
@@ -260,3 +263,112 @@ def objects(phi: Formula) -> list[str]:
             if o not in out:
                 out.append(o)
     return out
+
+
+# ---------------------------------------------------------------------------
+# libero_spatial: one fixed "bowl on plate" spec, the same for all 10 tasks.
+#
+#   phi = (!On(b,p) U Grasp(b))                      grasp before it lands
+#       & F[0,9s] G[0,2s] Rest(b,p)                  lands by 9 s, rests 2 s
+#       & AND_{o in O} G[0,11s] !Moved(o)            nothing else moves for 11 s
+#
+# The predicates are not BDDL atoms, so this spec is written directly as rtamt
+# text over recorded/derived signals instead of through the AST above.
+# ---------------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class Thresholds:
+    rest_speed: float = 0.01  # m/s, bowl linear speed while resting
+    rest_spin: float = 0.1  # rad/s, bowl angular speed while resting
+    moved_disp: float = 0.05  # m, displacement from the t=0 position that counts as "moved"
+
+
+@dataclass(frozen=True)
+class BowlOnPlateSpec:
+    bowl: str  # BDDL id of the target bowl
+    plate: str  # BDDL id of the plate
+    others: tuple[str, ...]  # movable objects that must not move
+    bowl_name: str  # readable name used in the raw-STL prompt, e.g. black_bowl_on_stove
+    land_by_s: float = 9.0
+    rest_s: float = 2.0
+    still_s: float = 11.0
+
+    # Signal names (rtamt variables). The first three are recorded in the sim;
+    # speed, spin and disp are derived offline from the recorded object states.
+    @property
+    def sig_on(self) -> str:
+        return f"on_{self.bowl}_{self.plate}"
+
+    @property
+    def sig_grasp(self) -> str:
+        return f"grasp_{self.bowl}"
+
+    @property
+    def sig_contact(self) -> str:
+        return f"gripper_contact_{self.bowl}"
+
+    @property
+    def sig_speed(self) -> str:
+        return f"speed_{self.bowl}"
+
+    @property
+    def sig_spin(self) -> str:
+        return f"spin_{self.bowl}"
+
+    @staticmethod
+    def sig_disp(obj: str) -> str:
+        return f"disp_{obj}"
+
+    @property
+    def signals(self) -> list[str]:
+        return [self.sig_on, self.sig_grasp, self.sig_contact, self.sig_speed, self.sig_spin] + [
+            self.sig_disp(o) for o in self.others
+        ]
+
+    # Windows in env steps, both ends included.
+    @property
+    def land_by(self) -> int:
+        return round(self.land_by_s * HZ)
+
+    @property
+    def rest_for(self) -> int:
+        return round(self.rest_s * HZ)
+
+    @property
+    def still_for(self) -> int:
+        return round(self.still_s * HZ)
+
+    def rest_rtamt(self, th: Thresholds) -> str:
+        return (
+            f"({self.sig_on} > 0.5) and ({self.sig_contact} < 0.5)"
+            f" and ({self.sig_speed} < {th.rest_speed:g}) and ({self.sig_spin} < {th.rest_spin:g})"
+        )
+
+    def parts_rtamt(self, th: Thresholds = Thresholds()) -> dict[str, str]:
+        """rtamt text of each conjunct of phi; one `no_move_<obj>` part per object in O."""
+        parts = {
+            "grasp_first": f"({self.sig_on} < 0.5) until ({self.sig_grasp} > 0.5)",
+            "deadline": f"eventually[0:{self.land_by}](always[0:{self.rest_for}]({self.rest_rtamt(th)}))",
+        }
+        for o in self.others:
+            parts[f"no_move_{o}"] = f"always[0:{self.still_for}]({self.sig_disp(o)} < {th.moved_disp:g})"
+        return parts
+
+    def to_rtamt(self, th: Thresholds = Thresholds()) -> str:
+        return " and ".join(f"({p})" for p in self.parts_rtamt(th).values())
+
+    def to_stl(self) -> str:
+        """Raw-STL prompt: ASCII, seconds, bowl named by its location, other objects grouped."""
+        b = self.bowl_name
+        return (
+            f"(!on({b}, plate) U grasped({b})) & F[0,{self.land_by_s:g}] G[0,{self.rest_s:g}] resting_on({b}, plate)"
+            f" & G[0,{self.still_s:g}] !moved(other_objects)"
+        )
+
+    def stl_nl_suffix(self) -> str:
+        """Rule sentence appended word for word to the original instruction."""
+        return (
+            f" within {self.land_by_s:g} seconds, then release it and leave it resting on the plate"
+            f" for {self.rest_s:g} seconds. do not move any other object during the first {self.still_s:g} seconds."
+        )
