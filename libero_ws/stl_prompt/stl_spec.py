@@ -270,7 +270,7 @@ def objects(phi: Formula) -> list[str]:
 #
 #   phi = (!On(b,p) U Grasp(b))                      grasp before it lands
 #       & F[0,9s] G[0,2s] Rest(b,p)                  lands by 9 s, rests 2 s
-#       & AND_{o in O} G[0,11s] !Moved(o)            nothing else moves for 11 s
+#       & AND_{o in O} G[0,11s] !Disturbed(o)        nothing else is moved or tipped for 11 s
 #
 # The predicates are not BDDL atoms, so this spec is written directly as rtamt
 # text over recorded/derived signals instead of through the AST above.
@@ -281,7 +281,12 @@ def objects(phi: Formula) -> list[str]:
 class Thresholds:
     rest_speed: float = 0.01  # m/s, bowl linear speed while resting
     rest_spin: float = 0.1  # rad/s, bowl angular speed while resting
-    moved_disp: float = 0.05  # m, displacement from the t=0 position that counts as "moved"
+    moved_disp: float = 0.05  # m, the first "Moved" check (phi until 2026-10-26); still reported as *_moved5
+    # Disturbed(o), used in phi (first 11 s) and clean success (whole episode): centre moved > disturb_disp from its t=0 position, or the
+    # object's up-axis tipped > disturb_tilt degrees from its t=0 direction. Spinning about the vertical
+    # (yaw) is ignored: the bowls and the ramekin are round, so it isn't visible.
+    disturb_disp: float = 0.02  # m
+    disturb_tilt: float = 10.0  # degrees
 
 
 @dataclass(frozen=True)
@@ -320,11 +325,15 @@ class BowlOnPlateSpec:
     def sig_disp(obj: str) -> str:
         return f"disp_{obj}"
 
+    @staticmethod
+    def sig_tilt(obj: str) -> str:
+        return f"tilt_{obj}"
+
     @property
     def signals(self) -> list[str]:
         return [self.sig_on, self.sig_grasp, self.sig_contact, self.sig_speed, self.sig_spin] + [
             self.sig_disp(o) for o in self.others
-        ]
+        ] + [self.sig_tilt(o) for o in self.others]
 
     # Windows in env steps, both ends included.
     @property
@@ -352,11 +361,20 @@ class BowlOnPlateSpec:
             "deadline": f"eventually[0:{self.land_by}](always[0:{self.rest_for}]({self.rest_rtamt(th)}))",
         }
         for o in self.others:
-            parts[f"no_move_{o}"] = f"always[0:{self.still_for}]({self.sig_disp(o)} < {th.moved_disp:g})"
+            parts[f"no_move_{o}"] = (
+                f"always[0:{self.still_for}](({self.sig_disp(o)} < {th.disturb_disp:g}) and ({self.sig_tilt(o)} < {th.disturb_tilt:g}))"
+            )
         return parts
 
     def to_rtamt(self, th: Thresholds = Thresholds()) -> str:
         return " and ".join(f"({p})" for p in self.parts_rtamt(th).values())
+
+    def undisturbed_rtamt(self, th: Thresholds = Thresholds()) -> dict[str, str]:
+        """G !Disturbed(o) over the whole episode, one formula per object in O (for clean success)."""
+        return {
+            f"undisturbed_{o}": f"always(({self.sig_disp(o)} < {th.disturb_disp:g}) and ({self.sig_tilt(o)} < {th.disturb_tilt:g}))"
+            for o in self.others
+        }
 
     def to_stl(self) -> str:
         """Raw-STL prompt: ASCII, seconds, bowl named by its location, other objects grouped."""

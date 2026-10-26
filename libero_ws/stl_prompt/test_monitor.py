@@ -184,8 +184,12 @@ def test_no_move_window_ends_at_step_220():
 
 
 def test_no_move_threshold():
-    assert verdict(move(make(), "cookies_1", at=50, dist=0.049))["no_move"]
-    assert not verdict(move(make(), "cookies_1", at=50, dist=0.051))["no_move"]
+    # phi's no_move uses Disturbed (2 cm / 10 deg); the first Moved check (5 cm) is kept as *_moved5
+    assert verdict(move(make(), "cookies_1", at=50, dist=0.019))["no_move"]
+    r = verdict(move(make(), "cookies_1", at=50, dist=0.021))
+    assert not r["no_move"] and not r["full_stl"] and r["no_move_moved5"] and r["full_stl_moved5"]
+    assert verdict(move(make(), "cookies_1", at=50, dist=0.049))["no_move_moved5"]
+    assert not verdict(move(make(), "cookies_1", at=50, dist=0.051))["no_move_moved5"]
 
 
 def test_plate_moving_is_ignored():
@@ -204,6 +208,62 @@ def test_grasp_lift_alternative():
     # pushed along the table (contact, no lift) still fails
     r = monitor.check_spatial(make(grasp=None), TH, grasp_lift=0.02)
     assert not r["grasp_first"] and r["first_grasp_s"] is None
+
+
+# ------------------------------------------------- Disturbed(o), clean success --
+
+
+def rotate(trace, obj, at, until, axis, deg):
+    """Rotate `obj` by `deg` degrees about a world axis ('x' tilts it, 'z' spins it) on steps [at, until)."""
+    tr = copy.deepcopy(trace)
+    q = np.asarray(tr["objects"][obj]["quat"], dtype=float)
+    h = np.radians(deg) / 2
+    q[at:until] = [np.cos(h), np.sin(h), 0, 0] if axis == "x" else [np.cos(h), 0, 0, np.sin(h)]
+    tr["objects"][obj]["quat"] = q.tolist()
+    return tr
+
+
+def test_undisturbed_baseline():
+    r = verdict(make())
+    assert r["undisturbed"] and r["clean"] and r["clean_moved5"] and r["first_disturbed_s"] is None
+
+
+def test_tipped_then_back_is_disturbed():
+    # knocked: tipped 30 deg for 6 steps, then back exactly where it was -> fails the new checks only
+    r = verdict(rotate(make(), "cookies_1", 60, 66, "x", 30))
+    assert not r["no_move"] and not r["full_stl"]
+    assert r["no_move_moved5"] and r["full_stl_moved5"] and r["clean_moved5"]
+    assert not r["undisturbed_cookies_1"] and not r["clean"] and r["first_disturbed_s"] == 3.0
+    assert r["max_tilt_deg_cookies_1"] == 30.0
+
+
+def test_phi_window_tilt_at_220_and_221():
+    assert not verdict(rotate(make(), "cookies_1", 220, 225, "x", 30))["no_move"]
+    r = verdict(rotate(make(), "cookies_1", 221, 225, "x", 30))
+    assert r["no_move"] and not r["undisturbed"]
+
+
+def test_tilt_threshold():
+    assert verdict(rotate(make(), "akita_black_bowl_2", 60, 66, "x", 9.9))["undisturbed"]
+    assert not verdict(rotate(make(), "akita_black_bowl_2", 60, 66, "x", 10.1))["undisturbed"]
+
+
+def test_spin_in_place_is_not_disturbed():
+    # a round bowl spinning 90 deg about the vertical isn't visible
+    assert verdict(rotate(make(), "akita_black_bowl_2", 60, N, "z", 90))["undisturbed"]
+
+
+def test_disturb_disp_threshold():
+    assert verdict(move(make(), "cookies_1", at=50, dist=0.019))["undisturbed"]
+    r = verdict(move(make(), "cookies_1", at=50, dist=0.021))
+    assert not r["undisturbed"] and not r["no_move"] and r["no_move_moved5"]  # 2.1 cm: disturbed, not "moved" (> 5 cm)
+
+
+def test_disturbed_after_11s_counts_for_clean_only():
+    # picked up after phi's 11 s window: phi's no_move passes, clean success (whole episode) fails
+    tr = move(make(), "akita_black_bowl_2", at=240, dist=0.10)
+    r = verdict(tr)
+    assert r["no_move"] and r["full_stl"] and not r["clean"] and r["first_disturbed_s"] == 12.0
 
 
 # ------------------------------------------------- velocity from poses ---------
@@ -241,7 +301,7 @@ def test_rtamt_text_matches_doc_checker_form():
         "((on_b_p < 0.5) until (grasp_b > 0.5))"
         " and (eventually[0:180](always[0:40]((on_b_p > 0.5) and (gripper_contact_b < 0.5)"
         " and (speed_b < 0.01) and (spin_b < 0.1))))"
-        " and (always[0:220](disp_o1 < 0.05))"
+        " and (always[0:220]((disp_o1 < 0.02) and (tilt_o1 < 10)))"
     )
 
 
@@ -253,7 +313,7 @@ GOAL_LOGS = HERE.parent / "eval_logs_stl"
 
 def test_spatial_prompts_match_doc_table():
     specs = json.loads((HERE / "specs.json").read_text())["libero_spatial"]
-    rows = [l for l in DOC.read_text().splitlines() if re.match(r"^\| \d \| pick up", l)]
+    rows = [l for l in DOC.read_text().splitlines() if re.match(r"^\|\s*\d\s*\|\s*pick up", l)]
     assert len(rows) == 10
     for l in rows:
         c = [x.strip() for x in l.strip().strip("|").split("|")]

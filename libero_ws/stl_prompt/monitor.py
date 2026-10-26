@@ -17,9 +17,12 @@ libero_spatial (spec kind "bowl_on_plate", see stl_spec.BowlOnPlateSpec); per ep
   task_success  LIBERO's success flag at any step (the standard benchmark number)
   grasp_first   (!On(b,p) U Grasp(b))
   deadline      F[0,9s] G[0,2s] Rest(b,p)
-  no_move_<o>   G[0,11s] !Moved(o), and no_move = all of them
-  clean         task_success and no_move
+  no_move_<o>   G[0,11s] !Disturbed(o), and no_move = all of them
+  undisturbed   G !Disturbed(o) for every o in O over the whole episode, where Disturbed(o) = centre moved
+                > 2 cm from its start or up-axis tipped > 10 deg (yaw ignored)
+  clean         task_success and undisturbed
   full_stl      grasp_first and deadline and no_move
+  *_moved5      the first definitions, with Moved(o) = centre moved > 5 cm in the first 11 s, for comparison
 plus diagnostics (first grasp, landing, rest start, longest rest, max displacement per object).
 Every verdict is computed twice, by rtamt and by a plain-numpy check; any disagreement is reported.
 Writes <run>/<variant>/episodes.csv and prints markdown summary tables.
@@ -176,10 +179,18 @@ def _quat_angle(q1: np.ndarray, q0: np.ndarray) -> np.ndarray:
     return 2.0 * np.arctan2(np.linalg.norm(v, axis=1), np.abs(w[:, 0]))
 
 
+def _tilt_deg(quat: np.ndarray) -> np.ndarray:
+    """Angle (degrees) between the body's up-axis at each sample and at t=0. Quaternions are wxyz."""
+    w, x, y, z = np.asarray(quat, dtype=float).T
+    up = np.c_[2 * (x * z + w * y), 2 * (y * z - w * x), 1 - 2 * (x * x + y * y)]
+    up /= np.linalg.norm(up, axis=1, keepdims=True)
+    return np.degrees(np.arccos(np.clip(up @ up[0], -1.0, 1.0)))
+
+
 def derive_signals(
     trace: dict, s: BowlOnPlateSpec, vel: str = "sim", grasp_lift: float | None = None
 ) -> dict[str, np.ndarray]:
-    """All rtamt signals of the spec: recorded 0/1 signals plus speed, spin and displacement.
+    """All rtamt signals of the spec: recorded 0/1 signals plus speed, spin, displacement and tilt.
 
     vel="sim":  speed/spin are the simulator's body velocities at each sample.
     vel="pose": speed/spin are finite differences of the recorded poses over one step (0.05 s).
@@ -206,6 +217,7 @@ def derive_signals(
     for o in s.others:
         p = np.asarray(trace["objects"][o]["pos"])
         sig[s.sig_disp(o)] = np.linalg.norm(p - p[0], axis=1)
+        sig[s.sig_tilt(o)] = _tilt_deg(trace["objects"][o]["quat"])
     return sig
 
 
@@ -248,8 +260,17 @@ def python_parts(sig: dict[str, np.ndarray], s: BowlOnPlateSpec, th: Thresholds)
     starts = _window_starts(rest_mask(sig, s, th), s.rest_for)
     out["deadline"] = bool(starts[: s.land_by + 1].any())
     for o in s.others:
-        out[f"no_move_{o}"] = bool((sig[s.sig_disp(o)][: s.still_for + 1] < th.moved_disp).all())
+        w = slice(0, s.still_for + 1)
+        out[f"no_move_{o}"] = bool(((sig[s.sig_disp(o)][w] < th.disturb_disp) & (sig[s.sig_tilt(o)][w] < th.disturb_tilt)).all())
     return out
+
+
+def python_undisturbed(sig: dict[str, np.ndarray], s: BowlOnPlateSpec, th: Thresholds) -> dict[str, bool]:
+    """The same verdicts as undisturbed_rtamt, written out directly with numpy."""
+    return {
+        f"undisturbed_{o}": bool(((sig[s.sig_disp(o)] < th.disturb_disp) & (sig[s.sig_tilt(o)] < th.disturb_tilt)).all())
+        for o in s.others
+    }
 
 
 def check_spatial(trace: dict, th: Thresholds, vel: str = "sim", grasp_lift: float | None = None) -> dict:
@@ -259,7 +280,14 @@ def check_spatial(trace: dict, th: Thresholds, vel: str = "sim", grasp_lift: flo
     lists = {k: v.tolist() for k, v in sig.items()}
     parts = {name: holds(f, lists) for name, f in s.parts_rtamt(th).items()}
     py = python_parts(sig, s, th)
+    undist = {name: holds(f, lists) for name, f in s.undisturbed_rtamt(th).items()}
+    py_undist = python_undisturbed(sig, s, th)
     no_move = all(parts[f"no_move_{o}"] for o in s.others)
+    no_move_moved5 = all(bool((sig[s.sig_disp(o)][: s.still_for + 1] < th.moved_disp).all()) for o in s.others)
+    undisturbed = all(undist.values())
+    disturbed = np.zeros(len(trace["success"]), dtype=bool)
+    for o in s.others:
+        disturbed |= (sig[s.sig_disp(o)] >= th.disturb_disp) | (sig[s.sig_tilt(o)] >= th.disturb_tilt)
     task_success = any(trace["success"])
     rest = rest_mask(sig, s, th)
     starts = _window_starts(rest, s.rest_for)
@@ -272,17 +300,26 @@ def check_spatial(trace: dict, th: Thresholds, vel: str = "sim", grasp_lift: flo
         "grasp_first": parts["grasp_first"],
         "deadline": parts["deadline"],
         "no_move": no_move,
-        "clean": task_success and no_move,
+        "undisturbed": undisturbed,
+        "clean": task_success and undisturbed,
         "full_stl": parts["grasp_first"] and parts["deadline"] and no_move,
+        # The first definitions (Moved = centre > 5 cm, first 11 s), for comparison.
+        "no_move_moved5": no_move_moved5,
+        "clean_moved5": task_success and no_move_moved5,
+        "full_stl_moved5": parts["grasp_first"] and parts["deadline"] and no_move_moved5,
         **{k: v for k, v in parts.items() if k.startswith("no_move_")},
+        **undist,
         "first_grasp_s": secs(_first(sig[s.sig_grasp] > 0.5)),
         "landing_s": secs(_first(sig[s.sig_on] > 0.5)),
         "rest_start_s": secs(_first(starts)),
         "longest_rest_s": round(_longest_run(rest) / hz, 2),
         **{f"max_disp_{o}": round(float(sig[s.sig_disp(o)][: s.still_for + 1].max()), 4) for o in s.others},
+        "first_disturbed_s": secs(_first(disturbed)),
+        **{f"max_disp_all_{o}": round(float(sig[s.sig_disp(o)].max()), 4) for o in s.others},
+        **{f"max_tilt_deg_{o}": round(float(sig[s.sig_tilt(o)].max()), 1) for o in s.others},
         "steps": len(trace["success"]),
         # Consistency checks: rtamt vs numpy, and LIBERO's flag vs the recorded On signal.
-        "rtamt_eq_numpy": parts == py,
+        "rtamt_eq_numpy": parts == py and undist == py_undist,
         "libero_eq_on": task_success == bool((sig[s.sig_on] > 0.5).any()),
     }
     return row
@@ -317,21 +354,21 @@ def report_spatial(rows: list[dict], specs: dict | None):
 
     def pct(k, n):
         lo, hi = wilson(k, n)
-        return f"{100 * k / n:.0f}% [{100 * lo:.0f}–{100 * hi:.0f}]"
+        return f"{k}/{n} [{100 * lo:.0f}–{100 * hi:.0f}%]"
 
-    print("**Summary** (95% Wilson range in brackets)\n")
-    print("| Prompt | n | " + " | ".join(label for _, label in SPATIAL_METRICS) + " |")
-    print("| --- | --- | " + " | ".join("---" for _ in SPATIAL_METRICS) + " |")
+    print("**Summary** (episodes that passed / episodes run; 95% Wilson range of the pass rate in brackets)\n")
+    print("| Prompt | " + " | ".join(label for _, label in SPATIAL_METRICS) + " |")
+    print("| --- | " + " | ".join("---" for _ in SPATIAL_METRICS) + " |")
     for v in variants:
         rs = [r for r in rows if r["variant"] == v]
         cells = [pct(sum(r[m] for r in rs), len(rs)) for m, _ in SPATIAL_METRICS]
-        print(f"| `{v}` | {len(rs)} | " + " | ".join(cells) + " |")
+        print(f"| `{v}` | " + " | ".join(cells) + " |")
 
     print("\n**Parts of φ and diagnostics** (counts; times are medians over episodes where the event happened)\n")
     print("| Prompt | grasp first | deadline | no move (all O) | " + " | ".join(
-        f"{o} still" for o in sorted({k[8:] for r in rows for k in r if k.startswith("no_move_")})) +
+        f"{o} still" for o in sorted({k[12:] for r in rows for k in r if k.startswith("undisturbed_")})) +
         " | first grasp s | landing s | longest rest s |")
-    others = sorted({k[8:] for r in rows for k in r if k.startswith("no_move_")})
+    others = sorted({k[12:] for r in rows for k in r if k.startswith("undisturbed_")})
     print("| --- " * (7 + len(others)) + "|")
     for v in variants:
         rs = [r for r in rows if r["variant"] == v]
@@ -345,6 +382,21 @@ def report_spatial(rows: list[dict], specs: dict | None):
                  f"{sum(r['no_move'] for r in rs)}/{n}"]
         cells += [f"{sum(r[f'no_move_{o}'] for r in rs)}/{n}" for o in others]
         cells += [med("first_grasp_s"), med("landing_s"), med("longest_rest_s")]
+        print(f"| `{v}` | " + " | ".join(cells) + " |")
+
+    print("\n**Other objects** (episodes where it was never disturbed: moved < 2 cm and tipped < 10° for the whole"
+          " episode; \"old\" = the first Moved check, centre moved < 5 cm in the first 11 s)\n")
+    print("| Prompt | undisturbed (all O) | " + " | ".join(f"{o} undisturbed" for o in others)
+          + " | old: no move (all O) | clean success | clean success (old) | full STL | full STL (old) |")
+    print("| --- " * (7 + len(others)) + "|")
+    for v in variants:
+        rs = [r for r in rows if r["variant"] == v]
+        n = len(rs)
+        cells = [f"{sum(r['undisturbed'] for r in rs)}/{n}"]
+        cells += [f"{sum(r[f'undisturbed_{o}'] for r in rs)}/{n}" for o in others]
+        cells += [f"{sum(r['no_move_moved5'] for r in rs)}/{n}", f"{sum(r['clean'] for r in rs)}/{n}",
+                  f"{sum(r['clean_moved5'] for r in rs)}/{n}", f"{sum(r['full_stl'] for r in rs)}/{n}",
+                  f"{sum(r['full_stl_moved5'] for r in rs)}/{n}"]
         print(f"| `{v}` | " + " | ".join(cells) + " |")
 
     for metric, label in SPATIAL_METRICS:
@@ -419,13 +471,16 @@ def main(argv=None):
     ap.add_argument("--rest-spin", type=float, default=Thresholds.rest_spin, help="rad/s")
     ap.add_argument("--moved-disp", type=float, default=Thresholds.moved_disp, help="m")
     ap.add_argument("--vel", choices=["sim", "pose"], default="sim", help="bowl speed/spin source")
+    ap.add_argument("--disturb-disp", type=float, default=Thresholds.disturb_disp, help="m, Disturbed(o) displacement")
+    ap.add_argument("--disturb-tilt", type=float, default=Thresholds.disturb_tilt, help="degrees, Disturbed(o) tilt")
     ap.add_argument("--grasp-lift", type=float, default=None,
                     help="m; if set, Grasp = gripper contact and bowl lifted more than this (default: both finger pads)")
     ap.add_argument("--json-out", help="also write all per-episode rows to this JSON file")
     ap.add_argument("--no-write", action="store_true", help="do not write episodes.csv files")
     a = ap.parse_args(argv)
     specs = json.loads(Path(a.specs).read_text()) if a.specs and Path(a.specs).exists() else None
-    th = Thresholds(rest_speed=a.rest_speed, rest_spin=a.rest_spin, moved_disp=a.moved_disp)
+    th = Thresholds(rest_speed=a.rest_speed, rest_spin=a.rest_spin, moved_disp=a.moved_disp,
+                    disturb_disp=a.disturb_disp, disturb_tilt=a.disturb_tilt)
     rows = run(a.dirs, specs, th, a.vel, write=not a.no_write, grasp_lift=a.grasp_lift)
     goal = [r for r in rows if r["kind"] == "bddl"]
     spatial = [r for r in rows if r["kind"] == "bowl_on_plate"]
