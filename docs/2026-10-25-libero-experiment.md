@@ -1,6 +1,6 @@
 # LIBERO-spatial STL experiment
 
-2026-10-25 · Status: **run complete** (300 episodes). Short answer: no. The rules in the prompt didn't make π0.5 follow them, and the deadline was met less often with them (96 → 90 → 84 of 100 episodes); see [Results](#results).
+2026-10-25 · Status: **run complete** (300 episodes). Short answer: no. The rules in the prompt didn't make π0.5 follow them. With the rules in English the deadline-and-rest rule was met as often as without them (74 vs 72 of 100), and with raw STL much less often (48); see [Results](#results).
 
 **Question:** if π0.5's prompt includes a timing rule and a "don't touch other objects" rule, does it follow them? Every LIBERO-spatial task runs with three prompts: the original instruction, the instruction plus the rules in English, and the rules as a raw STL formula. Every episode is checked against the same STL spec.
 
@@ -12,14 +12,14 @@ The same formula applies to all 10 tasks. `b` = `akita_black_bowl_1` (the target
 
 $$
 \varphi = \big(\neg\mathrm{On}(b,p)\ \mathbf U\ \mathrm{Grasp}(b)\big)
-\ \land\ \mathbf F_{[0,9]}\mathbf G_{[0,2]}\mathrm{Rest}(b,p)
+\ \land\ \mathbf F_{[0,9]}\mathbf G\,\mathrm{Rest}(b,p)
 \ \land\ \bigwedge_{o\in O}\mathbf G_{[0,11]}\neg\mathrm{Disturbed}(o)
 $$
 
 In words:
 
 - The bowl can't be on the plate before it has been grasped (picked up, not pushed).
-- By 9 s the bowl is resting on the plate, and it keeps resting there for 2 s.
+- By 9 s the bowl is resting on the plate, and it keeps resting there until the end of the episode (14 s). `G` without a window means "from then until the end". (Changed from "for 2 s" on 2026-10-26, decision 29. The prompts still say 2 s, since that's what the policy was given.)
 - During the first 11 s, no other object is moved more than 2 cm or tipped more than 10° (changed from "moved more than 5 cm" on 2026-10-26, decision 28).
 
 
@@ -38,7 +38,7 @@ In words:
 | Spec           | Steps                                      |
 | -------------- | ------------------------------------------ |
 | by 9 s         | the bowl lands at step ≤ 180               |
-| rests for 2 s  | the landing step plus the next 40 steps    |
+| rests to the end | from the landing step through step 280   |
 | first 11 s     | steps 0–220                                |
 | episode length | 280 steps (14 s), no early stop on success |
 
@@ -47,7 +47,7 @@ In words:
 
 ```
 ((on_b_p < 0.5) until (grasp_b > 0.5))
-and eventually[0:180](always[0:40](
+and eventually[0:180](always(
       (on_b_p > 0.5) and (gripper_contact_b < 0.5) and (speed_b < 0.01) and (spin_b < 0.1)))
 and always[0:220](
       (disp_akita_black_bowl_2 < 0.02) and (tilt_akita_black_bowl_2 < 10)
@@ -93,7 +93,7 @@ and always[0:220](
 | Metric            | Passes when                                                                                       |
 | ----------------- | ------------------------------------------------------------------------------------------------- |
 | **Task success**  | LIBERO's `On(b,p)` is true at any step of the 14 s episode. This is the standard benchmark number |
-| **Deadline met**  | `F[0,9] G[0,2] Rest(b,p)`                                                                         |
+| **Deadline met**  | `F[0,9] G Rest(b,p)`: resting by 9 s and until the end of the episode (decision 29)              |
 | **Clean success** | task success, and `G ¬Disturbed(o)` over the whole 14 s episode for every `o` in `O` (decision 28) |
 | **Full STL**      | all of φ                                                                                          |
 
@@ -144,7 +144,7 @@ For each episode the checker also records diagnostics: the first grasp time, the
   - `run_spatial.sh`: the eval command.
 - **Prompts:** all 30 generated prompts equal the table above word for word (checked by a test).
 - **libero_goal re-check:** the new checker gives nl 94%, stl_nl 92%, stl 84%, stl_bddl 70%, and matches the old per-episode results on all 200 episodes in every field.
-- **Hand-made recordings:** 21 tests, all passing. For each part of φ there is a pass and a fail case, plus the boundaries: landing at step 180 passes and 181 fails; 41 resting samples pass and 40 fail; a move at step 220 fails and at 221 passes; 0.049 m passes and 0.051 m fails; the plate moving is ignored. (These were the checks before the run. After decision 28 the suite has 29 tests, including the 2 cm / 10° boundaries for `Disturbed`.)
+- **Hand-made recordings:** 21 tests, all passing. For each part of φ there is a pass and a fail case, plus the boundaries: landing at step 180 passes and 181 fails; 41 resting samples pass and 40 fail; a move at step 220 fails and at 221 passes; 0.049 m passes and 0.051 m fails; the plate moving is ignored. (These were the checks before the run. After decisions 28 and 29 the suite has 31 tests, including the 2 cm / 10° boundaries for `Disturbed` and a rest that breaks on the last sample.)
   - Each verdict is computed twice, by rtamt and by plain numpy, and the checker flags any episode where they differ. Shifting any window by one step makes the tests fail.
   - rtamt's `until` here means "not on the plate at any step *before* the first grasp". Grasp and landing in the same step passes.
 - **Pilot** (10 episodes, `nl`, `eval_logs_stl_spatial_pilot/`): all 10 passed every part. rtamt = numpy and LIBERO's flag = any(`On`) in 10/10.
@@ -166,22 +166,28 @@ Run on 2026-10-25: 300 episodes, all 280 steps long, one video each. Outputs are
 
 | Prompt   | Task success    | Deadline met    | Clean success   | Full STL        |
 | -------- | --------------- | --------------- | --------------- | --------------- |
-| `nl`     | 97/100 [92–99%] | 96/100 [90–98%] | 88/100 [80–93%] | 87/100 [79–92%] |
-| `stl_nl` | 98/100 [93–99%] | 90/100 [83–94%] | 86/100 [78–91%] | 76/100 [67–83%] |
-| `stl`    | 96/100 [90–98%] | 84/100 [76–90%] | 87/100 [79–92%] | 75/100 [66–82%] |
+| `nl`     | 97/100 [92–99%] | 72/100 [63–80%] | 88/100 [80–93%] | 66/100 [56–75%] |
+| `stl_nl` | 98/100 [93–99%] | 74/100 [65–82%] | 86/100 [78–91%] | 65/100 [55–74%] |
+| `stl`    | 96/100 [90–98%] | 48/100 [38–58%] | 87/100 [79–92%] | 42/100 [33–52%] |
 
 
-With `Grasp` = "gripper touches the bowl and the bowl is > 2 cm above its start" instead of "both finger pads touch" (see below), Full STL is 87/100, **79/100** and **76/100**. The other columns don't change.
+With `Grasp` = "gripper touches the bowl and the bowl is > 2 cm above its start" instead of "both finger pads touch" (see below), Full STL is 66/100, **66/100** and 42/100. The other columns don't change.
 
-Clean success and Full STL use `Disturbed(o)` (decision 28). With the first check (`Moved` > 5 cm in the first 11 s), clean success was 96/100, 97/100 and 96/100, and Full STL 95/100, 86/100 and 83/100; that check missed most disturbances (see below).
+Two changes after the run (both computed from the same recordings):
+
+- **Rest until the end of the episode** (decision 29). With the first version, resting for 2 s, deadline met was 96, 90 and 84 of 100, and Full STL (with `Disturbed`) 87, 76 and 75.
+- **`Disturbed(o)` for other objects** (decision 28). With the first check (`Moved` > 5 cm in the first 11 s), clean success was 96/100, 97/100 and 96/100; that check missed most disturbances (see below).
 
 **What the numbers say**
 
-- **The rules didn't make π0.5 follow them. The deadline rule was met *less* often with the rules in the prompt:** 96 → 90 → 84 of 100 episodes.
-  - Paired by starting state, `stl` failed the deadline in 12 episodes that `nl` passed and passed none that `nl` failed (exact McNemar p = 0.0005).
-  - For `stl_nl` it was 10 against 4 (p = 0.18, within noise).
+- **The rules didn't make π0.5 follow them.** The deadline-and-rest rule (resting by 9 s, until the end) was met in 72 (`nl`), 74 (`stl_nl`) and 48 (`stl`) of 100 episodes.
+  - Paired by starting state, `stl_nl` vs `nl` is 12 gained against 10 lost (exact McNemar p = 0.83): no effect.
+  - `stl` vs `nl` is 10 gained against 34 lost (p = 0.0004): clearly worse.
 - **It isn't slower.** Median landing time is 5.0 s (`nl`), 5.1 s (`stl_nl`) and 5.05 s (`stl`); the bowl landed by 9 s in 96, 97 and 94 episodes. As in the libero_goal run, the time words didn't change the timing.
-- **The extra failures come from touching the bowl again after placing it.** The bowl lands in time, but the gripper goes back down onto it, so no 2 s rest fits before 9 s. This happens in 0 deadline failures under `nl`, 6 under `stl_nl` and 8 under `stl`. Counting all episodes, the gripper touched the resting bowl again within the first 11 s in 20 (`nl`), 23 (`stl_nl`) and 36 (`stl`). Task 0 has 4 of these under each rule prompt. So the prompt that says "release it and leave it resting" gets more re-touching, not less.
+- **The main failure under every prompt is touching the bowl again after placing it.** The bowl lands in time and rests, then the gripper comes back down onto it (or knocks it). That is 22 of the 28 deadline failures under `nl`, 22 of 26 under `stl_nl` and 44 of 52 under `stl`. The first touch comes at a median of about 9 s, and in 7, 4 and 12 of these cases only after 11 s.
+  - With the first version (rest for 2 s) most of these passed: the bowl had already rested 2 s before the touch. Even `nl` touches the placed bowl again in 27 of 100 episodes.
+  - Under `stl` it happens in 48 episodes, so the raw-STL prompt, which names `resting_on(...)` and the bowl three times, roughly doubles it. "Release it and leave it resting" in English doesn't reduce it.
+- **Two deadline failures are simulation artifacts,** not robot behavior: in `nl` task 7 ep 5 and `stl` task 6 ep 5 the settled bowl rocks once at 0.19–0.22 rad/s for 1–4 steps, with no contact and the plate still. That's over the 0.1 rad/s spin limit, which was tuned on 2 s windows. A 0.25 rad/s limit passes exactly these two and nothing else (up to 0.5).
 - **Task success is unchanged within noise** (97 / 98 / 96%). Task 5 (bowl on the ramekin, second bowl on the cookie box) is the hardest under every prompt.
 - **Disturbing other objects is common in two tasks, under every prompt.** With `Disturbed(o)` (moved > 2 cm or tipped > 10°, whole episode), another object was disturbed in 11, 12 and 12 of 100 episodes. Nearly all are in two tasks:
   - **Task 5** (second bowl on the cookie box): clean success is 2, 1 and 3 out of 10. After placing the target bowl, the robot often goes back to the second bowl. It tips it (10–63°) or picks it up and carries it toward the plate, in some episodes stacking it on the target bowl. The disturbance starts between 4 and 12 s. Videos checked: `stl_nl` episodes 0, 1 and 4, `nl` episode 6.
@@ -189,7 +195,7 @@ Clean success and Full STL use `Disturbed(o)` (decision 28). With the first chec
   - The rule prompts don't reduce this (88, 86 and 87 clean successes), so π0.5 isn't following "do not move any other object".
   - `stl` task 7 episode 7 is a wrong-object failure: the robot put the **ramekin** on the plate and left the bowl on the stove. This is the keyword matching seen with raw STL in the libero_goal run. `stl` task 8 episode 4 lifted the cookie box 11 cm after 11 s.
   - The first `Moved` check (> 5 cm, first 11 s) caught only 1 of these per prompt. It ignores rotation (a bowl tipped 54° in place moves its center 2 cm), and most pick-ups finish after 11 s.
-  - With `Disturbed` in φ, the Full STL gap between the prompts widens: 87 → 76 → 75 of 100 (it was 95 → 86 → 83 with `Moved`). Task 5 passes the full spec in only 1, 0 and 2 of 10 episodes.
+  - With `Disturbed` in φ, Full STL drops further. Task 5 passes the full spec in 0 of 10 episodes under every prompt.
 - **"Grasp before it's on the plate" fails mostly because the** `Grasp` **check is too strict, not because of pushing.** Of the 3 + 3 rule-prompt episodes that fail this part with the bowl on the plate:
   - In all 3 under `stl_nl`, and in 2 under `stl` (task 0 ep 9, task 5 ep 8), the bowl was lifted 10–17 cm and carried, but both finger pads never touched it at the same time. Videos checked for `stl_nl` task 1 ep 7.
   - In `stl` task 8 ep 4 the pads first touched together only after landing, though the bowl had been lifted before.
@@ -242,30 +248,32 @@ The per-episode CSV (`episodes.csv`) has `undisturbed_<object>`, `first_disturbe
 **Per task: deadline met / full STL** (out of 10)
 
 
-| #   | `nl`    | `stl_nl` | `stl`   |
-| --- | ------- | -------- | ------- |
-| 0   | 10 / 10 | 6 / 6    | 6 / 6   |
-| 1   | 10 / 10 | 10 / 9   | 9 / 9   |
-| 2   | 10 / 10 | 10 / 10  | 8 / 7   |
-| 3   | 10 / 10 | 9 / 8    | 10 / 10 |
-| 4   | 9 / 9   | 10 / 10  | 8 / 8   |
-| 5   | 7 / 1   | 9 / 0    | 6 / 2   |
-| 6   | 10 / 7  | 10 / 7   | 10 / 7  |
-| 7   | 10 / 10 | 8 / 8    | 8 / 8   |
-| 8   | 10 / 10 | 10 / 10  | 10 / 9  |
-| 9   | 10 / 10 | 8 / 8    | 9 / 9   |
+| # | `nl`    | `stl_nl` | `stl` |
+| - | ------- | -------- | ----- |
+| 0 | 2 / 2   | 4 / 4    | 3 / 3 |
+| 1 | 7 / 7   | 5 / 5    | 4 / 4 |
+| 2 | 8 / 8   | 8 / 8    | 6 / 5 |
+| 3 | 9 / 9   | 9 / 8    | 4 / 4 |
+| 4 | 9 / 9   | 10 / 10  | 3 / 3 |
+| 5 | 3 / 0   | 5 / 0    | 3 / 0 |
+| 6 | 9 / 6   | 10 / 7   | 6 / 4 |
+| 7 | 8 / 8   | 8 / 8    | 7 / 7 |
+| 8 | 7 / 7   | 7 / 7    | 6 / 6 |
+| 9 | 10 / 10 | 8 / 8    | 6 / 6 |
 
 
-**Why each deadline failure happened**
+**Why each deadline failure happened** (deadline = resting by 9 s until the end)
 
 
-| Cause                                    | `nl`  | `stl_nl` | `stl`  |
-| ---------------------------------------- | ----- | -------- | ------ |
-| landed in time, gripper touched it again | 0     | 6        | 8      |
-| landed in time, knocked off and back on  | 0     | 1        | 2      |
-| landed after 9 s                         | 1     | 1        | 2      |
-| never on the plate                       | 3     | 2        | 4      |
-| **total**                                | **4** | **10**   | **16** |
+| Cause                                                  | `nl`   | `stl_nl` | `stl`  |
+| ------------------------------------------------------ | ------ | -------- | ------ |
+| landed in time, gripper touched it again               | 22     | 22       | 44     |
+| landed in time, knocked off the plate                  | 1      | 0        | 1      |
+| landed in time, bowl rocked (no contact; sim artifact) | 1      | 0        | 1      |
+| landed in time, never settled                          | 0      | 1        | 0      |
+| landed after 9 s                                       | 1      | 1        | 2      |
+| never on the plate                                     | 3      | 2        | 4      |
+| **total**                                              | **28** | **26**   | **52** |
 
 
 **Limits**
@@ -319,6 +327,7 @@ Agreed in a review session on 2026-10-25.
 26. **This doc layout:** the agreed spec on top, and the draft kept below.
 27. **95% ranges in the summary table only.** With 10 episodes per task, the ranges would be too wide to be useful.
 28. **(Added 2026-10-26, after the run.) `Disturbed(o)` replaces `Moved(o)` in φ (first 11 s) and in clean success (whole episode).** `Disturbed(o)`: moved > 2 cm or tipped > 10° from the start. The first `Moved` check (> 5 cm, first 11 s) missed objects that were tipped in place or picked up after 11 s. Thresholds were chosen from all 900 object-episodes: undisturbed objects stay below 1 mm and 6.2° tilt, and every flagged case was checked against the recordings. Task 5 cases were also checked in videos; in task 6 the box is hidden behind the gripper. φ switched to `Disturbed` as well, for its first 11 s (agreed 2026-10-26). The first versions are still in the CSV as `no_move_moved5`, `clean_moved5` and `full_stl_moved5`.
+29. **(Added 2026-10-26, after the run.) `Rest` must last until the end of the episode, not 2 s:** `F[0,9] G Rest(b,p)`, checked as `eventually[0:180](always(Rest))`. A bowl that is placed and then touched again, even after 11 s, isn't "left resting". The prompts the policy saw still say 2 s, so the policy is now scored on a stricter rule than it was given. The first version is still in the CSV as `deadline_rest2s` and `full_stl_rest2s`. The `Rest` spin limit (0.1 rad/s) was tuned on 2 s windows; over the longer window it flags 2 single rocking events (see Results).
 
 
 

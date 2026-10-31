@@ -16,7 +16,8 @@ libero_goal (spec kind "bddl"); per episode:
 libero_spatial (spec kind "bowl_on_plate", see stl_spec.BowlOnPlateSpec); per episode:
   task_success  LIBERO's success flag at any step (the standard benchmark number)
   grasp_first   (!On(b,p) U Grasp(b))
-  deadline      F[0,9s] G[0,2s] Rest(b,p)
+  deadline      F[0,9s] G Rest(b,p): resting by 9 s and until the end of the episode
+                (deadline_rest2s / full_stl_rest2s: the first version, resting for 2 s)
   no_move_<o>   G[0,11s] !Disturbed(o), and no_move = all of them
   undisturbed   G !Disturbed(o) for every o in O over the whole episode, where Disturbed(o) = centre moved
                 > 2 cm from its start or up-axis tipped > 10 deg (yaw ignored)
@@ -63,6 +64,12 @@ def load_trace(path: Path, specs: dict | None) -> dict:
     t = json.loads(path.read_text())
     t["file"] = path.name
     if t.get("format", 1) >= 2:
+        # Check against the current spec (specs.json), not the copy recorded at run time, so a spec change
+        # doesn't need a rerun. The prompts are kept from the recording: they are what the policy saw.
+        cur = (specs or {}).get(t["suite"], {}).get(str(t["task_id"]))
+        if cur is not None and cur.get("kind") == t["spec"].get("kind"):
+            t["spec_recorded"] = t["spec"]
+            t["spec"] = {**t["spec"], **{k: v for k, v in cur.items() if k != "prompts"}}
         return t
     spec = dict((specs or {}).get(t["suite"], {}).get(str(t["task_id"]), {}))
     spec.setdefault("kind", "bddl")
@@ -163,6 +170,7 @@ def bowl_spec(spec: dict) -> BowlOnPlateSpec:
         land_by_s=spec["land_by_s"],
         rest_s=spec["rest_s"],
         still_s=spec["still_s"],
+        rest_until_end=spec.get("rest_until_end", True),
     )
 
 
@@ -244,6 +252,16 @@ def _window_starts(mask: np.ndarray, length: int) -> np.ndarray:
     return out
 
 
+def _until_end_starts(mask: np.ndarray) -> np.ndarray:
+    """Bool per t: mask holds on every sample from t to the end of the episode."""
+    return np.flip(np.logical_and.accumulate(np.flip(mask)))
+
+
+def _rest_starts(rest: np.ndarray, s: BowlOnPlateSpec) -> np.ndarray:
+    """Bool per t: a rest that satisfies the spec starts at t (until the end, or for rest_s seconds)."""
+    return _until_end_starts(rest) if s.rest_until_end else _window_starts(rest, s.rest_for)
+
+
 def _longest_run(mask: np.ndarray) -> int:
     best = run = 0
     for v in mask:
@@ -257,8 +275,7 @@ def python_parts(sig: dict[str, np.ndarray], s: BowlOnPlateSpec, th: Thresholds)
     on, grasp = sig[s.sig_on] > 0.5, sig[s.sig_grasp] > 0.5
     g = _first(grasp)
     out = {"grasp_first": g is not None and not on[:g].any()}
-    starts = _window_starts(rest_mask(sig, s, th), s.rest_for)
-    out["deadline"] = bool(starts[: s.land_by + 1].any())
+    out["deadline"] = bool(_rest_starts(rest_mask(sig, s, th), s)[: s.land_by + 1].any())
     for o in s.others:
         w = slice(0, s.still_for + 1)
         out[f"no_move_{o}"] = bool(((sig[s.sig_disp(o)][w] < th.disturb_disp) & (sig[s.sig_tilt(o)][w] < th.disturb_tilt)).all())
@@ -290,7 +307,8 @@ def check_spatial(trace: dict, th: Thresholds, vel: str = "sim", grasp_lift: flo
         disturbed |= (sig[s.sig_disp(o)] >= th.disturb_disp) | (sig[s.sig_tilt(o)] >= th.disturb_tilt)
     task_success = any(trace["success"])
     rest = rest_mask(sig, s, th)
-    starts = _window_starts(rest, s.rest_for)
+    starts = _rest_starts(rest, s)
+    deadline_rest2s = bool(_window_starts(rest, s.rest_for)[: s.land_by + 1].any())  # first version: 2 s rest
 
     def secs(step):
         return None if step is None else round(step / hz, 2)
@@ -307,6 +325,9 @@ def check_spatial(trace: dict, th: Thresholds, vel: str = "sim", grasp_lift: flo
         "no_move_moved5": no_move_moved5,
         "clean_moved5": task_success and no_move_moved5,
         "full_stl_moved5": parts["grasp_first"] and parts["deadline"] and no_move_moved5,
+        # The first deadline (rest for 2 s instead of until the end), for comparison.
+        "deadline_rest2s": deadline_rest2s,
+        "full_stl_rest2s": parts["grasp_first"] and deadline_rest2s and no_move,
         **{k: v for k, v in parts.items() if k.startswith("no_move_")},
         **undist,
         "first_grasp_s": secs(_first(sig[s.sig_grasp] > 0.5)),

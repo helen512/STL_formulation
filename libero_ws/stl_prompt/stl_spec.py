@@ -269,7 +269,7 @@ def objects(phi: Formula) -> list[str]:
 # libero_spatial: one fixed "bowl on plate" spec, the same for all 10 tasks.
 #
 #   phi = (!On(b,p) U Grasp(b))                      grasp before it lands
-#       & F[0,9s] G[0,2s] Rest(b,p)                  lands by 9 s, rests 2 s
+#       & F[0,9s] G Rest(b,p)                        lands by 9 s, rests until the end of the episode
 #       & AND_{o in O} G[0,11s] !Disturbed(o)        nothing else is moved or tipped for 11 s
 #
 # The predicates are not BDDL atoms, so this spec is written directly as rtamt
@@ -296,8 +296,11 @@ class BowlOnPlateSpec:
     others: tuple[str, ...]  # movable objects that must not move
     bowl_name: str  # readable name used in the raw-STL prompt, e.g. black_bowl_on_stove
     land_by_s: float = 9.0
-    rest_s: float = 2.0
+    rest_s: float = 2.0  # rest length named in the prompts (what the policy was told)
     still_s: float = 11.0
+    # Checker: the bowl must rest from some time <= land_by_s until the end of the episode (G unbounded),
+    # not just for rest_s seconds. Set False for the first version, F[0,9] G[0,2] Rest.
+    rest_until_end: bool = True
 
     # Signal names (rtamt variables). The first three are recorded in the sim;
     # speed, spin and disp are derived offline from the recorded object states.
@@ -358,7 +361,11 @@ class BowlOnPlateSpec:
         """rtamt text of each conjunct of phi; one `no_move_<obj>` part per object in O."""
         parts = {
             "grasp_first": f"({self.sig_on} < 0.5) until ({self.sig_grasp} > 0.5)",
-            "deadline": f"eventually[0:{self.land_by}](always[0:{self.rest_for}]({self.rest_rtamt(th)}))",
+            "deadline": (
+                f"eventually[0:{self.land_by}](always({self.rest_rtamt(th)}))"
+                if self.rest_until_end
+                else f"eventually[0:{self.land_by}](always[0:{self.rest_for}]({self.rest_rtamt(th)}))"
+            ),
         }
         for o in self.others:
             parts[f"no_move_{o}"] = (

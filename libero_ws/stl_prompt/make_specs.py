@@ -128,6 +128,7 @@ def build_spatial(info: dict[int, dict]) -> dict:
             "land_by_s": spec.land_by_s,
             "rest_s": spec.rest_s,
             "still_s": spec.still_s,
+            "rest_until_end": spec.rest_until_end,
             "movable": t["movable"],
             "rtamt": spec.to_rtamt(),  # with default thresholds; monitor.py rebuilds it with its own
             "prompts": {

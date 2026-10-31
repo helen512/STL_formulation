@@ -131,8 +131,24 @@ def test_deadline_fails_one_step_late():
     assert r["rest_start_s"] == 9.05
 
 
-def test_deadline_needs_41_samples_of_rest():
+def with_spec(trace, **kw):
+    tr = copy.deepcopy(trace)
+    tr["spec"] = {**tr["spec"], **kw}
+    return tr
+
+
+def test_deadline_rest_must_last_to_the_end():
     tr = make()
+    on = np.asarray(tr["signals"][S.sig_on])
+    on[280] = 0  # rests on samples 110..279, leaves the plate on the very last sample
+    tr["signals"][S.sig_on] = on.tolist()
+    r = verdict(tr)
+    assert not r["deadline"] and not r["full_stl"] and r["deadline_rest2s"] and r["full_stl_rest2s"]
+    assert r["rest_start_s"] is None
+
+
+def test_deadline_2s_version_needs_41_samples_of_rest():
+    tr = with_spec(make(), rest_until_end=False)
     on = np.asarray(tr["signals"][S.sig_on])
     on[110 + 41:] = 0  # rests on samples 110..150 (41 samples = 2 s), then leaves the plate
     tr["signals"][S.sig_on] = on.tolist()
@@ -140,6 +156,17 @@ def test_deadline_needs_41_samples_of_rest():
     on[110 + 40] = 0  # only 110..149 (40 samples)
     tr["signals"][S.sig_on] = on.tolist()
     assert not verdict(tr)["deadline"]
+
+
+def test_retouch_late_fails_deadline_only_until_end():
+    # gripper touches the resting bowl at 13 s: fails the new deadline, passes the 2 s version
+    tr = make()
+    c = np.asarray(tr["signals"][S.sig_contact])
+    c[260:265] = 1
+    tr["signals"][S.sig_contact] = c.tolist()
+    r = verdict(tr)
+    assert not r["deadline"] and r["deadline_rest2s"] and r["rest_start_s"] == 13.25
+    assert r["longest_rest_s"] == round((260 - 110) / 20, 2)
 
 
 def test_deadline_fails_while_gripper_still_touches():
@@ -299,7 +326,7 @@ def test_rtamt_text_matches_doc_checker_form():
     sp = BowlOnPlateSpec(bowl="b", plate="p", others=("o1",), bowl_name="x")
     assert sp.to_rtamt() == (
         "((on_b_p < 0.5) until (grasp_b > 0.5))"
-        " and (eventually[0:180](always[0:40]((on_b_p > 0.5) and (gripper_contact_b < 0.5)"
+        " and (eventually[0:180](always((on_b_p > 0.5) and (gripper_contact_b < 0.5)"
         " and (speed_b < 0.01) and (spin_b < 0.1))))"
         " and (always[0:220]((disp_o1 < 0.02) and (tilt_o1 < 10)))"
     )
