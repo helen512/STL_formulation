@@ -1,6 +1,6 @@
 # RoboCasa365 atomic-task STL experiment
 
-2026-10-31 · Status: **plan agreed, not run yet.** So far only the scene-build and seeding checks have been run (see [Checks done while planning](#checks-done-while-planning)).
+2026-10-31 · Status: **checks and pilot done (steps 1–5); waiting for the pilot review before the full run.** The pilot found three bugs that made π0.5 fail every task and broke seed pairing; all are fixed (see [Checks before the run](#checks-before-the-run-steps-15)).
 
 **Question:** if π0.5's prompt includes a deadline, a "let go and leave it" rule and a "don't move other objects" rule, does it follow them? This repeats the [LIBERO-spatial run](2026-10-25-libero-experiment.md) on RoboCasa365. All 18 `atomic_seen` tasks run with three prompts: the original instruction, the instruction plus the rules in English, and the rules as a raw STL formula. Every episode is checked against the same STL spec for its task.
 
@@ -94,7 +94,7 @@ Every `Rest` implies task success at that step, so every "deadline met" is a tas
 | `Released(part)` | no gripper geom (hand, both fingers, both pads) touches any geom of the moving part | The moving part is everything under the goal joint's body: the door, drawer box, rack, head, knob, lever or handle. The fixture's housing doesn't count. For the microwave, `Released` is RoboCasa's own "gripper > 0.15 m from the start button" |
 | `PartStill(part)` | every goal joint moves < 0.01 rad/s (hinge, knob) or < 0.01 m/s (slide) | Not used for the microwave, whose button has no joint |
 | `BaseStopped` | the base's speed is < 0.02 m/s and it turns < 0.05 rad/s | NavigateKitchen only |
-| `Disturbed(o)` | `o`'s center is > 0.02 m from where it was at t = 0, **or** `o` has rotated > 10° about any axis since t = 0 | Rotation about any axis, unlike LIBERO, which ignored spinning about the vertical because its bowls were round. RoboCasa's objects mostly aren't. The utensil inside the drawer in OpenDrawer is measured in the drawer's frame, so opening the drawer doesn't flag it. Fixtures aren't counted |
+| `Disturbed(o)` | `o`'s center is > 0.02 m from its reference pose, **or** `o` has rotated > 10° about any axis since then. The reference is `o`'s pose once it has settled: the first step from which it is `Still` for 10 steps, but no later than 2 s or the gripper's first touch (decision 27) | Rotation about any axis, unlike LIBERO, which ignored spinning about the vertical because its bowls were round. RoboCasa's objects mostly aren't. The utensil inside the drawer in OpenDrawer is measured in the drawer's frame, so opening the drawer doesn't flag it. Fixtures aren't counted. Measuring from t = 0 instead (`monitor.py --ref t0`) flagged 3 of 180 idle scenes, where a round object was still rolling |
 
 **Diagnostics only.** These go in the CSV and aren't part of φ or any metric:
 
@@ -104,7 +104,7 @@ Every `Rest` implies task success at that step, so every "deadline met" is a tas
 | `GraspPads(o)` | both finger pads touch `o` (robosuite `_check_grasp`, `robosuite/environments/manipulation/manipulation_env.py:331`) |
 | `pushed_in` (P) | the goal placement was first reached before any `GraspLift`, i.e. slid or pushed in |
 | `bumped` (F) | the goal was first reached before any gripper contact with the part, i.e. done by the arm or base |
-| `fixture_changed` | another fixture's joint (door, drawer, knob, button, …) moved from its t = 0 value. The threshold is set in the idle check |
+| `fixture_changed` | another fixture's joint (door, drawer, knob, button, …) moved more than 0.2 rad or 0.2 m from its t = 0 value (decision 28) |
 | `disturbed_tilt_only` | LIBERO's `Disturbed`: 2 cm or tilt > 10°, with spin about the vertical ignored |
 
 **Time:** 20 control steps per second. t = 0 is the first policy step, after RoboCasa's 10 settle steps. Windows include both ends. Recordings have one sample per step, from step 0 to the episode limit H.
@@ -210,6 +210,12 @@ Per episode the CSV also records:
 ## Run setup
 
 - **Policy:** π0.5 `lerobot/pi05_robocasa`, `n_action_steps=50` (its default, which LeRobot's RoboCasa docs also use). It re-plans every 2.5 s. Every episode length is a multiple of 50, so with no early stop every episode makes the same number of policy calls under every prompt.
+  - `--policy.compile_model=false`. With the checkpoint's default torch.compile, MuJoCo's camera images in the same process come back scrambled after the first frame (found in the pilot).
+  - **State and action layout.** The checkpoint was trained on the RoboCasa365 dataset layout, not the one LeRobot 0.6.1's `RoboCasaEnv` uses. `launch_eval.py` converts both (`STL_IO_ORDER=dataset`):
+    - state: `ee_pos_rel(3), ee_quat_rel(4), base_pos(3), base_quat(4), gripper(2)` (LeRobot puts the base first);
+    - action: `ee_pos(3), ee_rot(3), gripper(1), base_motion(4), control_mode(1)` (LeRobot reads `base_motion, control_mode, ee_pos, ee_rot, gripper`).
+
+    The checkpoint's normalization stats show this: state dims 7–9 have z = 0.70 m with std 0.002 (base position) and dims 10–11 are always 0 (base quaternion x, y); action dims 6 and 11 are ±1 switches (gripper, control mode) and dim 10 is always 0 (torso).
 - **Simulator:** RoboCasa365 `56e355cc`, robosuite `aaa8b9b2`.
   - `--env.split=pretrain`: layouts 11–60 × styles 11–60 with the pretrain object instances, chosen because these scenes are familiar to the checkpoint.
   - Object registries `("objaverse", "lightwheel")` (LeRobot's `env.obj_registries`; its default is lightwheel only). This is RoboCasa's upstream default. The objaverse pack (6.2 GB) was downloaded on 2026-10-31 to `robocasa_ws/third_party/robocasa/robocasa/models/assets/objects/objaverse/`.
@@ -239,17 +245,17 @@ Per episode the CSV also records:
 
 ## Steps
 
-- [ ] 1. Commit the pending LIBERO changes (decisions 28 and 29 there) on `libero-spatial-stl`, then start the branch `robocasa-stl` from that commit.
-- [ ] 2. Write `robocasa_ws/stl_prompt/`.
-- [ ] 3. Test the checker on hand-made recordings. For each spec type there is a passing and a failing case for each part, plus the boundaries:
+- [x] 1. Commit the pending LIBERO changes (decisions 28 and 29 there) on `libero-spatial-stl`, then start the branch `robocasa-stl` from that commit.
+- [x] 2. Write `robocasa_ws/stl_prompt/`.
+- [x] 3. Test the checker on hand-made recordings. For each spec type there is a passing and a failing case for each part, plus the boundaries:
   - landing at the deadline step passes, one step later fails;
   - a rest that breaks on the last sample fails;
   - 2 cm and 10° for `Disturbed`, and the speed limits for objects, joints and the base;
   - the drawer-frame measurement in OpenDrawer.
 
   A test also checks that all 540 prompts match the templates and fit π0.5's token budget.
-- [ ] 4. **Idle-robot check:** zero actions, no policy, cameras off, all 18 tasks × seeds 1000–1009. Expect no task success, no `Disturbed` flag and no `fixture_changed`. Objects can still be moving at t = 0, and two fixtures move on their own near their limits. If anything drifts past a threshold, stop and review.
-- [ ] 5. **Pilot:** 1 episode per task with `nl` (18 episodes).
+- [x] 4. **Idle-robot check:** zero actions, no policy, cameras off, all 18 tasks × seeds 1000–1009. Expect no task success, no `Disturbed` flag and no `fixture_changed`. Objects can still be moving at t = 0, and two fixtures move on their own near their limits. If anything drifts past a threshold, stop and review.
+- [x] 5. **Pilot:** 1 episode per task with `nl` (18 episodes).
   - Compare the checker's verdicts with the videos and tune the thresholds.
   - Check that `ep_meta` and the start poses match across prompts.
   - Measure RAM.
@@ -258,11 +264,44 @@ Per episode the CSV also records:
 - [ ] 7. Full 540-episode run in `screen`.
 - [ ] 8. Fill in the results below.
 
+## Checks before the run (steps 1–5)
+
+- **Code** (branch `robocasa-stl`, from `54703de`, which commits the pending LIBERO changes): `robocasa_ws/stl_prompt/`
+  - `stl_spec.py`: task table, deadlines, prompt templates, the spec as rtamt text.
+  - `recorder.py`: per-step recordings (and the scene-determinism patch).
+  - `launch_eval.py`: prompt swap, no-early-stop `step`, state/action layout, recordings.
+  - `idle_check.py`: zero-action runs with cameras off.
+  - `monitor.py`: the checker; writes `episodes.csv` and the tables.
+  - `test_monitor.py` (rtamt venv), `test_prompts.py` (pixi env): the tests.
+  - `run_eval.sh`: one (prompt, task) eval. `driver.py`: the restartable `screen` driver. `make_specs.py` → `specs.json`.
+- **Hand-made recordings:** 32 tests, all passing; rtamt and numpy agree on every one. For P, F (including the microwave's distance-based `Released`) and N:
+  - a rest starting at the deadline step passes, one step later fails;
+  - a rest that breaks on the last sample fails;
+  - `Still` 0.0099/0.0101 m/s and 0.249/0.251 rad/s, `PartStill` ±0.0099/0.0101, `BaseStopped` 0.0199/0.0201 m/s and 0.049/0.051 rad/s;
+  - `Disturbed` at 0.0199/0.0201 m and 9.9°/10.1°, spin about the vertical counts, moved-and-put-back counts;
+  - the OpenDrawer utensil in a rotated, sliding drawer frame (0.0199/0.0201 m slip), and the settled reference (capped at 2 s and at the first gripper touch);
+  - each deadline-failure cause.
+- **Prompts:** all 540 prompts (180 recorded scenes × 3) match the templates, use RoboCasa's own words and are ASCII. The longest full π0.5 inputs are 91 (`nl`), 116 (`stl_nl`) and 105 (`stl`) tokens of 200. The seed-1000 prompts equal the [example table](#prompts) in all 18 rows. Task list and limits match RoboCasa's registry.
+- **Idle-robot check** (`eval_logs_stl/idle/`, 180 scenes, zero actions, cameras off; turning the cameras off changes neither the scene nor the trajectory):
+  - no task success; rtamt = numpy on 180/180;
+  - **3 scenes flagged `Disturbed` with t = 0 as the reference**: a round object (onion, corn, bell pepper) was still rolling at t = 0 and settled within 1.2 s, after moving up to 2.3 cm and 44°. With the settled reference (decision 27) none is flagged; the largest remaining drift is 5.6 mm and 9.1° (the OpenDrawer utensil);
+  - **joints that move on their own:** free speed knobs on the mixer and blender (up to 0.15 rad), the kettle switch (0.10), a dishwasher door (0.06), coffee-machine levers (≤ 0.03), and in 2 PickPlaceCounterToCabinet scenes an open cabinet door that swings 0.67 rad. With the 0.2 threshold (decision 28) only that door is flagged.
+- **Pilot** (`eval_logs_stl_pilot/`, `nl`, seed 1000, 18 episodes; 2.5–3 min per task, mostly startup):
+  - **First attempt: 0/18 task success** (`eval_logs_stl_pilot_compiled/`). The robot drove around the kitchen. Two causes, found by looking at the videos and the checkpoint's normalization stats: torch.compile scrambled the camera images, and LeRobot's state/action layout differs from the checkpoint's (see [Run setup](#run-setup)). An aborted second attempt with only the first fix is in `eval_logs_stl_pilot_compileoff_wrongorder/`.
+  - **With both fixes: 7/18 task success**, deadline met 3/18, clean success 6/18, Full STL 3/18. The robot now stays put for tabletop tasks, reaches, grasps and pushes.
+  - Successes: CloseFridge, OpenCabinet, OpenDrawer, OpenStandMixerHead, PickPlaceCounterToCabinet, PickPlaceDrawerToCounter, SlideDishwasherRack.
+  - **Verdicts match the recordings and videos:** CloseFridge was closed at 9.75 s but the gripper rested on the door from 16.15 s to the end; SlideDishwasherRack was done at 7.6 s and touched again at 14.45–15.05 s; OpenCabinet and PickPlaceDrawerToCounter succeeded after the deadline (25.1 s and 24.0 s); in OpenCabinet the boxed drink inside tipped 11.9° in the last second as the hand reached in; in TurnOnSinkFaucet the arm knocked two counter items (13.6 cm, 118°).
+  - Thresholds kept: successful P rests start within 0.25 s of success, and no F rest failed on `PartStill` alone.
+  - Consistency: 18/18 episodes run the full limit, rtamt = numpy, LeRobot's success = any(`success`). The 18 seed-1000 scenes equal the idle check's.
+  - **RAM:** each eval peaks at about 14 GB, and free memory dropped to 13.6 GB with two running, so the full run uses two at a time.
+  - **Expected time:** about 40 s per episode plus about 1.5 min of startup per (prompt, task): about 8–9 min per pair, 54 pairs two at a time, about 4 h.
+
 ## Checks done while planning
 
 - **Seeding:** episode k resets with seed 1000 + k (`lerobot_eval.py:531` → `RoboCasaEnv.reset` → `RoboCasaGymEnv.reset`, which sets `env.rng`).
   - Two separate processes reset with seed 1000 matched in every field: layout, style, instruction, object types and model files, robot base pose, the full `qpos`, all three camera images, and the state vector.
   - They still matched after 20 identical actions.
+  - **Not quite:** the pilot found that RoboCasa's counter-region sampler dedupes candidate counter tops with `list(set(...))` over XML elements (`models/fixtures/counter.py:813`), whose order follows memory addresses. In about 1 of 4 processes TurnOnSinkFaucet seed 1000 put its counter objects on the other side of the sink. `recorder.py` makes that dedupe order-preserving (it shadows `set` in that module, whose only bare `set()` call this is). With the patch, 3 processes gave identical scenes for 3 tasks × 3 seeds. `monitor.py` also checks every (task, seed) for the same scene under every prompt.
   - The global numpy RNG doesn't affect the scene. The policy noise comes from the torch RNG.
 - **Object packs:** with only the lightwheel pack, 5 tasks couldn't build:
   - CoffeeSetupMug, PickPlaceCounterToStove, PickPlaceSinkToCounter and PickPlaceToasterToCounter on every seed;
@@ -359,6 +398,8 @@ Agreed in a review session on 2026-10-31.
     - `Disturbed`: 2 cm or 10° about any axis;
     - `Released`: no gripper contact with the moving part.
 26. **Grasp, `pushed_in`, `bumped` and `fixture_changed` are CSV columns only.**
+27. **(Added after the idle check.) `Disturbed(o)` is measured from `o`'s settled pose,** not its pose at t = 0: the first step from which `o` is `Still` for 10 steps, no later than 2 s or the gripper's first touch. Some round objects are still rolling at t = 0.
+28. **(Added after the idle check.) `fixture_changed` uses 0.2 rad or 0.2 m,** not 0.02. Free knobs, the kettle switch and a dishwasher door drift 0.02–0.15 with an idle robot. A freely swinging open cabinet door (0.67 rad) is still flagged.
 
 ## Original draft
 

@@ -31,6 +31,15 @@ import robosuite.utils.transform_utils as T
 
 from stl_spec import TASKS, make_prompts, prompt_names
 
+import robocasa.models.fixtures.counter as _counter  # noqa: E402
+
+# Seeded scenes must be identical in every process (prompts are paired by seed). RoboCasa's counter-region
+# sampler dedupes candidate counter tops with list(set(valid_geoms)) (counter.py:813); the elements hash by
+# memory address, so the order, and with it the region the seeded rng picks, changed between processes
+# (found in the pilot: TurnOnSinkFaucet seed 1000 put the counter objects on either side of the sink).
+# That line is the module's only bare set() call, so shadowing `set` there makes the dedupe order-preserving.
+_counter.set = lambda items=(): dict.fromkeys(items)
+
 FORMAT = "robocasa-1"
 ROBOT_PREFIXES = ("robot0_", "mobilebase0_", "gripper0_")
 BASE_BODY = "mobilebase0_base"

@@ -67,6 +67,16 @@ def find_traces(d: Path) -> list[Path]:
     return sorted(d.rglob("*.json.gz"), key=key)
 
 
+def scene_key(t: dict) -> str:
+    """Fingerprint of the scene at t=0 (layout, style, object models, start poses to 1 mm, base pose)."""
+    import hashlib
+
+    parts = [t.get("layout_id"), t.get("style_id"), sorted((t.get("object_models") or {}).items()),
+             t["orig_prompt"], [round(x, 3) for x in t["base"]["pos"][0]],
+             sorted((o, [round(x, 3) for x in v["pos"][0]]) for o, v in t["objects"].items())]
+    return hashlib.sha1(json.dumps(parts, default=str).encode()).hexdigest()[:12]
+
+
 def spec_of(t: dict) -> TaskSpec:
     return TaskSpec(task=t["task"], others=tuple(t["others"]), microwave=t["task"] == "TurnOnMicrowave")
 
@@ -495,6 +505,14 @@ def report(rows: list[dict]):
 
 
 def consistency(rows: list[dict]):
+    groups: dict[tuple, set] = {}
+    for r in rows:
+        groups.setdefault((r["task"], r["seed"]), set()).add(r["scene"])
+    multi = [k for k in groups if sum(1 for r in rows if (r["task"], r["seed"]) == k) > 1]
+    split = [k for k in multi if len(groups[k]) > 1]
+    if multi:
+        print(f"\npairing: the same seed gives the same scene under every prompt for {len(multi) - len(split)}/{len(multi)}"
+              f" (task, seed) pairs" + (f"; DIFFERENT: {split}" if split else ""))
     bad_len = [r for r in rows if r["steps"] != TASKS[r["task"]].horizon]
     bad = [r for r in rows if not r["rtamt_eq_numpy"]]
     lr = [r for r in rows if r.get("lerobot_success") is not None]
@@ -579,7 +597,7 @@ def run(dirs: list[str], th: Thresholds, vel: str = "sim", write: bool = True, k
             meta = dict(task=t["task"], kind=t["kind"], variant=t["variant"], seed=t["seed"], episode=ep,
                         layout=t.get("layout_id"), style=t.get("style_id"),
                         lerobot_success=lr[ep] if lr is not None and ep is not None and ep < len(lr) else None,
-                        prompt=t["prompt"], file=str(p))
+                        scene=scene_key(t), prompt=t["prompt"], file=str(p))
             d_rows.append({**meta, **r})
             if keep:
                 traces[str(p)] = t
