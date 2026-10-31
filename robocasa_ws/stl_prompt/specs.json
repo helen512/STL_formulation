@@ -1,0 +1,252 @@
+{
+ "hz": 20,
+ "deadline_fraction": 0.6,
+ "thresholds": {
+  "still_speed": 0.01,
+  "still_spin": 0.25,
+  "part_still": 0.01,
+  "base_speed": 0.02,
+  "base_turn": 0.05,
+  "disturb_disp": 0.02,
+  "disturb_rot": 10.0,
+  "disturb_tilt": 10.0,
+  "fixture_changed": 0.02,
+  "grasp_lift": 0.02
+ },
+ "tasks": {
+  "CloseBlenderLid": {
+   "index": 0,
+   "kind": "P",
+   "horizon": 600,
+   "deadline_s": 18,
+   "deadline_step": 360,
+   "rtamt_with_O": "(eventually[0:360](always((success > 0.5) and (speed_obj < 0.01) and (spin_obj < 0.25)))) and (always((disp_O < 0.02) and (rot_O < 10)))",
+   "prompt_templates": {
+    "nl": "Close the lid blender by securely placing the lid on top.",
+    "stl_nl": "Close the lid blender by securely placing the lid on top. Finish within 18 seconds, then let go and leave it there until the end. Do not move any other object.",
+    "stl": "F[0,18] G resting_on(lid, blender) & G !moved(other_objects)"
+   }
+  },
+  "CloseFridge": {
+   "index": 1,
+   "kind": "F",
+   "horizon": 600,
+   "deadline_s": 18,
+   "deadline_step": 360,
+   "rtamt_with_O": "(eventually[0:360](always((success > 0.5) and (gripper_contact_part < 0.5) and (jvel_part < 0.01)))) and (always((disp_O < 0.02) and (rot_O < 10)))",
+   "prompt_templates": {
+    "nl": "Close the fridge door.",
+    "stl_nl": "Close the fridge door. Finish within 18 seconds, then let go and leave it closed until the end. Do not move any other object.",
+    "stl": "F[0,18] G (closed(fridge_door) & released(fridge_door)) & G !moved(other_objects)"
+   }
+  },
+  "CloseToasterOvenDoor": {
+   "index": 2,
+   "kind": "F",
+   "horizon": 300,
+   "deadline_s": 9,
+   "deadline_step": 180,
+   "rtamt_with_O": "(eventually[0:180](always((success > 0.5) and (gripper_contact_part < 0.5) and (jvel_part < 0.01)))) and (always((disp_O < 0.02) and (rot_O < 10)))",
+   "prompt_templates": {
+    "nl": "Close the toaster oven door.",
+    "stl_nl": "Close the toaster oven door. Finish within 9 seconds, then let go and leave it closed until the end. Do not move any other object.",
+    "stl": "F[0,9] G (closed(toaster_oven_door) & released(toaster_oven_door)) & G !moved(other_objects)"
+   }
+  },
+  "CoffeeSetupMug": {
+   "index": 3,
+   "kind": "P",
+   "horizon": 400,
+   "deadline_s": 12,
+   "deadline_step": 240,
+   "rtamt_with_O": "(eventually[0:240](always((success > 0.5) and (speed_obj < 0.01) and (spin_obj < 0.25)))) and (always((disp_O < 0.02) and (rot_O < 10)))",
+   "prompt_templates": {
+    "nl": "Pick the {obj} from the counter and place it under the coffee machine dispenser.",
+    "stl_nl": "Pick the {obj} from the counter and place it under the coffee machine dispenser. Finish within 12 seconds, then let go and leave it there until the end. Do not move any other object.",
+    "stl": "F[0,12] G resting_under({obj}, coffee_dispenser) & G !moved(other_objects)"
+   }
+  },
+  "NavigateKitchen": {
+   "index": 4,
+   "kind": "N",
+   "horizon": 300,
+   "deadline_s": 9,
+   "deadline_step": 180,
+   "rtamt_with_O": "(eventually[0:180](always((success > 0.5) and (base_speed < 0.02) and (base_turn < 0.05)))) and (always((disp_O < 0.02) and (rot_O < 10)))",
+   "prompt_templates": {
+    "nl": "Navigate to the {fixture}.",
+    "stl_nl": "Navigate to the {fixture}. Arrive within 9 seconds and stay there until the end. Do not move any other object.",
+    "stl": "F[0,9] G (at({fixture}) & stopped(robot)) & G !moved(other_objects)"
+   }
+  },
+  "OpenCabinet": {
+   "index": 5,
+   "kind": "F",
+   "horizon": 700,
+   "deadline_s": 21,
+   "deadline_step": 420,
+   "rtamt_with_O": "(eventually[0:420](always((success > 0.5) and (gripper_contact_part < 0.5) and (jvel_part < 0.01)))) and (always((disp_O < 0.02) and (rot_O < 10)))",
+   "prompt_templates": {
+    "nl": "Open the cabinet doors.",
+    "stl_nl": "Open the cabinet doors. Finish within 21 seconds, then let go and leave them open until the end. Do not move any other object.",
+    "stl": "F[0,21] G (open(cabinet_doors) & released(cabinet_doors)) & G !moved(other_objects)"
+   }
+  },
+  "OpenDrawer": {
+   "index": 6,
+   "kind": "F",
+   "horizon": 500,
+   "deadline_s": 15,
+   "deadline_step": 300,
+   "rtamt_with_O": "(eventually[0:300](always((success > 0.5) and (gripper_contact_part < 0.5) and (jvel_part < 0.01)))) and (always((disp_O < 0.02) and (rot_O < 10)))",
+   "prompt_templates": {
+    "nl": "Open the {side} drawer.",
+    "stl_nl": "Open the {side} drawer. Finish within 15 seconds, then let go and leave it open until the end. Do not move any other object.",
+    "stl": "F[0,15] G (open({side}_drawer) & released({side}_drawer)) & G !moved(other_objects)"
+   }
+  },
+  "OpenStandMixerHead": {
+   "index": 7,
+   "kind": "F",
+   "horizon": 300,
+   "deadline_s": 9,
+   "deadline_step": 180,
+   "rtamt_with_O": "(eventually[0:180](always((success > 0.5) and (gripper_contact_part < 0.5) and (jvel_part < 0.01)))) and (always((disp_O < 0.02) and (rot_O < 10)))",
+   "prompt_templates": {
+    "nl": "Open the stand mixer head.",
+    "stl_nl": "Open the stand mixer head. Finish within 9 seconds, then let go and leave it open until the end. Do not move any other object.",
+    "stl": "F[0,9] G (open(stand_mixer_head) & released(stand_mixer_head)) & G !moved(other_objects)"
+   }
+  },
+  "PickPlaceCounterToCabinet": {
+   "index": 8,
+   "kind": "P",
+   "horizon": 500,
+   "deadline_s": 15,
+   "deadline_step": 300,
+   "rtamt_with_O": "(eventually[0:300](always((success > 0.5) and (speed_obj < 0.01) and (spin_obj < 0.25)))) and (always((disp_O < 0.02) and (rot_O < 10)))",
+   "prompt_templates": {
+    "nl": "Pick the {obj} from the counter and place it in the cabinet.",
+    "stl_nl": "Pick the {obj} from the counter and place it in the cabinet. Finish within 15 seconds, then let go and leave it there until the end. Do not move any other object.",
+    "stl": "F[0,15] G resting_in({obj}, cabinet) & G !moved(other_objects)"
+   }
+  },
+  "PickPlaceCounterToStove": {
+   "index": 9,
+   "kind": "P",
+   "horizon": 400,
+   "deadline_s": 12,
+   "deadline_step": 240,
+   "rtamt_with_O": "(eventually[0:240](always((success > 0.5) and (speed_obj < 0.01) and (spin_obj < 0.25)))) and (always((disp_O < 0.02) and (rot_O < 10)))",
+   "prompt_templates": {
+    "nl": "Pick the {obj} from the plate and place it in the {container}.",
+    "stl_nl": "Pick the {obj} from the plate and place it in the {container}. Finish within 12 seconds, then let go and leave it there until the end. Do not move any other object.",
+    "stl": "F[0,12] G resting_in({obj}, {container}) & G !moved(other_objects)"
+   }
+  },
+  "PickPlaceDrawerToCounter": {
+   "index": 10,
+   "kind": "P",
+   "horizon": 500,
+   "deadline_s": 15,
+   "deadline_step": 300,
+   "rtamt_with_O": "(eventually[0:300](always((success > 0.5) and (speed_obj < 0.01) and (spin_obj < 0.25)))) and (always((disp_O < 0.02) and (rot_O < 10)))",
+   "prompt_templates": {
+    "nl": "Pick the {obj} from the drawer and place it on the counter.",
+    "stl_nl": "Pick the {obj} from the drawer and place it on the counter. Finish within 15 seconds, then let go and leave it there until the end. Do not move any other object.",
+    "stl": "F[0,15] G resting_on({obj}, counter) & G !moved(other_objects)"
+   }
+  },
+  "PickPlaceSinkToCounter": {
+   "index": 11,
+   "kind": "P",
+   "horizon": 600,
+   "deadline_s": 18,
+   "deadline_step": 360,
+   "rtamt_with_O": "(eventually[0:360](always((success > 0.5) and (speed_obj < 0.01) and (spin_obj < 0.25)))) and (always((disp_O < 0.02) and (rot_O < 10)))",
+   "prompt_templates": {
+    "nl": "Pick the {obj} from the sink and place it on the {container} located on the counter.",
+    "stl_nl": "Pick the {obj} from the sink and place it on the {container} located on the counter. Finish within 18 seconds, then let go and leave it there until the end. Do not move any other object.",
+    "stl": "F[0,18] G resting_on({obj}, {container}) & G !moved(other_objects)"
+   }
+  },
+  "PickPlaceToasterToCounter": {
+   "index": 12,
+   "kind": "P",
+   "horizon": 400,
+   "deadline_s": 12,
+   "deadline_step": 240,
+   "rtamt_with_O": "(eventually[0:240](always((success > 0.5) and (speed_obj < 0.01) and (spin_obj < 0.25)))) and (always((disp_O < 0.02) and (rot_O < 10)))",
+   "prompt_templates": {
+    "nl": "Place the toasted item on a plate.",
+    "stl_nl": "Place the toasted item on a plate. Finish within 12 seconds, then let go and leave it there until the end. Do not move any other object.",
+    "stl": "F[0,12] G resting_on(toasted_item, plate) & G !moved(other_objects)"
+   }
+  },
+  "SlideDishwasherRack": {
+   "index": 13,
+   "kind": "F",
+   "horizon": 300,
+   "deadline_s": 9,
+   "deadline_step": 180,
+   "rtamt_with_O": "(eventually[0:180](always((success > 0.5) and (gripper_contact_part < 0.5) and (jvel_part < 0.01)))) and (always((disp_O < 0.02) and (rot_O < 10)))",
+   "prompt_templates": {
+    "nl": "Fully slide the top dishwasher rack in.",
+    "stl_nl": "Fully slide the top dishwasher rack in. Finish within 9 seconds, then let go and leave it in until the end. Do not move any other object.",
+    "stl": "F[0,9] G (slid_in(top_dishwasher_rack) & released(top_dishwasher_rack)) & G !moved(other_objects)"
+   }
+  },
+  "TurnOffStove": {
+   "index": 14,
+   "kind": "F",
+   "horizon": 500,
+   "deadline_s": 15,
+   "deadline_step": 300,
+   "rtamt_with_O": "(eventually[0:300](always((success > 0.5) and (gripper_contact_part < 0.5) and (jvel_part < 0.01)))) and (always((disp_O < 0.02) and (rot_O < 10)))",
+   "prompt_templates": {
+    "nl": "Turn off the {location} burner of the stove.",
+    "stl_nl": "Turn off the {location} burner of the stove. Finish within 15 seconds, then let go and leave it off until the end. Do not move any other object.",
+    "stl": "F[0,15] G (off({location}_burner) & released({location}_burner)) & G !moved(other_objects)"
+   }
+  },
+  "TurnOnElectricKettle": {
+   "index": 15,
+   "kind": "F",
+   "horizon": 300,
+   "deadline_s": 9,
+   "deadline_step": 180,
+   "rtamt_with_O": "(eventually[0:180](always((success > 0.5) and (gripper_contact_part < 0.5) and (jvel_part < 0.01)))) and (always((disp_O < 0.02) and (rot_O < 10)))",
+   "prompt_templates": {
+    "nl": "Press down the lever to turn on the electric kettle.",
+    "stl_nl": "Press down the lever to turn on the electric kettle. Finish within 9 seconds, then let go and leave it on until the end. Do not move any other object.",
+    "stl": "F[0,9] G (on(electric_kettle) & released(electric_kettle)) & G !moved(other_objects)"
+   }
+  },
+  "TurnOnMicrowave": {
+   "index": 16,
+   "kind": "F",
+   "horizon": 300,
+   "deadline_s": 9,
+   "deadline_step": 180,
+   "rtamt_with_O": "(eventually[0:180](always((success > 0.5) and (released_far > 0.5)))) and (always((disp_O < 0.02) and (rot_O < 10)))",
+   "prompt_templates": {
+    "nl": "Press the start button on the microwave.",
+    "stl_nl": "Press the start button on the microwave. Finish within 9 seconds, then let go and leave it on until the end. Do not move any other object.",
+    "stl": "F[0,9] G (on(microwave) & released(start_button)) & G !moved(other_objects)"
+   }
+  },
+  "TurnOnSinkFaucet": {
+   "index": 17,
+   "kind": "F",
+   "horizon": 400,
+   "deadline_s": 12,
+   "deadline_step": 240,
+   "rtamt_with_O": "(eventually[0:240](always((success > 0.5) and (gripper_contact_part < 0.5) and (jvel_part < 0.01)))) and (always((disp_O < 0.02) and (rot_O < 10)))",
+   "prompt_templates": {
+    "nl": "Turn on the sink faucet.",
+    "stl_nl": "Turn on the sink faucet. Finish within 12 seconds, then let go and leave it on until the end. Do not move any other object.",
+    "stl": "F[0,12] G (on(sink_faucet) & released(sink_faucet)) & G !moved(other_objects)"
+   }
+  }
+ }
+}
