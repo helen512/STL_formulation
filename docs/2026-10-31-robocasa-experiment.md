@@ -1,6 +1,6 @@
 # RoboCasa365 atomic-task STL experiment
 
-2026-10-31 · Status: **checks and pilot done (steps 1–5); waiting for the pilot review before the full run.** The pilot found three bugs that made π0.5 fail every task and broke seed pairing; all are fixed (see [Checks before the run](#checks-before-the-run-steps-15)).
+2026-10-31 · Status: **checks and pilot done (steps 1–6); full run started.** The pilot found three bugs that made π0.5 fail every task and broke seed pairing; all are fixed (see [Bugs found and fixed](#bugs-found-and-fixed)).
 
 **Question:** if π0.5's prompt includes a deadline, a "let go and leave it" rule and a "don't move other objects" rule, does it follow them? This repeats the [LIBERO-spatial run](2026-10-25-libero-experiment.md) on RoboCasa365. All 18 `atomic_seen` tasks run with three prompts: the original instruction, the instruction plus the rules in English, and the rules as a raw STL formula. Every episode is checked against the same STL spec for its task.
 
@@ -260,7 +260,7 @@ Per episode the CSV also records:
   - Check that `ep_meta` and the start poses match across prompts.
   - Measure RAM.
   - If success is near zero on most tasks, review before the full run.
-- [ ] 6. Review the pilot before the full run.
+- [x] 6. Review the pilot before the full run.
 - [ ] 7. Full 540-episode run in `screen`.
 - [ ] 8. Fill in the results below.
 
@@ -287,7 +287,7 @@ Per episode the CSV also records:
   - **3 scenes flagged `Disturbed` with t = 0 as the reference**: a round object (onion, corn, bell pepper) was still rolling at t = 0 and settled within 1.2 s, after moving up to 2.3 cm and 44°. With the settled reference (decision 27) none is flagged; the largest remaining drift is 5.6 mm and 9.1° (the OpenDrawer utensil);
   - **joints that move on their own:** free speed knobs on the mixer and blender (up to 0.15 rad), the kettle switch (0.10), a dishwasher door (0.06), coffee-machine levers (≤ 0.03), and in 2 PickPlaceCounterToCabinet scenes an open cabinet door that swings 0.67 rad. With the 0.2 threshold (decision 28) only that door is flagged.
 - **Pilot** (`eval_logs_stl_pilot/`, `nl`, seed 1000, 18 episodes; 2.5–3 min per task, mostly startup):
-  - **First attempt: 0/18 task success** (`eval_logs_stl_pilot_compiled/`). The robot drove around the kitchen. Two causes, found by looking at the videos and the checkpoint's normalization stats: torch.compile scrambled the camera images, and LeRobot's state/action layout differs from the checkpoint's (see [Run setup](#run-setup)). An aborted second attempt with only the first fix is in `eval_logs_stl_pilot_compileoff_wrongorder/`.
+  - **First attempt: 0/18 task success** (`eval_logs_stl_pilot_compiled/`). The robot drove around the kitchen. See bugs 1 and 2 in [Bugs found and fixed](#bugs-found-and-fixed). An aborted second attempt with only the first fix is in `eval_logs_stl_pilot_compileoff_wrongorder/`.
   - **With both fixes: 7/18 task success**, deadline met 3/18, clean success 6/18, Full STL 3/18. The robot now stays put for tabletop tasks, reaches, grasps and pushes.
   - Successes: CloseFridge, OpenCabinet, OpenDrawer, OpenStandMixerHead, PickPlaceCounterToCabinet, PickPlaceDrawerToCounter, SlideDishwasherRack.
   - **Verdicts match the recordings and videos:** CloseFridge was closed at 9.75 s but the gripper rested on the door from 16.15 s to the end; SlideDishwasherRack was done at 7.6 s and touched again at 14.45–15.05 s; OpenCabinet and PickPlaceDrawerToCounter succeeded after the deadline (25.1 s and 24.0 s); in OpenCabinet the boxed drink inside tipped 11.9° in the last second as the hand reached in; in TurnOnSinkFaucet the arm knocked two counter items (13.6 cm, 118°).
@@ -295,6 +295,21 @@ Per episode the CSV also records:
   - Consistency: 18/18 episodes run the full limit, rtamt = numpy, LeRobot's success = any(`success`). The 18 seed-1000 scenes equal the idle check's.
   - **RAM:** each eval peaks at about 14 GB, and free memory dropped to 13.6 GB with two running, so the full run uses two at a time.
   - **Expected time:** about 40 s per episode plus about 1.5 min of startup per (prompt, task): about 8–9 min per pair, 54 pairs two at a time, about 4 h.
+
+## Bugs found and fixed
+
+Found during steps 2–5, before the full run. Bugs 1–3 would have invalidated the results; the full run uses the fixed code (commits `9fcf9d1`, `85c65d9`).
+
+| # | Bug | Symptom | Cause | Fix |
+| --- | --- | --- | --- | --- |
+| 1 | **Scrambled camera images** | First pilot: 0/18 task success; after the first frame the videos show tiled copies, noise or black. Also with one eval alone and with empty GPUs | The checkpoint's config sets `compile_model: true`. With torch.compile in the same process, MuJoCo's EGL camera renders come back corrupted. Without the policy, or with plain CUDA work in the process, the images are clean | `run_eval.sh` passes `--policy.compile_model=false`. Videos checked clean afterwards |
+| 2 | **State and action vectors in the wrong order** | With clean images the robot still drove away from the counter in tabletop tasks; the gripper never got closer to the target | LeRobot 0.6.1's `RoboCasaEnv` builds the state as `base_pos, base_quat, ee_pos_rel, ee_quat_rel, gripper` and reads actions as `base_motion, control_mode, ee_pos, ee_rot, gripper`. The checkpoint was trained on the RoboCasa365 dataset layout `ee_pos_rel, ee_quat_rel, base_pos, base_quat, gripper` / `ee_pos, ee_rot, gripper, base_motion, control_mode`, as its normalization stats show (state dims 7–9: z = 0.70 m with std 0.002; dims 10–11 always 0; action dims 6 and 11 are ±1 switches, dim 10 always 0). Arm commands went to the base | `launch_eval.py` converts both (`STL_IO_ORDER=dataset`, the default). Afterwards the base stays put, the gripper reaches the mug (3.5 cm) and grasps it, and the pilot succeeds on 7/18 |
+| 3 | **Same seed, different scene** | TurnOnSinkFaucet seed 1000 placed its counter objects 0.9 m apart in two runs; repeated builds differed in about 1 of 4 processes, also with `PYTHONHASHSEED=0` | RoboCasa's counter-region sampler dedupes candidate counter tops with `list(set(valid_geoms))` (`models/fixtures/counter.py:813`). The XML elements hash by memory address, so the order, and the region the seeded RNG picks, changes between processes. This breaks pairing prompts by seed | `recorder.py` shadows `set` in that module with an order-preserving dedupe (its only bare `set()` call), leaving the RoboCasa checkout unchanged. 3 processes × 3 tasks × 3 seeds then match exactly. `monitor.py` now checks that every (task, seed) has the same scene under every prompt. The idle check was re-run with the fix |
+| 4 | Microwave "part" was the whole microwave | `part_gripper` for TurnOnMicrowave would count any touch of the microwave housing | The start button is a geom on the microwave's main body, not a body of its own | Part contact is tracked per geom; for the microwave it is the start-button geom only. Found in the first smoke test, before any run |
+| 5 | Settling objects counted as disturbed | Idle check: 3 of 180 scenes flagged `Disturbed` with no robot motion | Round objects still rolling at t = 0 | Measured from the settled pose (decision 27) |
+| 6 | Idle joints tripped `fixture_changed` | 13 of 180 idle scenes flagged | Free knobs, the kettle switch, a dishwasher door and coffee-machine levers drift on their own | Threshold 0.2 (decision 28). Diagnostic only |
+
+Bugs 5 and 6 are checker changes and need no rerun; the robot runs are unaffected.
 
 ## Checks done while planning
 
