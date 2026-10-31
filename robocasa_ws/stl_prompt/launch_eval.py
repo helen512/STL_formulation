@@ -6,6 +6,16 @@ Same CLI as `lerobot-eval`. Extra settings come from environment variables:
   STL_NO_EARLY_STOP  1 = never terminate on success, so every episode runs the task's full RoboCasa limit
                      (info["is_success"] is still reported each step, so LeRobot's success = goal at any step)
   STL_SEED0          seed of episode 0 (default 1000); the recording's episode = seed - STL_SEED0
+  STL_IO_ORDER       dataset (default) | lerobot: layout of the 16-d state and 12-d action vectors (see below)
+
+State/action layout. LeRobot 0.6.1's RoboCasaEnv builds the state as base_pos, base_quat, ee_pos_rel,
+ee_quat_rel, gripper and reads actions as base_motion(4), control_mode(1), ee_pos(3), ee_rot(3), gripper(1).
+lerobot/pi05_robocasa was trained on the RoboCasa365 dataset layout instead, as its normalization stats show
+(state dims 7-9 have z = 0.70 m with std 0.002 = base position, dims 10-11 are always 0 = base quat x, y;
+action dims 6 and 11 are +-1 switches = gripper and control mode, dim 10 is always 0 = torso):
+  state  = ee_pos_rel(3), ee_quat_rel(4), base_pos(3), base_quat(4), gripper_qpos(2)
+  action = ee_pos(3), ee_rot(3), gripper(1), base_motion(4), control_mode(1)
+With STL_IO_ORDER=dataset both are converted to and from that layout.
 
 LeRobot's RoboCasaEnv.step sets terminated = is_success and then calls self.reset() itself, which would
 rebuild an unseeded kitchen mid-episode. So step() is replaced, not wrapped. reset() calls the original,
@@ -20,6 +30,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import lerobot.envs.robocasa as R  # noqa: E402
+import numpy as np  # noqa: E402
 
 from recorder import Recorder, episode_names  # noqa: E402
 
@@ -27,6 +38,30 @@ VARIANT = os.environ.get("STL_VARIANT", "nl")
 TRACE_DIR = Path(os.environ["STL_TRACE_DIR"]) if os.environ.get("STL_TRACE_DIR") else None
 NO_EARLY_STOP = os.environ.get("STL_NO_EARLY_STOP", "0") == "1"
 SEED0 = int(os.environ.get("STL_SEED0", "1000"))
+IO_ORDER = os.environ.get("STL_IO_ORDER", "dataset")
+assert IO_ORDER in ("dataset", "lerobot"), IO_ORDER
+
+_format_raw_obs = R.RoboCasaEnv._format_raw_obs
+
+
+def format_raw_obs(self, raw_obs):
+    obs = _format_raw_obs(self, raw_obs)
+    if IO_ORDER == "dataset" and "agent_pos" in obs:
+        a = obs["agent_pos"]  # base_pos 0:3, base_quat 3:7, ee_pos_rel 7:10, ee_quat_rel 10:14, gripper 14:16
+        obs["agent_pos"] = np.concatenate([a[7:10], a[10:14], a[0:3], a[3:7], a[14:16]]).astype(a.dtype)
+    return obs
+
+
+def convert_action(a):
+    if IO_ORDER == "lerobot":
+        return R.convert_action(a)
+    return {
+        "action.end_effector_position": a[0:3],
+        "action.end_effector_rotation": a[3:6],
+        "action.gripper_close": a[6:7],
+        "action.base_motion": a[7:11],
+        "action.control_mode": a[11:12],
+    }
 
 _reset, _step, _close = R.RoboCasaEnv.reset, R.RoboCasaEnv.step, R.RoboCasaEnv.close
 
@@ -48,9 +83,9 @@ def reset(self, seed=None, **kwargs):
     env = self._env.env
     ep = episode_names(env, self.task)
     self.task_description = ep["prompts"][VARIANT]
-    print(f"[stl] {self.task} seed={seed} variant={VARIANT} prompt={self.task_description!r}", flush=True)
+    print(f"[stl] {self.task} seed={seed} variant={VARIANT} io={IO_ORDER} prompt={self.task_description!r}", flush=True)
     if not hasattr(self, "_stl_rec"):
-        self._stl_rec = Recorder(self.task, VARIANT, {"seed0": SEED0, "no_early_stop": NO_EARLY_STOP})
+        self._stl_rec = Recorder(self.task, VARIANT, {"seed0": SEED0, "no_early_stop": NO_EARLY_STOP, "io_order": IO_ORDER})
     self._stl_rec.start(env, seed, self.task_description, ep["names"])
     self._stl_rec.trace["prompts"] = ep["prompts"]
     return out
@@ -60,7 +95,7 @@ def step(self, action):
     self._ensure_env()
     if action.ndim != 1:
         raise ValueError(f"Expected a 1-D action, got shape {action.shape}")
-    raw_obs, reward, done, truncated, info = self._env.step(R.convert_action(action))
+    raw_obs, reward, done, truncated, info = self._env.step(convert_action(action))
     is_success = bool(info.get("success", False))
     info.update({"task": self.task, "done": done, "is_success": is_success})
     observation = self._format_raw_obs(raw_obs)
@@ -84,6 +119,7 @@ def close(self):
     return _close(self)
 
 
+R.RoboCasaEnv._format_raw_obs = format_raw_obs
 R.RoboCasaEnv.reset = reset
 R.RoboCasaEnv.step = step
 R.RoboCasaEnv.close = close

@@ -185,7 +185,8 @@ class Thresholds:
     disturb_disp: float = 0.02  # m, Disturbed(o)
     disturb_rot: float = 10.0  # degrees about any axis, Disturbed(o)
     disturb_tilt: float = 10.0  # degrees, LIBERO's tilt-only Disturbed (diagnostic)
-    fixture_changed: float = 0.02  # rad or m, another fixture joint moved from its t=0 value (diagnostic)
+    fixture_changed: float = 0.2  # rad or m, another fixture joint moved from its t=0 value (diagnostic;
+    #   raised from 0.02 after the idle check, where free knobs, the kettle switch and a dishwasher door drifted 0.02-0.15)
     grasp_lift: float = 0.02  # m, GraspLift(o) (diagnostic)
 
 

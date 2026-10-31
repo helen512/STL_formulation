@@ -10,7 +10,7 @@
   "disturb_disp": 0.02,
   "disturb_rot": 10.0,
   "disturb_tilt": 10.0,
-  "fixture_changed": 0.02,
+  "fixture_changed": 0.2,
   "grasp_lift": 0.02
  },
  "tasks": {

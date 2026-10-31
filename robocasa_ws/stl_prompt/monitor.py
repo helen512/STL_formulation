@@ -10,7 +10,9 @@ Per episode (see stl_spec.py and docs/2026-10-31-robocasa-experiment.md):
   task_success  RoboCasa's _check_success() at any step (the benchmark number)
   deadline      F[0,T] G Rest: done and at rest by T, and still at rest at the last step
   undisturbed   G !Disturbed(o) for every o in O over the whole episode, where Disturbed(o) = centre moved
-                > 2 cm from its t=0 position, or rotated > 10 deg about any axis since t=0
+                > 2 cm from its reference pose, or rotated > 10 deg about any axis since then. The reference is
+                the pose once o has settled (still for 10 samples; at most 2 s in, and before the gripper first
+                touches it), because some objects are still rolling at t=0 (idle check). --ref t0 uses t=0.
   clean         task_success and undisturbed
   full_stl      deadline and undisturbed (= all of phi)
 plus diagnostics (first success, rest start, longest rest, first grasp by both definitions, pushed_in,
@@ -119,7 +121,8 @@ def object_pose(t: dict, o: str) -> tuple[np.ndarray, np.ndarray]:
 # ---------------------------------------------------------------- signals ----
 
 
-def derive_signals(t: dict, s: TaskSpec, vel: str = "sim") -> dict[str, np.ndarray]:
+def derive_signals(t: dict, s: TaskSpec, vel: str = "sim", ref: str = "settle",
+                   th: Thresholds = Thresholds()) -> dict[str, np.ndarray]:
     """All rtamt signals of the task's spec."""
     hz = t.get("hz", HZ)
     n = len(t["success"])
@@ -149,9 +152,37 @@ def derive_signals(t: dict, s: TaskSpec, vel: str = "sim") -> dict[str, np.ndarr
         sig[SIG_BASE_TURN] = np.linalg.norm(np.asarray(t["base"]["angvel"]), axis=1)
     for o in s.others:
         pos, quat = object_pose(t, o)
-        sig[sig_disp(o)] = np.linalg.norm(pos - pos[0], axis=1)
-        sig[sig_rot(o)] = np.degrees(rot_angle(quat, np.tile(quat[0], (n, 1))))
+        k = ref_index(t, o, ref, th)
+        sig[sig_disp(o)] = np.linalg.norm(pos - pos[k], axis=1)
+        sig[sig_rot(o)] = np.degrees(rot_angle(quat, np.tile(quat[k], (n, 1))))
+        if k:
+            sig[sig_disp(o)][:k] = 0.0  # settling before the reference sample isn't counted
+            sig[sig_rot(o)][:k] = 0.0
     return sig
+
+
+SETTLE_RUN = 10  # samples the object must be still for
+SETTLE_MAX = 40  # latest reference sample (2 s)
+
+
+def ref_index(t: dict, o: str, ref: str, th: Thresholds) -> int:
+    """Sample whose pose Disturbed(o) is measured from.
+
+    ref="t0": sample 0. ref="settle": the first sample from which o is Still for SETTLE_RUN samples, but no
+    later than SETTLE_MAX or the gripper's first contact with o (objects can still be rolling at t=0)."""
+    if ref == "t0":
+        return 0
+    lin = np.linalg.norm(np.asarray(t["objects"][o]["linvel"]), axis=1)
+    ang = np.linalg.norm(np.asarray(t["objects"][o]["angvel"]), axis=1)
+    still = (lin < th.still_speed) & (ang < th.still_spin)
+    cap = SETTLE_MAX
+    touch = first(np.asarray(t["contact"]["gripper"].get(o, []), dtype=bool))
+    if touch is not None:
+        cap = min(cap, touch)
+    for k in range(cap + 1):
+        if still[k : k + SETTLE_RUN].all():
+            return k
+    return cap
 
 
 # ------------------------------------------------------------------ rtamt ----
@@ -284,10 +315,10 @@ def fixture_changes(t: dict, th: Thresholds) -> dict[str, float]:
 # ------------------------------------------------------------------ check ----
 
 
-def check(t: dict, th: Thresholds, vel: str = "sim") -> dict:
+def check(t: dict, th: Thresholds, vel: str = "sim", ref: str = "settle") -> dict:
     s = spec_of(t)
     hz = t.get("hz", HZ)
-    sig = derive_signals(t, s, vel)
+    sig = derive_signals(t, s, vel, ref, th)
     rt = {"deadline": holds(s.deadline_rtamt(th), sig)}
     rt.update({f"undisturbed_{o}": holds(f, sig) for o, f in s.undisturbed_rtamt(th).items()})
     py = python_parts(sig, s, th)
@@ -306,7 +337,9 @@ def check(t: dict, th: Thresholds, vel: str = "sim") -> dict:
     tilt_ok = {}
     for o in s.others:
         pos, quat = object_pose(t, o)
-        tilt_ok[o] = bool(((sig[sig_disp(o)] < th.disturb_disp) & (tilt_deg(quat) < th.disturb_tilt)).all())
+        k = ref_index(t, o, ref, th)
+        tilt = tilt_deg(quat[k:])
+        tilt_ok[o] = bool(((sig[sig_disp(o)][k:] < th.disturb_disp) & (tilt < th.disturb_tilt)).all())
 
     first_success = first(masks["success"])
     row = {
@@ -530,14 +563,15 @@ def lerobot_successes(trace_path: Path) -> list[bool] | None:
 # ------------------------------------------------------------------- main ----
 
 
-def run(dirs: list[str], th: Thresholds, vel: str = "sim", write: bool = True, keep: bool = False):
+def run(dirs: list[str], th: Thresholds, vel: str = "sim", write: bool = True, keep: bool = False,
+        ref: str = "settle"):
     rows, traces = [], {}
     for d in dirs:
         d_rows = []
         lr_cache: dict[Path, list[bool] | None] = {}
         for p in find_traces(Path(d)):
             t = load_trace(p)
-            r = check(t, th, vel)
+            r = check(t, th, vel, ref)
             if p.parent not in lr_cache:
                 lr_cache[p.parent] = lerobot_successes(p)
             lr = lr_cache[p.parent]
@@ -565,13 +599,15 @@ def main(argv=None):
         ap.add_argument(f"--{f.replace('_', '-')}", type=float, default=getattr(d, f))
     ap.add_argument("--vel", choices=["sim", "pose"], default="sim",
                     help="speeds from the simulator's velocities (sim) or from differences of recorded poses (pose)")
+    ap.add_argument("--ref", choices=["t0", "settle"], default="settle",
+                    help="Disturbed(o) measured from the pose at t=0, or once o has settled (see ref_index)")
     ap.add_argument("--idle", action="store_true", help="report as an idle-robot check")
     ap.add_argument("--no-write", action="store_true", help="do not write episodes.csv")
     ap.add_argument("--json-out", help="also write all rows to this JSON file")
     a = ap.parse_args(argv)
     th = Thresholds(**{f: getattr(a, f) for f in d.__dataclass_fields__})
-    rows, traces = run(a.dirs, th, a.vel, write=not a.no_write, keep=a.idle)
-    print(f"\nthresholds: {th}  velocities: {a.vel}\n")
+    rows, traces = run(a.dirs, th, a.vel, write=not a.no_write, keep=a.idle, ref=a.ref)
+    print(f"\nthresholds: {th}  velocities: {a.vel}  Disturbed reference: {a.ref}\n")
     if a.idle:
         report_idle(rows, traces, th)
     else:

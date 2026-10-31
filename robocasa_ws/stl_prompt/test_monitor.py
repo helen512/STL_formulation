@@ -234,6 +234,39 @@ def test_disturbed_on_the_last_sample_and_moved_back_both_count():
     assert not verdict(tr)["undisturbed"]
 
 
+def rolling(tr, obj, until, dx=0.03, deg=40.0):
+    """`obj` rolls dx metres / deg degrees during steps 0..until (fast), then is still for good."""
+    tr = copy.deepcopy(tr)
+    o, n = tr["objects"][obj], len(tr["success"])
+    for k in range(n):
+        f = min(k / until, 1.0)
+        o["pos"][k] = [1.0 + dx * f, 2.0, 0.9]
+        o["quat"][k] = quat_x(deg * f)
+        o["linvel"][k] = [0.05, 0, 0] if k < until else [0.0, 0, 0]
+        o["angvel"][k] = [1.0, 0, 0] if k < until else [0.0, 0, 0]
+    return tr
+
+
+def test_settling_at_t0_is_not_counted_with_the_settled_reference():
+    tr = rolling(P(), "distr_a", until=24)
+    assert verdict(tr)["undisturbed"]  # default: settled reference
+    r = monitor.check(tr, TH, ref="t0")
+    assert r["rtamt_eq_numpy"] and not r["undisturbed"]
+    assert monitor.ref_index(tr, "distr_a", "settle", TH) == 24
+    # a move after settling still counts, measured from the settled pose
+    assert not verdict(move(tr, "distr_a", 200, dx=0.0201))["undisturbed"]
+    assert verdict(move(tr, "distr_a", 200, dx=0.0199))["undisturbed"]
+
+
+def test_settled_reference_is_capped_at_2s_and_at_first_gripper_contact():
+    tr = rolling(P(), "distr_a", until=100)  # never settles within 2 s: reference at step 40
+    assert monitor.ref_index(tr, "distr_a", "settle", TH) == 40
+    assert not verdict(tr)["undisturbed"]  # it rolls on after 2 s
+    tr = rolling(P(), "distr_a", until=24)
+    tr = setv(tr, ("contact", "gripper", "distr_a"), 10, True)  # touched while still rolling
+    assert monitor.ref_index(tr, "distr_a", "settle", TH) == 10
+
+
 def test_no_others_means_undisturbed():
     r = verdict(P(others=()))
     assert r["undisturbed"] and r["clean"] and r["full_stl"] and r["n_others"] == 0
@@ -249,9 +282,11 @@ def test_target_and_unlisted_objects_are_not_checked():
 
 def test_fixture_changed_is_a_diagnostic_only():
     tr = P()
-    tr["joints"] = [[0.0]] * 200 + [[0.03]] * (len(tr["success"]) - 200)
+    tr["joints"] = [[0.0]] * 200 + [[0.19]] * (len(tr["success"]) - 200)
+    assert not verdict(tr)["fixture_changed"]
+    tr["joints"] = [[0.0]] * 200 + [[0.21]] * (len(tr["success"]) - 200)
     r = verdict(tr)
-    assert r["fixture_changed"] and r["full_stl"] and r["fixture_changed_joints"] == "other_door_joint:0.03"
+    assert r["fixture_changed"] and r["full_stl"] and r["fixture_changed_joints"] == "other_door_joint:0.21"
 
 
 # ------------------------------------------------------------------ F -------
