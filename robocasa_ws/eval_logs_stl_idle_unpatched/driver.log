@@ -1,0 +1,19 @@
+[idle] CloseToasterOvenDoor finished with code 0
+[idle] NavigateKitchen finished with code 0
+[idle] CoffeeSetupMug finished with code 0
+[idle] CloseBlenderLid finished with code 0
+[idle] CloseFridge finished with code 0
+[idle] OpenStandMixerHead finished with code 0
+[idle] OpenDrawer finished with code 0
+[idle] OpenCabinet finished with code 0
+[idle] PickPlaceCounterToStove finished with code 0
+[idle] PickPlaceCounterToCabinet finished with code 0
+[idle] PickPlaceDrawerToCounter finished with code 0
+[idle] SlideDishwasherRack finished with code 0
+[idle] PickPlaceToasterToCounter finished with code 0
+[idle] PickPlaceSinkToCounter finished with code 0
+[idle] TurnOffStove finished with code 0
+[idle] TurnOnElectricKettle finished with code 0
+[idle] TurnOnMicrowave finished with code 0
+[idle] TurnOnSinkFaucet finished with code 0
+[idle] done; failed: none

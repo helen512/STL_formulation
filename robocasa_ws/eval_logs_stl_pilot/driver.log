@@ -1,0 +1,64 @@
+[2026-10-31 16:56:06] driver start: 18 pairs to run, slots=2, gpus=['0', '1'], episodes=1
+[2026-10-31 16:56:06] slot 0 gpu 0: start nl CloseBlenderLid
+[2026-10-31 16:56:06] slot 1 gpu 1: start nl CloseFridge
+[2026-10-31 16:56:11] mem: available 50.3 GB; running: nl/CloseBlenderLid 0.9 GB, nl/CloseFridge 0.9 GB
+[2026-10-31 16:57:11] mem: available 24.2 GB; running: nl/CloseBlenderLid 13.7 GB, nl/CloseFridge 13.7 GB
+[2026-10-31 16:58:11] mem: available 38.2 GB; running: nl/CloseBlenderLid 5.9 GB, nl/CloseFridge 6.9 GB
+[2026-10-31 16:59:01] slot 0: nl CloseBlenderLid finished code=0 ok=True in 2.9 min
+[2026-10-31 16:59:01] slot 1: nl CloseFridge finished code=0 ok=True in 2.9 min
+[2026-10-31 16:59:02] slot 0 gpu 0: start nl CloseToasterOvenDoor
+[2026-10-31 16:59:02] slot 1 gpu 1: start nl CoffeeSetupMug
+[2026-10-31 16:59:12] mem: available 47.3 GB; running: nl/CloseToasterOvenDoor 2.4 GB, nl/CoffeeSetupMug 2.4 GB
+[2026-10-31 17:00:12] mem: available 40.0 GB; running: nl/CloseToasterOvenDoor 6.1 GB, nl/CoffeeSetupMug 5.4 GB
+[2026-10-31 17:01:12] mem: available 36.2 GB; running: nl/CloseToasterOvenDoor 8.1 GB, nl/CoffeeSetupMug 7.2 GB
+[2026-10-31 17:01:32] slot 0: nl CloseToasterOvenDoor finished code=0 ok=True in 2.5 min
+[2026-10-31 17:01:32] slot 0 gpu 0: start nl NavigateKitchen
+[2026-10-31 17:01:42] slot 1: nl CoffeeSetupMug finished code=0 ok=True in 2.7 min
+[2026-10-31 17:01:42] slot 1 gpu 1: start nl OpenCabinet
+[2026-10-31 17:02:12] mem: available 36.7 GB; running: nl/NavigateKitchen 3.3 GB, nl/OpenCabinet 11.8 GB
+[2026-10-31 17:03:12] mem: available 24.5 GB; running: nl/NavigateKitchen 13.5 GB, nl/OpenCabinet 13.7 GB
+[2026-10-31 17:04:07] slot 0: nl NavigateKitchen finished code=0 ok=True in 2.6 min
+[2026-10-31 17:04:08] slot 0 gpu 0: start nl OpenDrawer
+[2026-10-31 17:04:13] mem: available 44.0 GB; running: nl/OpenCabinet 7.3 GB, nl/OpenDrawer 0.9 GB
+[2026-10-31 17:04:43] slot 1: nl OpenCabinet finished code=0 ok=True in 3.0 min
+[2026-10-31 17:04:43] slot 1 gpu 1: start nl OpenStandMixerHead
+[2026-10-31 17:05:13] mem: available 26.4 GB; running: nl/OpenDrawer 13.7 GB, nl/OpenStandMixerHead 11.8 GB
+[2026-10-31 17:06:13] mem: available 30.9 GB; running: nl/OpenDrawer 7.1 GB, nl/OpenStandMixerHead 13.7 GB
+[2026-10-31 17:06:58] slot 0: nl OpenDrawer finished code=0 ok=True in 2.8 min
+[2026-10-31 17:06:58] slot 0 gpu 0: start nl PickPlaceCounterToCabinet
+[2026-10-31 17:07:13] mem: available 40.8 GB; running: nl/OpenStandMixerHead 6.6 GB, nl/PickPlaceCounterToCabinet 4.8 GB
+[2026-10-31 17:07:18] slot 1: nl OpenStandMixerHead finished code=0 ok=True in 2.6 min
+[2026-10-31 17:07:19] slot 1 gpu 1: start nl PickPlaceCounterToStove
+[2026-10-31 17:08:14] mem: available 30.6 GB; running: nl/PickPlaceCounterToCabinet 8.7 GB, nl/PickPlaceCounterToStove 12.5 GB
+[2026-10-31 17:09:14] mem: available 27.7 GB; running: nl/PickPlaceCounterToCabinet 7.6 GB, nl/PickPlaceCounterToStove 16.6 GB
+[2026-10-31 17:09:59] slot 0: nl PickPlaceCounterToCabinet finished code=0 ok=True in 3.0 min
+[2026-10-31 17:09:59] slot 0 gpu 0: start nl PickPlaceDrawerToCounter
+[2026-10-31 17:10:04] slot 1: nl PickPlaceCounterToStove finished code=0 ok=True in 2.8 min
+[2026-10-31 17:10:04] slot 1 gpu 1: start nl PickPlaceSinkToCounter
+[2026-10-31 17:10:14] mem: available 44.6 GB; running: nl/PickPlaceDrawerToCounter 5.1 GB, nl/PickPlaceSinkToCounter 2.4 GB
+[2026-10-31 17:11:14] mem: available 36.6 GB; running: nl/PickPlaceDrawerToCounter 9.0 GB, nl/PickPlaceSinkToCounter 6.2 GB
+[2026-10-31 17:12:14] mem: available 36.2 GB; running: nl/PickPlaceDrawerToCounter 8.2 GB, nl/PickPlaceSinkToCounter 7.1 GB
+[2026-10-31 17:12:49] slot 0: nl PickPlaceDrawerToCounter finished code=0 ok=True in 2.8 min
+[2026-10-31 17:12:50] slot 0 gpu 0: start nl PickPlaceToasterToCounter
+[2026-10-31 17:13:00] slot 1: nl PickPlaceSinkToCounter finished code=0 ok=True in 2.9 min
+[2026-10-31 17:13:00] slot 1 gpu 1: start nl SlideDishwasherRack
+[2026-10-31 17:13:15] mem: available 35.1 GB; running: nl/PickPlaceToasterToCounter 11.8 GB, nl/SlideDishwasherRack 5.2 GB
+[2026-10-31 17:14:15] mem: available 28.8 GB; running: nl/PickPlaceToasterToCounter 13.7 GB, nl/SlideDishwasherRack 9.1 GB
+[2026-10-31 17:15:15] mem: available 35.0 GB; running: nl/PickPlaceToasterToCounter 8.3 GB, nl/SlideDishwasherRack 8.3 GB
+[2026-10-31 17:15:30] slot 0: nl PickPlaceToasterToCounter finished code=0 ok=True in 2.7 min
+[2026-10-31 17:15:30] slot 0 gpu 0: start nl TurnOffStove
+[2026-10-31 17:15:35] slot 1: nl SlideDishwasherRack finished code=0 ok=True in 2.6 min
+[2026-10-31 17:15:36] slot 1 gpu 1: start nl TurnOnElectricKettle
+[2026-10-31 17:16:16] mem: available 44.2 GB; running: nl/TurnOffStove 4.6 GB, nl/TurnOnElectricKettle 3.1 GB
+[2026-10-31 17:17:16] mem: available 23.1 GB; running: nl/TurnOffStove 15.9 GB, nl/TurnOnElectricKettle 12.8 GB
+[2026-10-31 17:18:11] slot 1: nl TurnOnElectricKettle finished code=0 ok=True in 2.6 min
+[2026-10-31 17:18:11] slot 1 gpu 1: start nl TurnOnMicrowave
+[2026-10-31 17:18:16] mem: available 50.4 GB; running: nl/TurnOffStove 0.0 GB, nl/TurnOnMicrowave 0.9 GB
+[2026-10-31 17:18:16] slot 0: nl TurnOffStove finished code=0 ok=True in 2.8 min
+[2026-10-31 17:18:16] slot 0 gpu 0: start nl TurnOnSinkFaucet
+[2026-10-31 17:19:16] mem: available 24.4 GB; running: nl/TurnOnMicrowave 13.7 GB, nl/TurnOnSinkFaucet 13.7 GB
+[2026-10-31 17:20:17] mem: available 22.2 GB; running: nl/TurnOnMicrowave 9.3 GB, nl/TurnOnSinkFaucet 18.1 GB
+[2026-10-31 17:21:12] slot 1: nl TurnOnMicrowave finished code=0 ok=True in 3.0 min
+[2026-10-31 17:21:12] slot 0: nl TurnOnSinkFaucet finished code=0 ok=True in 2.9 min
+[2026-10-31 17:21:12] driver done; failed pairs: none
+[2026-10-31 17:21:13] wrote eval_logs_stl_pilot/summary.md

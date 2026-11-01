@@ -1,6 +1,6 @@
 # RoboCasa365 atomic-task STL experiment
 
-2026-10-31 · Status: **checks and pilot done (steps 1–6); full run started.** The pilot found three bugs that made π0.5 fail every task and broke seed pairing; all are fixed (see [Bugs found and fixed](#bugs-found-and-fixed)).
+2026-10-31 · Status: **full run stopped early on request, after 2 of 54 (prompt, task) pairs** (CloseBlenderLid under `nl` and `stl_nl`, 20 episodes); see [Results](#results). Checks and pilot (steps 1–6) are done. The pilot found three bugs that made π0.5 fail every task and broke seed pairing; all are fixed (see [Bugs found and fixed](#bugs-found-and-fixed)).
 
 **Question:** if π0.5's prompt includes a deadline, a "let go and leave it" rule and a "don't move other objects" rule, does it follow them? This repeats the [LIBERO-spatial run](2026-10-25-libero-experiment.md) on RoboCasa365. All 18 `atomic_seen` tasks run with three prompts: the original instruction, the instruction plus the rules in English, and the rules as a raw STL formula. Every episode is checked against the same STL spec for its task.
 
@@ -261,8 +261,8 @@ Per episode the CSV also records:
   - Measure RAM.
   - If success is near zero on most tasks, review before the full run.
 - [x] 6. Review the pilot before the full run.
-- [ ] 7. Full 540-episode run in `screen`.
-- [ ] 8. Fill in the results below.
+- [ ] 7. Full 540-episode run in `screen`. **Stopped at 20:10 on 2026-10-31 on request, after 2 of 54 pairs** (see [Results](#results)).
+- [ ] 8. Fill in the results below. Partial: only the finished pairs are recorded.
 
 ## Checks before the run (steps 1–5)
 
@@ -372,7 +372,29 @@ Behaviors to keep in mind when reading the pilot and the results:
 
 ## Results
 
-Not run yet.
+**Partial run, stopped on request.** The full run started at 19:48 on 2026-10-31 and was stopped at about 20:10. Finished: **CloseBlenderLid under `nl` and `stl_nl`**, 10 episodes each (seeds 1000–1009). Nothing else finished:
+
+- CloseFridge under `nl` failed three times with CUDA out-of-memory, and under `stl_nl` it was stopped mid-run. Another user's eval jobs took 20–21 GB on one GPU and 12–20 GB on the other, and kept launching new ones. The driver now waits for 11 GB of free GPU memory and retries up to 3 times (`afb96a4`). The CUDA device numbering now matches `nvidia-smi` (`d85af22`); before that it didn't, so the driver checked one GPU and launched on the other. The failed attempts' logs are in `eval_logs_stl/{nl,stl_nl}/CloseFridge*/eval.log`; none wrote a recording.
+- `stl` never started, and the other 16 tasks never started under any prompt.
+
+Outputs: `robocasa_ws/eval_logs_stl/{nl,stl_nl}/CloseBlenderLid/` (recordings, videos, `eval_info.json`), `eval_logs_stl/{nl,stl_nl}/episodes.csv`, `eval_logs_stl/driver.log`. Consistency: 20/20 episodes ran the full 600 steps; rtamt = numpy on 20/20; LeRobot's success = any(`success`) on 20/20; the same seed gave the same scene under both prompts on 10/10 seeds.
+
+**CloseBlenderLid** (P, limit 30 s, deadline T = 18 s; O is empty, so clean success = task success and Full STL = deadline met)
+
+| Prompt | Task success | Deadline met | Clean success | Full STL |
+| --- | --- | --- | --- | --- |
+| `nl` | 2/10 [6–51%] | 0/10 [0–28%] | 2/10 [6–51%] | 0/10 [0–28%] |
+| `stl_nl` | 1/10 [2–40%] | 0/10 [0–28%] | 1/10 [2–40%] | 0/10 [0–28%] |
+
+(95% Wilson range in brackets.)
+
+- **No episode met the deadline under either prompt.** All three successes came after 18 s: `nl` seeds 1002 (18.6 s) and 1004 (27.4 s), `stl_nl` seed 1007 (27.45 s). Each then stayed at rest to the end.
+- **Paired by seed,** `stl_nl` vs `nl` task success is 1 gained against 2 lost (exact McNemar p = 1). Ten episodes of one task can't show a difference either way.
+- **Deadline failures:** `nl` 8 never done, 2 done after T; `stl_nl` 9 never done, 1 done after T.
+- **The lid is often placed but RoboCasa's success never fires.** The lid was on the blender at some point (`lid_on` part) in 2 `nl` and 4 `stl_nl` episodes. Both `nl` ones succeeded; in 3 `stl_nl` ones success never followed (seeds 1002, 1004, 1005, with the lid on for 1.2–4.8 s). RoboCasa also needs the gripper > 0.15 m from the lid, while it is still on and upright. The first lift came at 7.9–27.3 s; 4 `nl` and 3 `stl_nl` episodes never lifted the lid. No episode pushed the lid in without lifting it.
+- Not comparable to the pilot's CloseBlenderLid (0/1), and too few episodes to say anything about the rule prompts.
+
+**Not recorded:** the other 17 tasks, and the `stl` prompt.
 
 ## Decisions
 

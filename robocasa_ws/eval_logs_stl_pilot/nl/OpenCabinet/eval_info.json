@@ -1,0 +1,47 @@
+{
+  "per_task": [
+    {
+      "task_group": "OpenCabinet",
+      "task_id": 0,
+      "metrics": {
+        "sum_rewards": [
+          199.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [
+          "eval_logs_stl_pilot/nl/OpenCabinet/videos/OpenCabinet_0/eval_episode_0.mp4"
+        ],
+        "predicted_video_paths": []
+      }
+    }
+  ],
+  "per_group": {
+    "OpenCabinet": {
+      "avg_sum_reward": 199.0,
+      "avg_max_reward": 1.0,
+      "pc_success": 100.0,
+      "n_episodes": 1,
+      "video_paths": [
+        "eval_logs_stl_pilot/nl/OpenCabinet/videos/OpenCabinet_0/eval_episode_0.mp4"
+      ],
+      "predicted_video_paths": []
+    }
+  },
+  "overall": {
+    "avg_sum_reward": 199.0,
+    "avg_max_reward": 1.0,
+    "pc_success": 100.0,
+    "n_episodes": 1,
+    "eval_s": 55.25639367103577,
+    "eval_ep_s": 55.256393909454346,
+    "video_paths": [
+      "eval_logs_stl_pilot/nl/OpenCabinet/videos/OpenCabinet_0/eval_episode_0.mp4"
+    ],
+    "predicted_video_paths": []
+  }
+}

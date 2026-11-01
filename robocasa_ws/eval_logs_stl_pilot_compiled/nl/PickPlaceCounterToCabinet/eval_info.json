@@ -1,0 +1,47 @@
+{
+  "per_task": [
+    {
+      "task_group": "PickPlaceCounterToCabinet",
+      "task_id": 0,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [
+          "eval_logs_stl_pilot/nl/PickPlaceCounterToCabinet/videos/PickPlaceCounterToCabinet_0/eval_episode_0.mp4"
+        ],
+        "predicted_video_paths": []
+      }
+    }
+  ],
+  "per_group": {
+    "PickPlaceCounterToCabinet": {
+      "avg_sum_reward": 0.0,
+      "avg_max_reward": 0.0,
+      "pc_success": 0.0,
+      "n_episodes": 1,
+      "video_paths": [
+        "eval_logs_stl_pilot/nl/PickPlaceCounterToCabinet/videos/PickPlaceCounterToCabinet_0/eval_episode_0.mp4"
+      ],
+      "predicted_video_paths": []
+    }
+  },
+  "overall": {
+    "avg_sum_reward": 0.0,
+    "avg_max_reward": 0.0,
+    "pc_success": 0.0,
+    "n_episodes": 1,
+    "eval_s": 110.65716218948364,
+    "eval_ep_s": 110.65716290473938,
+    "video_paths": [
+      "eval_logs_stl_pilot/nl/PickPlaceCounterToCabinet/videos/PickPlaceCounterToCabinet_0/eval_episode_0.mp4"
+    ],
+    "predicted_video_paths": []
+  }
+}

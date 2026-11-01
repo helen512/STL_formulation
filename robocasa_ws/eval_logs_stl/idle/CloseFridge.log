@@ -1,0 +1,18 @@
+[robosuite WARNING] Could not import robosuite_models. Some robots may not be available. If you want to use these robots, please install robosuite_models from source (https://github.com/ARISE-Initiative/robosuite_models) or through pip install. (__init__.py:30)
+WARNING:robosuite_logs:Could not import robosuite_models. Some robots may not be available. If you want to use these robots, please install robosuite_models from source (https://github.com/ARISE-Initiative/robosuite_models) or through pip install.
+[robosuite WARNING] Could not load the mink-based whole-body IK. Make sure you install related import properly (e.g. pip install mink==0.0.5), otherwise you will not be able to use the default IK controller setting for GR1 robot. (__init__.py:40)
+WARNING:robosuite_logs:Could not load the mink-based whole-body IK. Make sure you install related import properly (e.g. pip install mink==0.0.5), otherwise you will not be able to use the default IK controller setting for GR1 robot.
+[robosuite INFO] Loading controller configuration from: /mnt/samsung_2tb/mingyue/lerobot-libero/robocasa_ws/third_party/robosuite/robosuite/controllers/config/robots/default_pandaomron.json (composite_controller_factory.py:121)
+INFO:robosuite_logs:Loading controller configuration from: /mnt/samsung_2tb/mingyue/lerobot-libero/robocasa_ws/third_party/robosuite/robosuite/controllers/config/robots/default_pandaomron.json
+WARNING: mimicgen environments not imported since mimicgen is not installed!
+Creating CloseFridge with split=pretrain
+[idle] CloseFridge seed=1000 reset=4.4s steps=25.3s -> eval_logs_stl/idle/CloseFridge_ep0.json.gz
+[idle] CloseFridge seed=1001 reset=5.6s steps=30.2s -> eval_logs_stl/idle/CloseFridge_ep1.json.gz
+[idle] CloseFridge seed=1002 reset=7.1s steps=21.4s -> eval_logs_stl/idle/CloseFridge_ep2.json.gz
+[idle] CloseFridge seed=1003 reset=8.7s steps=45.9s -> eval_logs_stl/idle/CloseFridge_ep3.json.gz
+[idle] CloseFridge seed=1004 reset=6.5s steps=27.6s -> eval_logs_stl/idle/CloseFridge_ep4.json.gz
+[idle] CloseFridge seed=1005 reset=8.1s steps=25.4s -> eval_logs_stl/idle/CloseFridge_ep5.json.gz
+[idle] CloseFridge seed=1006 reset=5.2s steps=22.1s -> eval_logs_stl/idle/CloseFridge_ep6.json.gz
+[idle] CloseFridge seed=1007 reset=5.9s steps=26.3s -> eval_logs_stl/idle/CloseFridge_ep7.json.gz
+[idle] CloseFridge seed=1008 reset=5.9s steps=39.1s -> eval_logs_stl/idle/CloseFridge_ep8.json.gz
+[idle] CloseFridge seed=1009 reset=14.0s steps=27.6s -> eval_logs_stl/idle/CloseFridge_ep9.json.gz

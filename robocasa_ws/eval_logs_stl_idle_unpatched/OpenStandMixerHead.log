@@ -1,0 +1,18 @@
+[robosuite WARNING] Could not import robosuite_models. Some robots may not be available. If you want to use these robots, please install robosuite_models from source (https://github.com/ARISE-Initiative/robosuite_models) or through pip install. (__init__.py:30)
+WARNING:robosuite_logs:Could not import robosuite_models. Some robots may not be available. If you want to use these robots, please install robosuite_models from source (https://github.com/ARISE-Initiative/robosuite_models) or through pip install.
+[robosuite WARNING] Could not load the mink-based whole-body IK. Make sure you install related import properly (e.g. pip install mink==0.0.5), otherwise you will not be able to use the default IK controller setting for GR1 robot. (__init__.py:40)
+WARNING:robosuite_logs:Could not load the mink-based whole-body IK. Make sure you install related import properly (e.g. pip install mink==0.0.5), otherwise you will not be able to use the default IK controller setting for GR1 robot.
+[robosuite INFO] Loading controller configuration from: /mnt/samsung_2tb/mingyue/lerobot-libero/robocasa_ws/third_party/robosuite/robosuite/controllers/config/robots/default_pandaomron.json (composite_controller_factory.py:121)
+INFO:robosuite_logs:Loading controller configuration from: /mnt/samsung_2tb/mingyue/lerobot-libero/robocasa_ws/third_party/robosuite/robosuite/controllers/config/robots/default_pandaomron.json
+WARNING: mimicgen environments not imported since mimicgen is not installed!
+Creating OpenStandMixerHead with split=pretrain
+[idle] OpenStandMixerHead seed=1000 reset=5.1s steps=11.4s -> eval_logs_stl/idle/OpenStandMixerHead_ep0.json.gz
+[idle] OpenStandMixerHead seed=1001 reset=6.3s steps=16.1s -> eval_logs_stl/idle/OpenStandMixerHead_ep1.json.gz
+[idle] OpenStandMixerHead seed=1002 reset=5.3s steps=13.2s -> eval_logs_stl/idle/OpenStandMixerHead_ep2.json.gz
+[idle] OpenStandMixerHead seed=1003 reset=8.7s steps=17.7s -> eval_logs_stl/idle/OpenStandMixerHead_ep3.json.gz
+[idle] OpenStandMixerHead seed=1004 reset=4.9s steps=13.2s -> eval_logs_stl/idle/OpenStandMixerHead_ep4.json.gz
+[idle] OpenStandMixerHead seed=1005 reset=5.7s steps=12.3s -> eval_logs_stl/idle/OpenStandMixerHead_ep5.json.gz
+[idle] OpenStandMixerHead seed=1006 reset=4.6s steps=10.3s -> eval_logs_stl/idle/OpenStandMixerHead_ep6.json.gz
+[idle] OpenStandMixerHead seed=1007 reset=6.1s steps=12.6s -> eval_logs_stl/idle/OpenStandMixerHead_ep7.json.gz
+[idle] OpenStandMixerHead seed=1008 reset=5.4s steps=15.0s -> eval_logs_stl/idle/OpenStandMixerHead_ep8.json.gz
+[idle] OpenStandMixerHead seed=1009 reset=5.2s steps=13.3s -> eval_logs_stl/idle/OpenStandMixerHead_ep9.json.gz

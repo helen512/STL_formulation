@@ -1,0 +1,18 @@
+[robosuite WARNING] Could not import robosuite_models. Some robots may not be available. If you want to use these robots, please install robosuite_models from source (https://github.com/ARISE-Initiative/robosuite_models) or through pip install. (__init__.py:30)
+WARNING:robosuite_logs:Could not import robosuite_models. Some robots may not be available. If you want to use these robots, please install robosuite_models from source (https://github.com/ARISE-Initiative/robosuite_models) or through pip install.
+[robosuite WARNING] Could not load the mink-based whole-body IK. Make sure you install related import properly (e.g. pip install mink==0.0.5), otherwise you will not be able to use the default IK controller setting for GR1 robot. (__init__.py:40)
+WARNING:robosuite_logs:Could not load the mink-based whole-body IK. Make sure you install related import properly (e.g. pip install mink==0.0.5), otherwise you will not be able to use the default IK controller setting for GR1 robot.
+[robosuite INFO] Loading controller configuration from: /mnt/samsung_2tb/mingyue/lerobot-libero/robocasa_ws/third_party/robosuite/robosuite/controllers/config/robots/default_pandaomron.json (composite_controller_factory.py:121)
+INFO:robosuite_logs:Loading controller configuration from: /mnt/samsung_2tb/mingyue/lerobot-libero/robocasa_ws/third_party/robosuite/robosuite/controllers/config/robots/default_pandaomron.json
+WARNING: mimicgen environments not imported since mimicgen is not installed!
+Creating NavigateKitchen with split=pretrain
+[idle] NavigateKitchen seed=1000 reset=5.0s steps=11.8s -> eval_logs_stl/idle/NavigateKitchen_ep0.json.gz
+[idle] NavigateKitchen seed=1001 reset=6.4s steps=14.9s -> eval_logs_stl/idle/NavigateKitchen_ep1.json.gz
+[idle] NavigateKitchen seed=1002 reset=5.3s steps=13.7s -> eval_logs_stl/idle/NavigateKitchen_ep2.json.gz
+[idle] NavigateKitchen seed=1003 reset=8.7s steps=18.0s -> eval_logs_stl/idle/NavigateKitchen_ep3.json.gz
+[idle] NavigateKitchen seed=1004 reset=5.2s steps=13.5s -> eval_logs_stl/idle/NavigateKitchen_ep4.json.gz
+[idle] NavigateKitchen seed=1005 reset=5.4s steps=12.9s -> eval_logs_stl/idle/NavigateKitchen_ep5.json.gz
+[idle] NavigateKitchen seed=1006 reset=4.8s steps=12.6s -> eval_logs_stl/idle/NavigateKitchen_ep6.json.gz
+[idle] NavigateKitchen seed=1007 reset=17.3s steps=10.9s -> eval_logs_stl/idle/NavigateKitchen_ep7.json.gz
+[idle] NavigateKitchen seed=1008 reset=5.4s steps=15.1s -> eval_logs_stl/idle/NavigateKitchen_ep8.json.gz
+[idle] NavigateKitchen seed=1009 reset=5.0s steps=13.6s -> eval_logs_stl/idle/NavigateKitchen_ep9.json.gz

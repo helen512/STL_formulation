@@ -1,0 +1,18 @@
+[robosuite WARNING] Could not import robosuite_models. Some robots may not be available. If you want to use these robots, please install robosuite_models from source (https://github.com/ARISE-Initiative/robosuite_models) or through pip install. (__init__.py:30)
+WARNING:robosuite_logs:Could not import robosuite_models. Some robots may not be available. If you want to use these robots, please install robosuite_models from source (https://github.com/ARISE-Initiative/robosuite_models) or through pip install.
+[robosuite WARNING] Could not load the mink-based whole-body IK. Make sure you install related import properly (e.g. pip install mink==0.0.5), otherwise you will not be able to use the default IK controller setting for GR1 robot. (__init__.py:40)
+WARNING:robosuite_logs:Could not load the mink-based whole-body IK. Make sure you install related import properly (e.g. pip install mink==0.0.5), otherwise you will not be able to use the default IK controller setting for GR1 robot.
+[robosuite INFO] Loading controller configuration from: /mnt/samsung_2tb/mingyue/lerobot-libero/robocasa_ws/third_party/robosuite/robosuite/controllers/config/robots/default_pandaomron.json (composite_controller_factory.py:121)
+INFO:robosuite_logs:Loading controller configuration from: /mnt/samsung_2tb/mingyue/lerobot-libero/robocasa_ws/third_party/robosuite/robosuite/controllers/config/robots/default_pandaomron.json
+WARNING: mimicgen environments not imported since mimicgen is not installed!
+Creating TurnOnSinkFaucet with split=pretrain
+[idle] TurnOnSinkFaucet seed=1000 reset=7.4s steps=16.7s -> eval_logs_stl/idle/TurnOnSinkFaucet_ep0.json.gz
+[idle] TurnOnSinkFaucet seed=1001 reset=5.7s steps=20.0s -> eval_logs_stl/idle/TurnOnSinkFaucet_ep1.json.gz
+[idle] TurnOnSinkFaucet seed=1002 reset=19.1s steps=22.4s -> eval_logs_stl/idle/TurnOnSinkFaucet_ep2.json.gz
+[idle] TurnOnSinkFaucet seed=1003 reset=14.8s steps=19.3s -> eval_logs_stl/idle/TurnOnSinkFaucet_ep3.json.gz
+[idle] TurnOnSinkFaucet seed=1004 reset=6.1s steps=18.1s -> eval_logs_stl/idle/TurnOnSinkFaucet_ep4.json.gz
+[idle] TurnOnSinkFaucet seed=1005 reset=5.1s steps=16.6s -> eval_logs_stl/idle/TurnOnSinkFaucet_ep5.json.gz
+[idle] TurnOnSinkFaucet seed=1006 reset=11.2s steps=17.1s -> eval_logs_stl/idle/TurnOnSinkFaucet_ep6.json.gz
+[idle] TurnOnSinkFaucet seed=1007 reset=7.5s steps=16.5s -> eval_logs_stl/idle/TurnOnSinkFaucet_ep7.json.gz
+[idle] TurnOnSinkFaucet seed=1008 reset=7.7s steps=20.8s -> eval_logs_stl/idle/TurnOnSinkFaucet_ep8.json.gz
+[idle] TurnOnSinkFaucet seed=1009 reset=10.5s steps=20.3s -> eval_logs_stl/idle/TurnOnSinkFaucet_ep9.json.gz

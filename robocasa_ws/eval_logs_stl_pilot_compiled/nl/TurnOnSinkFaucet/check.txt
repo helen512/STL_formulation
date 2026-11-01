@@ -1,0 +1,35 @@
+
+thresholds: Thresholds(still_speed=0.01, still_spin=0.25, part_still=0.01, base_speed=0.02, base_turn=0.05, disturb_disp=0.02, disturb_rot=10.0, disturb_tilt=10.0, fixture_changed=0.02, grasp_lift=0.02)  velocities: sim  Disturbed reference: t0
+
+**Summary** (episodes that passed / episodes run; 95% Wilson range of the pass rate in brackets)
+
+| Prompt | Task success | Deadline met | Clean success | Full STL |
+| --- | --- | --- | --- | --- |
+| `nl` | 0/1 [0–79%] | 0/1 [0–79%] | 0/1 [0–79%] | 0/1 [0–79%] |
+
+**Per task** (out of the episodes run; cells are `nl`)
+
+| # | Task | Type | Task success | Clean success | Deadline met / Full STL |
+| --- | --- | --- | --- | --- | --- |
+| 17 | TurnOnSinkFaucet | F | 0 | 0 | 0 / 0 |
+
+**Why each deadline failure happened**
+
+| Cause | `nl` |
+| --- | --- |
+| never done | 1 |
+| **total** | **1** |
+
+**Other objects disturbed** (episodes with at least one o in O disturbed; tasks with O non-empty)
+
+| Task | `nl` | objects (all prompts) |
+| --- | --- | --- |
+| TurnOnSinkFaucet | 0/1 |  |
+
+**Diagnostics** (counts)
+
+| Prompt | pushed in (P) | bumped (F) | fixture changed | tilt-only undisturbed | success at end |
+| --- | --- | --- | --- | --- | --- |
+| `nl` | 0/0 | 0/1 | 1/1 | 1/1 | 0/1 |
+
+consistency: steps == task limit in 1/1; rtamt == numpy in 1/1; lerobot-eval success == any(success) in 1/1

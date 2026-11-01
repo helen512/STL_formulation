@@ -1,0 +1,18 @@
+[robosuite WARNING] Could not import robosuite_models. Some robots may not be available. If you want to use these robots, please install robosuite_models from source (https://github.com/ARISE-Initiative/robosuite_models) or through pip install. (__init__.py:30)
+WARNING:robosuite_logs:Could not import robosuite_models. Some robots may not be available. If you want to use these robots, please install robosuite_models from source (https://github.com/ARISE-Initiative/robosuite_models) or through pip install.
+[robosuite WARNING] Could not load the mink-based whole-body IK. Make sure you install related import properly (e.g. pip install mink==0.0.5), otherwise you will not be able to use the default IK controller setting for GR1 robot. (__init__.py:40)
+WARNING:robosuite_logs:Could not load the mink-based whole-body IK. Make sure you install related import properly (e.g. pip install mink==0.0.5), otherwise you will not be able to use the default IK controller setting for GR1 robot.
+[robosuite INFO] Loading controller configuration from: /mnt/samsung_2tb/mingyue/lerobot-libero/robocasa_ws/third_party/robosuite/robosuite/controllers/config/robots/default_pandaomron.json (composite_controller_factory.py:121)
+INFO:robosuite_logs:Loading controller configuration from: /mnt/samsung_2tb/mingyue/lerobot-libero/robocasa_ws/third_party/robosuite/robosuite/controllers/config/robots/default_pandaomron.json
+WARNING: mimicgen environments not imported since mimicgen is not installed!
+Creating PickPlaceCounterToStove with split=pretrain
+[idle] PickPlaceCounterToStove seed=1000 reset=8.1s steps=18.7s -> eval_logs_stl/idle/PickPlaceCounterToStove_ep0.json.gz
+[idle] PickPlaceCounterToStove seed=1001 reset=12.6s steps=20.4s -> eval_logs_stl/idle/PickPlaceCounterToStove_ep1.json.gz
+[idle] PickPlaceCounterToStove seed=1002 reset=4.9s steps=21.8s -> eval_logs_stl/idle/PickPlaceCounterToStove_ep2.json.gz
+[idle] PickPlaceCounterToStove seed=1003 reset=11.0s steps=29.7s -> eval_logs_stl/idle/PickPlaceCounterToStove_ep3.json.gz
+[idle] PickPlaceCounterToStove seed=1004 reset=4.7s steps=21.3s -> eval_logs_stl/idle/PickPlaceCounterToStove_ep4.json.gz
+[idle] PickPlaceCounterToStove seed=1005 reset=5.2s steps=18.3s -> eval_logs_stl/idle/PickPlaceCounterToStove_ep5.json.gz
+[idle] PickPlaceCounterToStove seed=1006 reset=9.0s steps=21.0s -> eval_logs_stl/idle/PickPlaceCounterToStove_ep6.json.gz
+[idle] PickPlaceCounterToStove seed=1007 reset=9.4s steps=16.9s -> eval_logs_stl/idle/PickPlaceCounterToStove_ep7.json.gz
+[idle] PickPlaceCounterToStove seed=1008 reset=5.6s steps=23.1s -> eval_logs_stl/idle/PickPlaceCounterToStove_ep8.json.gz
+[idle] PickPlaceCounterToStove seed=1009 reset=5.2s steps=22.7s -> eval_logs_stl/idle/PickPlaceCounterToStove_ep9.json.gz

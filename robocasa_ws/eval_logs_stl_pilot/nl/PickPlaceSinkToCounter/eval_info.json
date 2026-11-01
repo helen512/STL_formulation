@@ -1,0 +1,47 @@
+{
+  "per_task": [
+    {
+      "task_group": "PickPlaceSinkToCounter",
+      "task_id": 0,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [
+          "eval_logs_stl_pilot/nl/PickPlaceSinkToCounter/videos/PickPlaceSinkToCounter_0/eval_episode_0.mp4"
+        ],
+        "predicted_video_paths": []
+      }
+    }
+  ],
+  "per_group": {
+    "PickPlaceSinkToCounter": {
+      "avg_sum_reward": 0.0,
+      "avg_max_reward": 0.0,
+      "pc_success": 0.0,
+      "n_episodes": 1,
+      "video_paths": [
+        "eval_logs_stl_pilot/nl/PickPlaceSinkToCounter/videos/PickPlaceSinkToCounter_0/eval_episode_0.mp4"
+      ],
+      "predicted_video_paths": []
+    }
+  },
+  "overall": {
+    "avg_sum_reward": 0.0,
+    "avg_max_reward": 0.0,
+    "pc_success": 0.0,
+    "n_episodes": 1,
+    "eval_s": 48.556771993637085,
+    "eval_ep_s": 48.55677247047424,
+    "video_paths": [
+      "eval_logs_stl_pilot/nl/PickPlaceSinkToCounter/videos/PickPlaceSinkToCounter_0/eval_episode_0.mp4"
+    ],
+    "predicted_video_paths": []
+  }
+}

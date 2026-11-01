@@ -1,0 +1,18 @@
+[robosuite WARNING] Could not import robosuite_models. Some robots may not be available. If you want to use these robots, please install robosuite_models from source (https://github.com/ARISE-Initiative/robosuite_models) or through pip install. (__init__.py:30)
+WARNING:robosuite_logs:Could not import robosuite_models. Some robots may not be available. If you want to use these robots, please install robosuite_models from source (https://github.com/ARISE-Initiative/robosuite_models) or through pip install.
+[robosuite WARNING] Could not load the mink-based whole-body IK. Make sure you install related import properly (e.g. pip install mink==0.0.5), otherwise you will not be able to use the default IK controller setting for GR1 robot. (__init__.py:40)
+WARNING:robosuite_logs:Could not load the mink-based whole-body IK. Make sure you install related import properly (e.g. pip install mink==0.0.5), otherwise you will not be able to use the default IK controller setting for GR1 robot.
+[robosuite INFO] Loading controller configuration from: /mnt/samsung_2tb/mingyue/lerobot-libero/robocasa_ws/third_party/robosuite/robosuite/controllers/config/robots/default_pandaomron.json (composite_controller_factory.py:121)
+INFO:robosuite_logs:Loading controller configuration from: /mnt/samsung_2tb/mingyue/lerobot-libero/robocasa_ws/third_party/robosuite/robosuite/controllers/config/robots/default_pandaomron.json
+WARNING: mimicgen environments not imported since mimicgen is not installed!
+Creating TurnOnElectricKettle with split=pretrain
+[idle] TurnOnElectricKettle seed=1000 reset=5.4s steps=14.1s -> eval_logs_stl/idle/TurnOnElectricKettle_ep0.json.gz
+[idle] TurnOnElectricKettle seed=1001 reset=6.3s steps=13.8s -> eval_logs_stl/idle/TurnOnElectricKettle_ep1.json.gz
+[idle] TurnOnElectricKettle seed=1002 reset=4.8s steps=10.9s -> eval_logs_stl/idle/TurnOnElectricKettle_ep2.json.gz
+[idle] TurnOnElectricKettle seed=1003 reset=8.5s steps=17.7s -> eval_logs_stl/idle/TurnOnElectricKettle_ep3.json.gz
+[idle] TurnOnElectricKettle seed=1004 reset=5.0s steps=12.9s -> eval_logs_stl/idle/TurnOnElectricKettle_ep4.json.gz
+[idle] TurnOnElectricKettle seed=1005 reset=5.0s steps=12.5s -> eval_logs_stl/idle/TurnOnElectricKettle_ep5.json.gz
+[idle] TurnOnElectricKettle seed=1006 reset=5.1s steps=9.4s -> eval_logs_stl/idle/TurnOnElectricKettle_ep6.json.gz
+[idle] TurnOnElectricKettle seed=1007 reset=9.7s steps=10.9s -> eval_logs_stl/idle/TurnOnElectricKettle_ep7.json.gz
+[idle] TurnOnElectricKettle seed=1008 reset=5.4s steps=14.2s -> eval_logs_stl/idle/TurnOnElectricKettle_ep8.json.gz
+[idle] TurnOnElectricKettle seed=1009 reset=5.1s steps=11.4s -> eval_logs_stl/idle/TurnOnElectricKettle_ep9.json.gz

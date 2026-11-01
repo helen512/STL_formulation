@@ -1,0 +1,1104 @@
+[robosuite WARNING] Could not import robosuite_models. Some robots may not be available. If you want to use these robots, please install robosuite_models from source (https://github.com/ARISE-Initiative/robosuite_models) or through pip install. (__init__.py:30)
+WARNING:robosuite_logs:Could not import robosuite_models. Some robots may not be available. If you want to use these robots, please install robosuite_models from source (https://github.com/ARISE-Initiative/robosuite_models) or through pip install.
+[robosuite WARNING] Could not load the mink-based whole-body IK. Make sure you install related import properly (e.g. pip install mink==0.0.5), otherwise you will not be able to use the default IK controller setting for GR1 robot. (__init__.py:40)
+WARNING:robosuite_logs:Could not load the mink-based whole-body IK. Make sure you install related import properly (e.g. pip install mink==0.0.5), otherwise you will not be able to use the default IK controller setting for GR1 robot.
+WARNING 2026-10-31 14:20:41 figs/eval.py:69 No job name provided, using 'robocasa_pi05' as job name.
+INFO 2026-10-31 14:20:41 bot_eval.py:741 {'env': {'camera_name': 'robot0_agentview_left,robot0_eye_in_hand,robot0_agentview_right',
+         'disable_env_checker': True,
+         'episode_length': None,
+         'features': {'action': {'shape': (12,),
+                                 'type': <FeatureType.ACTION: 'ACTION'>},
+                      'agent_pos': {'shape': (16,),
+                                    'type': <FeatureType.STATE: 'STATE'>},
+                      'pixels/robot0_agentview_left': {'shape': (256, 256, 3),
+                                                       'type': <FeatureType.VISUAL: 'VISUAL'>},
+                      'pixels/robot0_agentview_right': {'shape': (256, 256, 3),
+                                                        'type': <FeatureType.VISUAL: 'VISUAL'>},
+                      'pixels/robot0_eye_in_hand': {'shape': (256, 256, 3),
+                                                    'type': <FeatureType.VISUAL: 'VISUAL'>}},
+         'features_map': {'action': 'action',
+                          'agent_pos': 'observation.state',
+                          'pixels/robot0_agentview_left': 'observation.images.robot0_agentview_left',
+                          'pixels/robot0_agentview_right': 'observation.images.robot0_agentview_right',
+                          'pixels/robot0_eye_in_hand': 'observation.images.robot0_eye_in_hand'},
+         'fps': 20,
+         'max_parallel_tasks': 1,
+         'obj_registries': ['objaverse', 'lightwheel'],
+         'obs_type': 'pixels_agent_pos',
+         'observation_height': 256,
+         'observation_width': 256,
+         'render_mode': 'rgb_array',
+         'split': 'pretrain',
+         'task': 'OpenCabinet',
+         'visualization_height': 512,
+         'visualization_width': 512},
+ 'eval': {'batch_size': 1,
+          'n_episodes': 1,
+          'recording': False,
+          'recording_private': False,
+          'recording_repo_id': None,
+          'use_async_envs': False},
+ 'job_name': 'robocasa_pi05',
+ 'output_dir': PosixPath('eval_logs_stl_pilot/nl/OpenCabinet'),
+ 'policy': {'action_expert_variant': 'gemma_300m',
+            'action_feature_names': None,
+            'chunk_size': 50,
+            'compile_mode': 'default',
+            'compile_model': True,
+            'device': 'cuda',
+            'dtype': 'bfloat16',
+            'empty_cameras': 0,
+            'freeze_vision_encoder': False,
+            'gradient_checkpointing': True,
+            'image_resolution': (224, 224),
+            'input_features': {'observation.images.robot0_agentview_left': {'shape': (3,
+                                                                                      256,
+                                                                                      256),
+                                                                            'type': <FeatureType.VISUAL: 'VISUAL'>},
+                               'observation.images.robot0_agentview_right': {'shape': (3,
+                                                                                       256,
+                                                                                       256),
+                                                                             'type': <FeatureType.VISUAL: 'VISUAL'>},
+                               'observation.images.robot0_eye_in_hand': {'shape': (3,
+                                                                                   256,
+                                                                                   256),
+                                                                         'type': <FeatureType.VISUAL: 'VISUAL'>},
+                               'observation.state': {'shape': (16,),
+                                                     'type': <FeatureType.STATE: 'STATE'>}},
+            'license': None,
+            'max_action_dim': 32,
+            'max_period': 4.0,
+            'max_state_dim': 32,
+            'min_period': 0.004,
+            'n_action_steps': 50,
+            'n_obs_steps': 1,
+            'normalization_mapping': {'ACTION': <NormalizationMode.MEAN_STD: 'MEAN_STD'>,
+                                      'STATE': <NormalizationMode.MEAN_STD: 'MEAN_STD'>,
+                                      'VISUAL': <NormalizationMode.IDENTITY: 'IDENTITY'>},
+            'num_inference_steps': 10,
+            'optimizer_betas': (0.9, 0.95),
+            'optimizer_eps': 1e-08,
+            'optimizer_grad_clip_norm': 1.0,
+            'optimizer_lr': 5e-05,
+            'optimizer_weight_decay': 1e-10,
+            'output_features': {'action': {'shape': (12,),
+                                           'type': <FeatureType.ACTION: 'ACTION'>}},
+            'paligemma_variant': 'gemma_2b',
+            'pretrained_path': PosixPath('lerobot/pi05_robocasa'),
+            'pretrained_revision': None,
+            'private': None,
+            'push_to_hub': True,
+            'relative_exclude_joints': ['gripper'],
+            'repo_id': 'pepijn223/pi05_robocasa_full_mean',
+            'rtc_config': None,
+            'scheduler_decay_lr': 5e-05,
+            'scheduler_decay_steps': 100000,
+            'scheduler_warmup_steps': 1000,
+            'tags': None,
+            'time_sampling_beta_alpha': 1.5,
+            'time_sampling_beta_beta': 1.0,
+            'time_sampling_offset': 0.001,
+            'time_sampling_scale': 0.999,
+            'tokenizer_max_length': 200,
+            'train_expert_only': False,
+            'use_amp': False,
+            'use_peft': False,
+            'use_relative_actions': False},
+ 'rename_map': {},
+ 'seed': 1000,
+ 'trust_remote_code': False}
+INFO 2026-10-31 14:20:41 bot_eval.py:750 Output dir: eval_logs_stl_pilot/nl/OpenCabinet
+INFO 2026-10-31 14:20:41 bot_eval.py:752 Making environment (batch_size=1, async=False).
+INFO 2026-10-31 14:20:41 robocasa.py:397 Creating RoboCasa envs | tasks=['OpenCabinet'] | split=pretrain | n_envs(per task)=1
+INFO 2026-10-31 14:20:41 robocasa.py:436 Built vec env | task=OpenCabinet | n_envs=1
+INFO 2026-10-31 14:20:41 bot_eval.py:760 Making policy.
+INFO 2026-10-31 14:22:47 ing_pi05.py:449 Enabled gradient checkpointing for PI05Pytorch model
+WARNING 2026-10-31 14:22:48 ing_pi05.py:912 Vision embedding key might need handling: model.paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias
+WARNING 2026-10-31 14:22:48 ing_pi05.py:912 Vision embedding key might need handling: model.paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight
+WARNING: mimicgen environments not imported since mimicgen is not installed!
+The PI05 model is a direct port of the OpenPI implementation. 
+This implementation follows the original OpenPI structure for compatibility. 
+Original implementation: https://github.com/Physical-Intelligence/openpi
+Loading model from: lerobot/pi05_robocasa
+✓ Loaded state dict from model.safetensors
+All keys loaded successfully!
+Stepping through eval batches:   0%|          | 0/1 [00:00<?, ?it/s][robosuite INFO] Loading controller configuration from: /mnt/samsung_2tb/mingyue/lerobot-libero/robocasa_ws/third_party/robosuite/robosuite/controllers/config/robots/default_pandaomron.json (composite_controller_factory.py:121)
+INFO 2026-10-31 14:22:58 _factory.py:121 Loading controller configuration from: /mnt/samsung_2tb/mingyue/lerobot-libero/robocasa_ws/third_party/robosuite/robosuite/controllers/config/robots/default_pandaomron.json
+Creating OpenCabinet with split=pretrain
+[stl] OpenCabinet seed=1000 variant=nl prompt='Open the cabinet doors.'
+
+Running rollout with at most 700 steps:   0%|          | 0/700 [00:00<?, ?it/s][A
+Running rollout with at most 700 steps:   0%|          | 0/700 [00:51<?, ?it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   0%|          | 1/700 [00:51<10:00:36, 51.55s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   0%|          | 1/700 [00:51<10:00:36, 51.55s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   0%|          | 2/700 [00:51<9:59:44, 51.55s/it, running_success_rate=0.0%] [A
+Running rollout with at most 700 steps:   0%|          | 3/700 [00:51<9:58:53, 51.55s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   1%|          | 4/700 [00:51<1:53:35,  9.79s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   1%|          | 4/700 [00:51<1:53:35,  9.79s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   1%|          | 5/700 [00:51<1:53:25,  9.79s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   1%|          | 6/700 [00:51<1:53:15,  9.79s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   1%|          | 7/700 [00:51<52:42,  4.56s/it, running_success_rate=0.0%]  [A
+Running rollout with at most 700 steps:   1%|          | 7/700 [00:51<52:42,  4.56s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   1%|          | 8/700 [00:51<52:37,  4.56s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   1%|▏         | 9/700 [00:51<52:33,  4.56s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   1%|▏         | 10/700 [00:51<29:56,  2.60s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   1%|▏         | 10/700 [00:52<29:56,  2.60s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   2%|▏         | 11/700 [00:52<29:54,  2.60s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   2%|▏         | 12/700 [00:52<29:51,  2.60s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   2%|▏         | 13/700 [00:52<18:36,  1.63s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   2%|▏         | 13/700 [00:52<18:36,  1.63s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   2%|▏         | 14/700 [00:52<18:35,  1.63s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   2%|▏         | 15/700 [00:52<18:33,  1.63s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   2%|▏         | 16/700 [00:52<12:12,  1.07s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   2%|▏         | 16/700 [00:52<12:12,  1.07s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   2%|▏         | 17/700 [00:52<12:11,  1.07s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   3%|▎         | 18/700 [00:52<12:09,  1.07s/it, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   3%|▎         | 19/700 [00:52<08:15,  1.38it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   3%|▎         | 19/700 [00:52<08:15,  1.38it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   3%|▎         | 20/700 [00:52<08:14,  1.38it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   3%|▎         | 21/700 [00:52<08:13,  1.38it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   3%|▎         | 22/700 [00:52<05:44,  1.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   3%|▎         | 22/700 [00:52<05:44,  1.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   3%|▎         | 23/700 [00:52<05:43,  1.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   3%|▎         | 24/700 [00:52<05:43,  1.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   4%|▎         | 25/700 [00:52<04:04,  2.76it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   4%|▎         | 25/700 [00:52<04:04,  2.76it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   4%|▎         | 26/700 [00:52<04:04,  2.76it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   4%|▍         | 27/700 [00:52<04:04,  2.76it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   4%|▍         | 28/700 [00:52<02:58,  3.77it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   4%|▍         | 28/700 [00:52<02:58,  3.77it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   4%|▍         | 29/700 [00:52<02:57,  3.77it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   4%|▍         | 30/700 [00:53<02:57,  3.77it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   4%|▍         | 31/700 [00:53<02:12,  5.03it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   4%|▍         | 31/700 [00:53<02:12,  5.03it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   5%|▍         | 32/700 [00:53<02:12,  5.03it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   5%|▍         | 33/700 [00:53<02:12,  5.03it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   5%|▍         | 34/700 [00:53<01:44,  6.36it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   5%|▍         | 34/700 [00:53<01:44,  6.36it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   5%|▌         | 35/700 [00:53<01:44,  6.36it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   5%|▌         | 36/700 [00:53<01:28,  7.51it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   5%|▌         | 36/700 [00:53<01:28,  7.51it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   5%|▌         | 37/700 [00:53<01:28,  7.51it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   5%|▌         | 38/700 [00:53<01:28,  7.51it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   6%|▌         | 39/700 [00:53<01:10,  9.44it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   6%|▌         | 39/700 [00:53<01:10,  9.44it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   6%|▌         | 40/700 [00:53<01:09,  9.44it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   6%|▌         | 41/700 [00:53<01:09,  9.44it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   6%|▌         | 42/700 [00:53<00:57, 11.39it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   6%|▌         | 42/700 [00:53<00:57, 11.39it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   6%|▌         | 43/700 [00:53<00:57, 11.39it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   6%|▋         | 44/700 [00:53<00:57, 11.39it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   6%|▋         | 45/700 [00:53<00:49, 13.26it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   6%|▋         | 45/700 [00:53<00:49, 13.26it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   7%|▋         | 46/700 [00:53<00:49, 13.26it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   7%|▋         | 47/700 [00:53<00:49, 13.26it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   7%|▋         | 48/700 [00:53<00:44, 14.79it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   7%|▋         | 48/700 [00:53<00:44, 14.79it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   7%|▋         | 49/700 [00:54<00:44, 14.79it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   7%|▋         | 50/700 [00:54<00:43, 14.79it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   7%|▋         | 51/700 [00:54<00:54, 11.99it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   7%|▋         | 51/700 [00:54<00:54, 11.99it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   7%|▋         | 52/700 [00:54<00:54, 11.99it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   8%|▊         | 53/700 [00:54<00:49, 13.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   8%|▊         | 53/700 [00:54<00:49, 13.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   8%|▊         | 54/700 [00:54<00:49, 13.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   8%|▊         | 55/700 [00:54<00:44, 14.36it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   8%|▊         | 55/700 [00:54<00:44, 14.36it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   8%|▊         | 56/700 [00:54<00:44, 14.36it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   8%|▊         | 57/700 [00:54<00:44, 14.36it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   8%|▊         | 58/700 [00:54<00:40, 15.90it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   8%|▊         | 58/700 [00:54<00:40, 15.90it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   8%|▊         | 59/700 [00:54<00:40, 15.90it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   9%|▊         | 60/700 [00:54<00:38, 16.65it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   9%|▊         | 60/700 [00:54<00:38, 16.65it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   9%|▊         | 61/700 [00:54<00:38, 16.65it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   9%|▉         | 62/700 [00:54<00:37, 17.05it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   9%|▉         | 62/700 [00:54<00:37, 17.05it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   9%|▉         | 63/700 [00:54<00:37, 17.05it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   9%|▉         | 64/700 [00:54<00:37, 17.05it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   9%|▉         | 65/700 [00:54<00:35, 18.02it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   9%|▉         | 65/700 [00:55<00:35, 18.02it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:   9%|▉         | 66/700 [00:55<00:35, 18.02it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  10%|▉         | 67/700 [00:55<00:34, 18.28it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  10%|▉         | 67/700 [00:55<00:34, 18.28it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  10%|▉         | 68/700 [00:55<00:34, 18.28it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  10%|▉         | 69/700 [00:55<00:34, 18.46it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  10%|▉         | 69/700 [00:55<00:34, 18.46it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  10%|█         | 70/700 [00:55<00:34, 18.46it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  10%|█         | 71/700 [00:55<00:33, 18.75it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  10%|█         | 71/700 [00:55<00:33, 18.75it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  10%|█         | 72/700 [00:55<00:33, 18.75it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  10%|█         | 73/700 [00:55<00:32, 19.07it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  10%|█         | 73/700 [00:55<00:32, 19.07it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  11%|█         | 74/700 [00:55<00:32, 19.07it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  11%|█         | 75/700 [00:55<00:32, 19.26it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  11%|█         | 75/700 [00:55<00:32, 19.26it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  11%|█         | 76/700 [00:55<00:32, 19.26it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  11%|█         | 77/700 [00:55<00:32, 19.33it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  11%|█         | 77/700 [00:55<00:32, 19.33it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  11%|█         | 78/700 [00:55<00:32, 19.33it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  11%|█▏        | 79/700 [00:55<00:31, 19.52it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  11%|█▏        | 79/700 [00:55<00:31, 19.52it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  11%|█▏        | 80/700 [00:55<00:31, 19.52it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  12%|█▏        | 81/700 [00:55<00:31, 19.64it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  12%|█▏        | 81/700 [00:55<00:31, 19.64it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  12%|█▏        | 82/700 [00:55<00:31, 19.64it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  12%|█▏        | 83/700 [00:55<00:31, 19.51it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  12%|█▏        | 83/700 [00:55<00:31, 19.51it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  12%|█▏        | 84/700 [00:56<00:31, 19.51it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  12%|█▏        | 85/700 [00:56<00:31, 19.64it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  12%|█▏        | 85/700 [00:56<00:31, 19.64it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  12%|█▏        | 86/700 [00:56<00:31, 19.64it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  12%|█▏        | 87/700 [00:56<00:31, 19.73it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  12%|█▏        | 87/700 [00:56<00:31, 19.73it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  13%|█▎        | 88/700 [00:56<00:31, 19.73it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  13%|█▎        | 89/700 [00:56<00:30, 19.76it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  13%|█▎        | 89/700 [00:56<00:30, 19.76it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  13%|█▎        | 90/700 [00:56<00:30, 19.76it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  13%|█▎        | 91/700 [00:56<00:32, 18.65it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  13%|█▎        | 91/700 [00:56<00:32, 18.65it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  13%|█▎        | 92/700 [00:56<00:32, 18.65it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  13%|█▎        | 93/700 [00:56<00:32, 18.79it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  13%|█▎        | 93/700 [00:56<00:32, 18.79it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  13%|█▎        | 94/700 [00:56<00:32, 18.79it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  14%|█▎        | 95/700 [00:56<00:32, 18.90it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  14%|█▎        | 95/700 [00:56<00:32, 18.90it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  14%|█▎        | 96/700 [00:56<00:31, 18.90it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  14%|█▍        | 97/700 [00:56<00:31, 18.90it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  14%|█▍        | 98/700 [00:56<00:31, 19.30it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  14%|█▍        | 98/700 [00:56<00:31, 19.30it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  14%|█▍        | 99/700 [00:56<00:31, 19.30it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  14%|█▍        | 100/700 [00:56<00:30, 19.46it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  14%|█▍        | 100/700 [00:57<00:30, 19.46it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  14%|█▍        | 101/700 [00:57<00:30, 19.46it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  15%|█▍        | 102/700 [00:57<00:48, 12.24it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  15%|█▍        | 102/700 [00:57<00:48, 12.24it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  15%|█▍        | 103/700 [00:57<00:48, 12.24it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  15%|█▍        | 104/700 [00:57<00:48, 12.24it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  15%|█▌        | 105/700 [00:57<00:41, 14.32it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  15%|█▌        | 105/700 [00:57<00:41, 14.32it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  15%|█▌        | 106/700 [00:57<00:41, 14.32it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  15%|█▌        | 107/700 [00:57<00:38, 15.47it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  15%|█▌        | 107/700 [00:57<00:38, 15.47it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  15%|█▌        | 108/700 [00:57<00:38, 15.47it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  16%|█▌        | 109/700 [00:57<00:36, 16.29it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  16%|█▌        | 109/700 [00:57<00:36, 16.29it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  16%|█▌        | 110/700 [00:57<00:36, 16.29it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  16%|█▌        | 111/700 [00:57<00:34, 17.16it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  16%|█▌        | 111/700 [00:57<00:34, 17.16it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  16%|█▌        | 112/700 [00:57<00:34, 17.16it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  16%|█▌        | 113/700 [00:57<00:34, 17.16it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  16%|█▋        | 114/700 [00:57<00:32, 18.19it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  16%|█▋        | 114/700 [00:57<00:32, 18.19it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  16%|█▋        | 115/700 [00:57<00:32, 18.19it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  17%|█▋        | 116/700 [00:57<00:32, 18.09it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  17%|█▋        | 116/700 [00:57<00:32, 18.09it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  17%|█▋        | 117/700 [00:57<00:32, 18.09it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  17%|█▋        | 118/700 [00:57<00:32, 18.09it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  17%|█▋        | 119/700 [00:57<00:30, 18.78it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  17%|█▋        | 119/700 [00:58<00:30, 18.78it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  17%|█▋        | 120/700 [00:58<00:30, 18.78it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  17%|█▋        | 121/700 [00:58<00:30, 18.78it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  17%|█▋        | 122/700 [00:58<00:29, 19.32it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  17%|█▋        | 122/700 [00:58<00:29, 19.32it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  18%|█▊        | 123/700 [00:58<00:29, 19.32it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  18%|█▊        | 124/700 [00:58<00:29, 19.32it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  18%|█▊        | 125/700 [00:58<00:29, 19.59it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  18%|█▊        | 125/700 [00:58<00:29, 19.59it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  18%|█▊        | 126/700 [00:58<00:29, 19.59it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  18%|█▊        | 127/700 [00:58<00:29, 19.55it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  18%|█▊        | 127/700 [00:58<00:29, 19.55it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  18%|█▊        | 128/700 [00:58<00:29, 19.55it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  18%|█▊        | 129/700 [00:58<00:29, 19.07it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  18%|█▊        | 129/700 [00:58<00:29, 19.07it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  19%|█▊        | 130/700 [00:58<00:29, 19.07it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  19%|█▊        | 131/700 [00:58<00:29, 19.07it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  19%|█▉        | 132/700 [00:58<00:28, 19.61it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  19%|█▉        | 132/700 [00:58<00:28, 19.61it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  19%|█▉        | 133/700 [00:58<00:28, 19.61it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  19%|█▉        | 134/700 [00:58<00:28, 19.61it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  19%|█▉        | 135/700 [00:58<00:28, 19.93it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  19%|█▉        | 135/700 [00:58<00:28, 19.93it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  19%|█▉        | 136/700 [00:58<00:28, 19.93it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  20%|█▉        | 137/700 [00:58<00:29, 19.35it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  20%|█▉        | 137/700 [00:58<00:29, 19.35it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  20%|█▉        | 138/700 [00:58<00:29, 19.35it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  20%|█▉        | 139/700 [00:58<00:28, 19.51it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  20%|█▉        | 139/700 [00:59<00:28, 19.51it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  20%|██        | 140/700 [00:59<00:28, 19.51it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  20%|██        | 141/700 [00:59<00:28, 19.51it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  20%|██        | 142/700 [00:59<00:28, 19.84it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  20%|██        | 142/700 [00:59<00:28, 19.84it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  20%|██        | 143/700 [00:59<00:28, 19.84it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  21%|██        | 144/700 [00:59<00:28, 19.84it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  21%|██        | 145/700 [00:59<00:27, 19.87it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  21%|██        | 145/700 [00:59<00:27, 19.87it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  21%|██        | 146/700 [00:59<00:27, 19.87it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  21%|██        | 147/700 [00:59<00:27, 19.87it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  21%|██        | 148/700 [00:59<00:27, 19.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  21%|██        | 148/700 [00:59<00:27, 19.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  21%|██▏       | 149/700 [00:59<00:27, 19.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  21%|██▏       | 150/700 [00:59<00:27, 19.78it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  21%|██▏       | 150/700 [00:59<00:27, 19.78it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  22%|██▏       | 151/700 [00:59<00:27, 19.78it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  22%|██▏       | 152/700 [00:59<00:38, 14.23it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  22%|██▏       | 152/700 [00:59<00:38, 14.23it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  22%|██▏       | 153/700 [00:59<00:38, 14.23it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  22%|██▏       | 154/700 [00:59<00:38, 14.23it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  22%|██▏       | 155/700 [00:59<00:34, 15.96it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  22%|██▏       | 155/700 [00:59<00:34, 15.96it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  22%|██▏       | 156/700 [01:00<00:34, 15.96it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  22%|██▏       | 157/700 [01:00<00:34, 15.96it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  23%|██▎       | 158/700 [01:00<00:31, 17.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  23%|██▎       | 158/700 [01:00<00:31, 17.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  23%|██▎       | 159/700 [01:00<00:31, 17.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  23%|██▎       | 160/700 [01:00<00:31, 17.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  23%|██▎       | 161/700 [01:00<00:29, 18.20it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  23%|██▎       | 161/700 [01:00<00:29, 18.20it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  23%|██▎       | 162/700 [01:00<00:29, 18.20it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  23%|██▎       | 163/700 [01:00<00:29, 18.20it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  23%|██▎       | 164/700 [01:00<00:28, 18.80it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  23%|██▎       | 164/700 [01:00<00:28, 18.80it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  24%|██▎       | 165/700 [01:00<00:28, 18.80it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  24%|██▎       | 166/700 [01:00<00:28, 18.80it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  24%|██▍       | 167/700 [01:00<00:27, 19.28it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  24%|██▍       | 167/700 [01:00<00:27, 19.28it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  24%|██▍       | 168/700 [01:00<00:27, 19.28it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  24%|██▍       | 169/700 [01:00<00:27, 19.28it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  24%|██▍       | 170/700 [01:00<00:27, 19.50it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  24%|██▍       | 170/700 [01:00<00:27, 19.50it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  24%|██▍       | 171/700 [01:00<00:27, 19.50it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  25%|██▍       | 172/700 [01:00<00:27, 19.50it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  25%|██▍       | 173/700 [01:00<00:26, 19.87it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  25%|██▍       | 173/700 [01:00<00:26, 19.87it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  25%|██▍       | 174/700 [01:00<00:26, 19.87it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  25%|██▌       | 175/700 [01:00<00:26, 19.87it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  25%|██▌       | 176/700 [01:00<00:26, 20.10it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  25%|██▌       | 176/700 [01:01<00:26, 20.10it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  25%|██▌       | 177/700 [01:01<00:26, 20.10it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  25%|██▌       | 178/700 [01:01<00:25, 20.10it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  26%|██▌       | 179/700 [01:01<00:25, 20.17it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  26%|██▌       | 179/700 [01:01<00:25, 20.17it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  26%|██▌       | 180/700 [01:01<00:25, 20.17it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  26%|██▌       | 181/700 [01:01<00:25, 20.17it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  26%|██▌       | 182/700 [01:01<00:25, 20.33it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  26%|██▌       | 182/700 [01:01<00:25, 20.33it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  26%|██▌       | 183/700 [01:01<00:25, 20.33it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  26%|██▋       | 184/700 [01:01<00:25, 20.33it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  26%|██▋       | 185/700 [01:01<00:25, 20.41it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  26%|██▋       | 185/700 [01:01<00:25, 20.41it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  27%|██▋       | 186/700 [01:01<00:25, 20.41it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  27%|██▋       | 187/700 [01:01<00:25, 20.41it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  27%|██▋       | 188/700 [01:01<00:25, 20.46it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  27%|██▋       | 188/700 [01:01<00:25, 20.46it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  27%|██▋       | 189/700 [01:01<00:24, 20.46it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  27%|██▋       | 190/700 [01:01<00:24, 20.46it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  27%|██▋       | 191/700 [01:01<00:24, 20.37it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  27%|██▋       | 191/700 [01:01<00:24, 20.37it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  27%|██▋       | 192/700 [01:01<00:24, 20.37it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  28%|██▊       | 193/700 [01:01<00:24, 20.37it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  28%|██▊       | 194/700 [01:01<00:24, 20.48it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  28%|██▊       | 194/700 [01:01<00:24, 20.48it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  28%|██▊       | 195/700 [01:01<00:24, 20.48it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  28%|██▊       | 196/700 [01:01<00:24, 20.48it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  28%|██▊       | 197/700 [01:01<00:24, 20.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  28%|██▊       | 197/700 [01:02<00:24, 20.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  28%|██▊       | 198/700 [01:02<00:24, 20.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  28%|██▊       | 199/700 [01:02<00:24, 20.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  29%|██▊       | 200/700 [01:02<00:24, 20.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  29%|██▊       | 200/700 [01:02<00:24, 20.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  29%|██▊       | 201/700 [01:02<00:24, 20.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  29%|██▉       | 202/700 [01:02<00:24, 20.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  29%|██▉       | 203/700 [01:02<00:32, 15.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  29%|██▉       | 203/700 [01:02<00:32, 15.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  29%|██▉       | 204/700 [01:02<00:32, 15.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  29%|██▉       | 205/700 [01:02<00:31, 15.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  29%|██▉       | 206/700 [01:02<00:29, 16.71it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  29%|██▉       | 206/700 [01:02<00:29, 16.71it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  30%|██▉       | 207/700 [01:02<00:29, 16.71it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  30%|██▉       | 208/700 [01:02<00:29, 16.71it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  30%|██▉       | 209/700 [01:02<00:27, 17.85it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  30%|██▉       | 209/700 [01:02<00:27, 17.85it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  30%|███       | 210/700 [01:02<00:27, 17.85it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  30%|███       | 211/700 [01:02<00:27, 17.85it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  30%|███       | 212/700 [01:02<00:26, 18.67it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  30%|███       | 212/700 [01:02<00:26, 18.67it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  30%|███       | 213/700 [01:02<00:26, 18.67it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  31%|███       | 214/700 [01:03<00:26, 18.67it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  31%|███       | 215/700 [01:03<00:25, 19.16it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  31%|███       | 215/700 [01:03<00:25, 19.16it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  31%|███       | 216/700 [01:03<00:25, 19.16it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  31%|███       | 217/700 [01:03<00:25, 19.16it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  31%|███       | 218/700 [01:03<00:24, 19.72it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  31%|███       | 218/700 [01:03<00:24, 19.72it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  31%|███▏      | 219/700 [01:03<00:24, 19.72it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  31%|███▏      | 220/700 [01:03<00:24, 19.72it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  32%|███▏      | 221/700 [01:03<00:23, 20.11it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  32%|███▏      | 221/700 [01:03<00:23, 20.11it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  32%|███▏      | 222/700 [01:03<00:23, 20.11it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  32%|███▏      | 223/700 [01:03<00:23, 20.11it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  32%|███▏      | 224/700 [01:03<00:23, 20.38it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  32%|███▏      | 224/700 [01:03<00:23, 20.38it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  32%|███▏      | 225/700 [01:03<00:23, 20.38it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  32%|███▏      | 226/700 [01:03<00:23, 20.38it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  32%|███▏      | 227/700 [01:03<00:23, 20.53it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  32%|███▏      | 227/700 [01:03<00:23, 20.53it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  33%|███▎      | 228/700 [01:03<00:22, 20.53it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  33%|███▎      | 229/700 [01:03<00:22, 20.53it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  33%|███▎      | 230/700 [01:03<00:23, 20.15it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  33%|███▎      | 230/700 [01:03<00:23, 20.15it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  33%|███▎      | 231/700 [01:03<00:23, 20.15it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  33%|███▎      | 232/700 [01:03<00:23, 20.15it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  33%|███▎      | 233/700 [01:03<00:23, 20.28it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  33%|███▎      | 233/700 [01:03<00:23, 20.28it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  33%|███▎      | 234/700 [01:03<00:22, 20.28it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  34%|███▎      | 235/700 [01:04<00:22, 20.28it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  34%|███▎      | 236/700 [01:04<00:22, 20.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  34%|███▎      | 236/700 [01:04<00:22, 20.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  34%|███▍      | 237/700 [01:04<00:22, 20.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  34%|███▍      | 238/700 [01:04<00:22, 20.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  34%|███▍      | 239/700 [01:04<00:22, 20.32it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  34%|███▍      | 239/700 [01:04<00:22, 20.32it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  34%|███▍      | 240/700 [01:04<00:22, 20.32it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  34%|███▍      | 241/700 [01:04<00:22, 20.32it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  35%|███▍      | 242/700 [01:04<00:22, 20.39it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  35%|███▍      | 242/700 [01:04<00:22, 20.39it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  35%|███▍      | 243/700 [01:04<00:22, 20.39it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  35%|███▍      | 244/700 [01:04<00:22, 20.39it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  35%|███▌      | 245/700 [01:04<00:22, 20.48it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  35%|███▌      | 245/700 [01:04<00:22, 20.48it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  35%|███▌      | 246/700 [01:04<00:22, 20.48it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  35%|███▌      | 247/700 [01:04<00:22, 20.48it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  35%|███▌      | 248/700 [01:04<00:21, 20.57it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  35%|███▌      | 248/700 [01:04<00:21, 20.57it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  36%|███▌      | 249/700 [01:04<00:21, 20.57it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  36%|███▌      | 250/700 [01:04<00:21, 20.57it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  36%|███▌      | 251/700 [01:04<00:29, 15.45it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  36%|███▌      | 251/700 [01:04<00:29, 15.45it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  36%|███▌      | 252/700 [01:05<00:28, 15.45it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  36%|███▌      | 253/700 [01:05<00:28, 15.45it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  36%|███▋      | 254/700 [01:05<00:26, 16.76it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  36%|███▋      | 254/700 [01:05<00:26, 16.76it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  36%|███▋      | 255/700 [01:05<00:26, 16.76it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  37%|███▋      | 256/700 [01:05<00:26, 16.76it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  37%|███▋      | 257/700 [01:05<00:24, 17.78it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  37%|███▋      | 257/700 [01:05<00:24, 17.78it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  37%|███▋      | 258/700 [01:05<00:24, 17.78it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  37%|███▋      | 259/700 [01:05<00:48,  9.13it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  37%|███▋      | 259/700 [01:05<00:48,  9.13it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  37%|███▋      | 260/700 [01:05<00:48,  9.13it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  37%|███▋      | 261/700 [01:05<00:48,  9.13it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  37%|███▋      | 262/700 [01:05<00:39, 11.07it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  37%|███▋      | 262/700 [01:06<00:39, 11.07it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  38%|███▊      | 263/700 [01:06<00:39, 11.07it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  38%|███▊      | 264/700 [01:06<00:39, 11.07it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  38%|███▊      | 265/700 [01:06<00:33, 12.91it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  38%|███▊      | 265/700 [01:06<00:33, 12.91it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  38%|███▊      | 266/700 [01:06<00:33, 12.91it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  38%|███▊      | 267/700 [01:06<00:33, 12.91it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  38%|███▊      | 268/700 [01:06<00:29, 14.53it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  38%|███▊      | 268/700 [01:06<00:29, 14.53it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  38%|███▊      | 269/700 [01:06<00:29, 14.53it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  39%|███▊      | 270/700 [01:06<00:29, 14.53it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  39%|███▊      | 271/700 [01:06<00:26, 15.92it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  39%|███▊      | 271/700 [01:06<00:26, 15.92it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  39%|███▉      | 272/700 [01:06<00:26, 15.92it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  39%|███▉      | 273/700 [01:06<00:25, 16.68it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  39%|███▉      | 273/700 [01:06<00:25, 16.68it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  39%|███▉      | 274/700 [01:06<00:25, 16.68it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  39%|███▉      | 275/700 [01:06<00:25, 16.68it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  39%|███▉      | 276/700 [01:06<00:24, 17.59it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  39%|███▉      | 276/700 [01:06<00:24, 17.59it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  40%|███▉      | 277/700 [01:06<00:24, 17.59it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  40%|███▉      | 278/700 [01:06<00:23, 17.59it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  40%|███▉      | 279/700 [01:06<00:22, 18.47it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  40%|███▉      | 279/700 [01:06<00:22, 18.47it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  40%|████      | 280/700 [01:06<00:22, 18.47it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  40%|████      | 281/700 [01:06<00:22, 18.47it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  40%|████      | 282/700 [01:06<00:22, 18.96it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  40%|████      | 282/700 [01:06<00:22, 18.96it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  40%|████      | 283/700 [01:07<00:21, 18.96it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  41%|████      | 284/700 [01:07<00:21, 18.96it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  41%|████      | 285/700 [01:07<00:21, 19.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  41%|████      | 285/700 [01:07<00:21, 19.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  41%|████      | 286/700 [01:07<00:21, 19.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  41%|████      | 287/700 [01:07<00:21, 19.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  41%|████      | 288/700 [01:07<00:20, 19.62it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  41%|████      | 288/700 [01:07<00:20, 19.62it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  41%|████▏     | 289/700 [01:07<00:20, 19.62it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  41%|████▏     | 290/700 [01:07<00:20, 19.62it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  42%|████▏     | 291/700 [01:07<00:20, 19.69it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  42%|████▏     | 291/700 [01:07<00:20, 19.69it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  42%|████▏     | 292/700 [01:07<00:20, 19.69it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  42%|████▏     | 293/700 [01:07<00:20, 19.69it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  42%|████▏     | 294/700 [01:07<00:20, 19.91it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  42%|████▏     | 294/700 [01:07<00:20, 19.91it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  42%|████▏     | 295/700 [01:07<00:20, 19.91it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  42%|████▏     | 296/700 [01:07<00:20, 19.91it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  42%|████▏     | 297/700 [01:07<00:20, 19.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  42%|████▏     | 297/700 [01:07<00:20, 19.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  43%|████▎     | 298/700 [01:07<00:20, 19.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  43%|████▎     | 299/700 [01:07<00:20, 19.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  43%|████▎     | 300/700 [01:07<00:20, 19.89it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  43%|████▎     | 300/700 [01:08<00:20, 19.89it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  43%|████▎     | 301/700 [01:08<00:20, 19.89it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  43%|████▎     | 302/700 [01:08<00:20, 19.89it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  43%|████▎     | 303/700 [01:08<00:26, 15.03it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  43%|████▎     | 303/700 [01:08<00:26, 15.03it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  43%|████▎     | 304/700 [01:08<00:26, 15.03it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  44%|████▎     | 305/700 [01:08<00:26, 15.03it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  44%|████▎     | 306/700 [01:08<00:24, 16.36it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  44%|████▎     | 306/700 [01:08<00:24, 16.36it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  44%|████▍     | 307/700 [01:08<00:24, 16.36it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  44%|████▍     | 308/700 [01:08<00:23, 16.36it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  44%|████▍     | 309/700 [01:08<00:22, 17.45it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  44%|████▍     | 309/700 [01:08<00:22, 17.45it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  44%|████▍     | 310/700 [01:08<00:22, 17.45it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  44%|████▍     | 311/700 [01:08<00:22, 17.45it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  45%|████▍     | 312/700 [01:08<00:21, 18.29it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  45%|████▍     | 312/700 [01:08<00:21, 18.29it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  45%|████▍     | 313/700 [01:08<00:21, 18.29it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  45%|████▍     | 314/700 [01:08<00:21, 18.29it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  45%|████▌     | 315/700 [01:08<00:20, 18.89it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  45%|████▌     | 315/700 [01:08<00:20, 18.89it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  45%|████▌     | 316/700 [01:08<00:20, 18.89it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  45%|████▌     | 317/700 [01:08<00:20, 18.89it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  45%|████▌     | 318/700 [01:08<00:19, 19.36it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  45%|████▌     | 318/700 [01:08<00:19, 19.36it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  46%|████▌     | 319/700 [01:08<00:19, 19.36it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  46%|████▌     | 320/700 [01:09<00:19, 19.36it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  46%|████▌     | 321/700 [01:09<00:19, 19.67it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  46%|████▌     | 321/700 [01:09<00:19, 19.67it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  46%|████▌     | 322/700 [01:09<00:19, 19.67it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  46%|████▌     | 323/700 [01:09<00:19, 19.67it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  46%|████▋     | 324/700 [01:09<00:18, 19.88it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  46%|████▋     | 324/700 [01:09<00:18, 19.88it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  46%|████▋     | 325/700 [01:09<00:18, 19.88it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  47%|████▋     | 326/700 [01:09<00:18, 19.88it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  47%|████▋     | 327/700 [01:09<00:18, 20.04it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  47%|████▋     | 327/700 [01:09<00:18, 20.04it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  47%|████▋     | 328/700 [01:09<00:18, 20.04it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  47%|████▋     | 329/700 [01:09<00:18, 20.04it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  47%|████▋     | 330/700 [01:09<00:18, 20.23it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  47%|████▋     | 330/700 [01:09<00:18, 20.23it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  47%|████▋     | 331/700 [01:09<00:18, 20.23it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  47%|████▋     | 332/700 [01:09<00:18, 20.23it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  48%|████▊     | 333/700 [01:09<00:18, 20.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  48%|████▊     | 333/700 [01:09<00:18, 20.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  48%|████▊     | 334/700 [01:09<00:18, 20.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  48%|████▊     | 335/700 [01:09<00:18, 20.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  48%|████▊     | 336/700 [01:09<00:18, 20.17it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  48%|████▊     | 336/700 [01:09<00:18, 20.17it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  48%|████▊     | 337/700 [01:09<00:17, 20.17it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  48%|████▊     | 338/700 [01:09<00:17, 20.17it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  48%|████▊     | 339/700 [01:09<00:17, 20.30it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  48%|████▊     | 339/700 [01:09<00:17, 20.30it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  49%|████▊     | 340/700 [01:10<00:17, 20.30it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  49%|████▊     | 341/700 [01:10<00:17, 20.30it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  49%|████▉     | 342/700 [01:10<00:17, 20.25it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  49%|████▉     | 342/700 [01:10<00:17, 20.25it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  49%|████▉     | 343/700 [01:10<00:17, 20.25it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  49%|████▉     | 344/700 [01:10<00:17, 20.25it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  49%|████▉     | 345/700 [01:10<00:17, 20.40it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  49%|████▉     | 345/700 [01:10<00:17, 20.40it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  49%|████▉     | 346/700 [01:10<00:17, 20.40it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  50%|████▉     | 347/700 [01:10<00:17, 20.40it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  50%|████▉     | 348/700 [01:10<00:17, 20.57it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  50%|████▉     | 348/700 [01:10<00:17, 20.57it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  50%|████▉     | 349/700 [01:10<00:17, 20.57it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  50%|█████     | 350/700 [01:10<00:17, 20.57it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  50%|█████     | 351/700 [01:10<00:25, 13.69it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  50%|█████     | 351/700 [01:10<00:25, 13.69it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  50%|█████     | 352/700 [01:10<00:25, 13.69it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  50%|█████     | 353/700 [01:10<00:25, 13.69it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  51%|█████     | 354/700 [01:10<00:22, 15.33it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  51%|█████     | 354/700 [01:10<00:22, 15.33it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  51%|█████     | 355/700 [01:10<00:22, 15.33it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  51%|█████     | 356/700 [01:11<00:22, 15.33it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  51%|█████     | 357/700 [01:11<00:20, 16.65it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  51%|█████     | 357/700 [01:11<00:20, 16.65it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  51%|█████     | 358/700 [01:11<00:20, 16.65it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  51%|█████▏    | 359/700 [01:11<00:20, 16.65it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  51%|█████▏    | 360/700 [01:11<00:19, 17.75it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  51%|█████▏    | 360/700 [01:11<00:19, 17.75it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  52%|█████▏    | 361/700 [01:11<00:19, 17.75it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  52%|█████▏    | 362/700 [01:11<00:19, 17.75it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  52%|█████▏    | 363/700 [01:11<00:18, 18.68it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  52%|█████▏    | 363/700 [01:11<00:18, 18.68it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  52%|█████▏    | 364/700 [01:11<00:17, 18.68it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  52%|█████▏    | 365/700 [01:11<00:17, 18.68it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  52%|█████▏    | 366/700 [01:11<00:17, 19.21it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  52%|█████▏    | 366/700 [01:11<00:17, 19.21it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  52%|█████▏    | 367/700 [01:11<00:17, 19.21it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  53%|█████▎    | 368/700 [01:11<00:17, 19.21it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  53%|█████▎    | 369/700 [01:11<00:16, 19.67it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  53%|█████▎    | 369/700 [01:11<00:16, 19.67it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  53%|█████▎    | 370/700 [01:11<00:16, 19.67it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  53%|█████▎    | 371/700 [01:11<00:16, 19.67it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  53%|█████▎    | 372/700 [01:11<00:16, 20.11it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  53%|█████▎    | 372/700 [01:11<00:16, 20.11it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  53%|█████▎    | 373/700 [01:11<00:16, 20.11it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  53%|█████▎    | 374/700 [01:11<00:16, 20.11it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  54%|█████▎    | 375/700 [01:11<00:15, 20.37it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  54%|█████▎    | 375/700 [01:11<00:15, 20.37it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  54%|█████▎    | 376/700 [01:11<00:15, 20.37it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  54%|█████▍    | 377/700 [01:12<00:15, 20.37it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  54%|█████▍    | 378/700 [01:12<00:15, 20.60it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  54%|█████▍    | 378/700 [01:12<00:15, 20.60it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  54%|█████▍    | 379/700 [01:12<00:15, 20.60it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  54%|█████▍    | 380/700 [01:12<00:15, 20.60it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  54%|█████▍    | 381/700 [01:12<00:15, 20.79it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  54%|█████▍    | 381/700 [01:12<00:15, 20.79it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  55%|█████▍    | 382/700 [01:12<00:15, 20.79it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  55%|█████▍    | 383/700 [01:12<00:15, 20.79it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  55%|█████▍    | 384/700 [01:12<00:15, 20.82it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  55%|█████▍    | 384/700 [01:12<00:15, 20.82it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  55%|█████▌    | 385/700 [01:12<00:15, 20.82it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  55%|█████▌    | 386/700 [01:12<00:15, 20.82it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  55%|█████▌    | 387/700 [01:12<00:15, 20.83it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  55%|█████▌    | 387/700 [01:12<00:15, 20.83it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  55%|█████▌    | 388/700 [01:12<00:14, 20.83it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  56%|█████▌    | 389/700 [01:12<00:14, 20.83it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  56%|█████▌    | 390/700 [01:12<00:14, 20.77it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  56%|█████▌    | 390/700 [01:12<00:14, 20.77it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  56%|█████▌    | 391/700 [01:12<00:14, 20.77it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  56%|█████▌    | 392/700 [01:12<00:14, 20.77it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  56%|█████▌    | 393/700 [01:12<00:14, 20.61it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  56%|█████▌    | 393/700 [01:12<00:14, 20.61it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  56%|█████▋    | 394/700 [01:12<00:14, 20.61it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  56%|█████▋    | 395/700 [01:12<00:14, 20.61it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  57%|█████▋    | 396/700 [01:12<00:14, 20.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  57%|█████▋    | 396/700 [01:12<00:14, 20.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  57%|█████▋    | 397/700 [01:12<00:14, 20.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  57%|█████▋    | 398/700 [01:13<00:14, 20.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  57%|█████▋    | 399/700 [01:13<00:14, 20.61it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  57%|█████▋    | 399/700 [01:13<00:14, 20.61it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  57%|█████▋    | 400/700 [01:13<00:14, 20.61it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  57%|█████▋    | 401/700 [01:13<00:14, 20.61it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  57%|█████▋    | 402/700 [01:13<00:22, 13.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  57%|█████▋    | 402/700 [01:13<00:22, 13.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  58%|█████▊    | 403/700 [01:13<00:22, 13.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  58%|█████▊    | 404/700 [01:13<00:22, 13.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  58%|█████▊    | 405/700 [01:13<00:19, 15.01it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  58%|█████▊    | 405/700 [01:13<00:19, 15.01it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  58%|█████▊    | 406/700 [01:13<00:19, 15.01it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  58%|█████▊    | 407/700 [01:13<00:19, 15.01it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  58%|█████▊    | 408/700 [01:13<00:17, 16.37it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  58%|█████▊    | 408/700 [01:13<00:17, 16.37it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  58%|█████▊    | 409/700 [01:13<00:17, 16.37it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  59%|█████▊    | 410/700 [01:13<00:17, 16.37it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  59%|█████▊    | 411/700 [01:13<00:16, 17.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  59%|█████▊    | 411/700 [01:13<00:16, 17.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  59%|█████▉    | 412/700 [01:13<00:16, 17.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  59%|█████▉    | 413/700 [01:14<00:16, 17.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  59%|█████▉    | 414/700 [01:14<00:15, 18.47it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  59%|█████▉    | 414/700 [01:14<00:15, 18.47it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  59%|█████▉    | 415/700 [01:14<00:15, 18.47it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  59%|█████▉    | 416/700 [01:14<00:15, 18.47it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  60%|█████▉    | 417/700 [01:14<00:14, 19.09it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  60%|█████▉    | 417/700 [01:14<00:14, 19.09it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  60%|█████▉    | 418/700 [01:14<00:14, 19.09it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  60%|█████▉    | 419/700 [01:14<00:14, 19.09it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  60%|██████    | 420/700 [01:14<00:14, 19.73it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  60%|██████    | 420/700 [01:14<00:14, 19.73it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  60%|██████    | 421/700 [01:14<00:14, 19.73it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  60%|██████    | 422/700 [01:14<00:14, 19.73it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  60%|██████    | 423/700 [01:14<00:13, 20.00it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  60%|██████    | 423/700 [01:14<00:13, 20.00it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  61%|██████    | 424/700 [01:14<00:13, 20.00it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  61%|██████    | 425/700 [01:14<00:13, 20.00it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  61%|██████    | 426/700 [01:14<00:13, 20.23it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  61%|██████    | 426/700 [01:14<00:13, 20.23it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  61%|██████    | 427/700 [01:14<00:13, 20.23it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  61%|██████    | 428/700 [01:14<00:13, 20.23it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  61%|██████▏   | 429/700 [01:14<00:14, 19.06it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  61%|██████▏   | 429/700 [01:14<00:14, 19.06it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  61%|██████▏   | 430/700 [01:14<00:14, 19.06it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  62%|██████▏   | 431/700 [01:14<00:14, 19.06it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  62%|██████▏   | 432/700 [01:14<00:13, 19.42it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  62%|██████▏   | 432/700 [01:14<00:13, 19.42it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  62%|██████▏   | 433/700 [01:15<00:13, 19.42it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  62%|██████▏   | 434/700 [01:15<00:13, 19.42it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  62%|██████▏   | 435/700 [01:15<00:13, 19.66it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  62%|██████▏   | 435/700 [01:15<00:13, 19.66it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  62%|██████▏   | 436/700 [01:15<00:13, 19.66it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  62%|██████▏   | 437/700 [01:15<00:14, 17.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  62%|██████▏   | 437/700 [01:15<00:14, 17.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  63%|██████▎   | 438/700 [01:15<00:14, 17.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  63%|██████▎   | 439/700 [01:15<00:14, 17.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  63%|██████▎   | 440/700 [01:15<00:14, 18.44it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  63%|██████▎   | 440/700 [01:15<00:14, 18.44it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  63%|██████▎   | 441/700 [01:15<00:14, 18.44it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  63%|██████▎   | 442/700 [01:15<00:13, 18.44it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  63%|██████▎   | 443/700 [01:15<00:13, 19.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  63%|██████▎   | 443/700 [01:15<00:13, 19.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  63%|██████▎   | 444/700 [01:15<00:13, 19.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  64%|██████▎   | 445/700 [01:15<00:13, 19.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  64%|██████▎   | 446/700 [01:15<00:12, 19.63it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  64%|██████▎   | 446/700 [01:15<00:12, 19.63it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  64%|██████▍   | 447/700 [01:15<00:12, 19.63it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  64%|██████▍   | 448/700 [01:15<00:12, 19.63it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  64%|██████▍   | 449/700 [01:15<00:12, 19.92it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  64%|██████▍   | 449/700 [01:15<00:12, 19.92it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  64%|██████▍   | 450/700 [01:16<00:12, 19.92it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  64%|██████▍   | 451/700 [01:16<00:12, 19.92it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  65%|██████▍   | 452/700 [01:16<00:16, 15.24it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  65%|██████▍   | 452/700 [01:16<00:16, 15.24it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  65%|██████▍   | 453/700 [01:16<00:16, 15.24it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  65%|██████▍   | 454/700 [01:16<00:16, 15.24it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  65%|██████▌   | 455/700 [01:16<00:14, 16.60it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  65%|██████▌   | 455/700 [01:16<00:14, 16.60it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  65%|██████▌   | 456/700 [01:16<00:14, 16.60it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  65%|██████▌   | 457/700 [01:16<00:14, 16.60it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  65%|██████▌   | 458/700 [01:16<00:13, 17.67it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  65%|██████▌   | 458/700 [01:16<00:13, 17.67it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  66%|██████▌   | 459/700 [01:16<00:13, 17.67it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  66%|██████▌   | 460/700 [01:16<00:13, 17.67it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  66%|██████▌   | 461/700 [01:16<00:12, 18.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  66%|██████▌   | 461/700 [01:16<00:12, 18.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  66%|██████▌   | 462/700 [01:16<00:12, 18.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  66%|██████▌   | 463/700 [01:16<00:12, 18.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  66%|██████▋   | 464/700 [01:16<00:12, 19.07it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  66%|██████▋   | 464/700 [01:16<00:12, 19.07it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  66%|██████▋   | 465/700 [01:16<00:12, 19.07it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  67%|██████▋   | 466/700 [01:16<00:12, 19.07it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  67%|██████▋   | 467/700 [01:16<00:11, 19.52it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  67%|██████▋   | 467/700 [01:16<00:11, 19.52it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  67%|██████▋   | 468/700 [01:16<00:11, 19.52it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  67%|██████▋   | 469/700 [01:16<00:11, 19.52it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  67%|██████▋   | 470/700 [01:16<00:11, 19.91it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  67%|██████▋   | 470/700 [01:17<00:11, 19.91it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  67%|██████▋   | 471/700 [01:17<00:11, 19.91it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  67%|██████▋   | 472/700 [01:17<00:11, 19.91it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  68%|██████▊   | 473/700 [01:17<00:11, 20.15it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  68%|██████▊   | 473/700 [01:17<00:11, 20.15it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  68%|██████▊   | 474/700 [01:17<00:11, 20.15it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  68%|██████▊   | 475/700 [01:17<00:11, 20.15it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  68%|██████▊   | 476/700 [01:17<00:11, 20.28it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  68%|██████▊   | 476/700 [01:17<00:11, 20.28it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  68%|██████▊   | 477/700 [01:17<00:10, 20.28it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  68%|██████▊   | 478/700 [01:17<00:10, 20.28it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  68%|██████▊   | 479/700 [01:17<00:10, 20.33it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  68%|██████▊   | 479/700 [01:17<00:10, 20.33it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  69%|██████▊   | 480/700 [01:17<00:10, 20.33it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  69%|██████▊   | 481/700 [01:17<00:10, 20.33it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  69%|██████▉   | 482/700 [01:17<00:10, 20.35it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  69%|██████▉   | 482/700 [01:17<00:10, 20.35it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  69%|██████▉   | 483/700 [01:17<00:10, 20.35it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  69%|██████▉   | 484/700 [01:17<00:10, 20.35it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  69%|██████▉   | 485/700 [01:17<00:10, 20.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  69%|██████▉   | 485/700 [01:17<00:10, 20.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  69%|██████▉   | 486/700 [01:17<00:10, 20.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  70%|██████▉   | 487/700 [01:17<00:10, 20.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  70%|██████▉   | 488/700 [01:17<00:10, 20.58it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  70%|██████▉   | 488/700 [01:17<00:10, 20.58it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  70%|██████▉   | 489/700 [01:17<00:10, 20.58it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  70%|███████   | 490/700 [01:17<00:10, 20.58it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  70%|███████   | 491/700 [01:17<00:10, 20.73it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  70%|███████   | 491/700 [01:18<00:10, 20.73it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  70%|███████   | 492/700 [01:18<00:10, 20.73it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  70%|███████   | 493/700 [01:18<00:09, 20.73it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  71%|███████   | 494/700 [01:18<00:09, 20.88it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  71%|███████   | 494/700 [01:18<00:09, 20.88it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  71%|███████   | 495/700 [01:18<00:09, 20.88it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  71%|███████   | 496/700 [01:18<00:09, 20.88it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  71%|███████   | 497/700 [01:18<00:09, 20.92it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  71%|███████   | 497/700 [01:18<00:09, 20.92it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  71%|███████   | 498/700 [01:18<00:09, 20.92it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  71%|███████▏  | 499/700 [01:18<00:09, 20.92it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  71%|███████▏  | 500/700 [01:18<00:09, 21.01it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  71%|███████▏  | 500/700 [01:18<00:09, 21.01it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  72%|███████▏  | 501/700 [01:18<00:09, 21.01it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  72%|███████▏  | 502/700 [01:18<00:09, 21.01it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  72%|███████▏  | 503/700 [01:18<00:12, 15.30it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  72%|███████▏  | 503/700 [01:18<00:12, 15.30it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  72%|███████▏  | 504/700 [01:18<00:12, 15.30it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  72%|███████▏  | 505/700 [01:18<00:12, 16.05it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  72%|███████▏  | 505/700 [01:18<00:12, 16.05it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  72%|███████▏  | 506/700 [01:18<00:12, 16.05it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  72%|███████▏  | 507/700 [01:18<00:11, 16.78it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  72%|███████▏  | 507/700 [01:18<00:11, 16.78it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  73%|███████▎  | 508/700 [01:19<00:11, 16.78it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  73%|███████▎  | 509/700 [01:19<00:11, 17.01it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  73%|███████▎  | 509/700 [01:19<00:11, 17.01it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  73%|███████▎  | 510/700 [01:19<00:11, 17.01it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  73%|███████▎  | 511/700 [01:19<00:11, 17.01it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  73%|███████▎  | 512/700 [01:19<00:10, 18.11it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  73%|███████▎  | 512/700 [01:19<00:10, 18.11it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  73%|███████▎  | 513/700 [01:19<00:10, 18.11it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  73%|███████▎  | 514/700 [01:19<00:10, 18.11it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  74%|███████▎  | 515/700 [01:19<00:10, 18.17it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  74%|███████▎  | 515/700 [01:19<00:10, 18.17it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  74%|███████▎  | 516/700 [01:19<00:10, 18.17it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  74%|███████▍  | 517/700 [01:19<00:10, 18.17it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  74%|███████▍  | 518/700 [01:19<00:09, 18.88it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  74%|███████▍  | 518/700 [01:19<00:09, 18.88it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  74%|███████▍  | 519/700 [01:19<00:09, 18.88it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  74%|███████▍  | 520/700 [01:19<00:09, 18.88it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  74%|███████▍  | 521/700 [01:19<00:09, 19.46it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  74%|███████▍  | 521/700 [01:19<00:09, 19.46it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  75%|███████▍  | 522/700 [01:19<00:09, 19.46it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  75%|███████▍  | 523/700 [01:19<00:09, 19.46it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  75%|███████▍  | 524/700 [01:19<00:08, 19.86it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  75%|███████▍  | 524/700 [01:19<00:08, 19.86it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  75%|███████▌  | 525/700 [01:19<00:08, 19.86it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  75%|███████▌  | 526/700 [01:19<00:08, 19.86it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  75%|███████▌  | 527/700 [01:19<00:08, 20.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  75%|███████▌  | 527/700 [01:19<00:08, 20.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  75%|███████▌  | 528/700 [01:20<00:08, 20.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  76%|███████▌  | 529/700 [01:20<00:08, 20.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  76%|███████▌  | 530/700 [01:20<00:08, 20.35it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  76%|███████▌  | 530/700 [01:20<00:08, 20.35it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  76%|███████▌  | 531/700 [01:20<00:08, 20.35it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  76%|███████▌  | 532/700 [01:20<00:08, 20.35it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  76%|███████▌  | 533/700 [01:20<00:08, 20.42it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  76%|███████▌  | 533/700 [01:20<00:08, 20.42it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  76%|███████▋  | 534/700 [01:20<00:08, 20.42it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  76%|███████▋  | 535/700 [01:20<00:08, 20.42it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  77%|███████▋  | 536/700 [01:20<00:08, 20.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  77%|███████▋  | 536/700 [01:20<00:08, 20.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  77%|███████▋  | 537/700 [01:20<00:08, 20.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  77%|███████▋  | 538/700 [01:20<00:07, 20.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  77%|███████▋  | 539/700 [01:20<00:07, 20.39it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  77%|███████▋  | 539/700 [01:20<00:07, 20.39it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  77%|███████▋  | 540/700 [01:20<00:07, 20.39it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  77%|███████▋  | 541/700 [01:20<00:07, 20.39it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  77%|███████▋  | 542/700 [01:20<00:07, 20.46it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  77%|███████▋  | 542/700 [01:20<00:07, 20.46it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  78%|███████▊  | 543/700 [01:20<00:07, 20.46it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  78%|███████▊  | 544/700 [01:20<00:07, 20.46it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  78%|███████▊  | 545/700 [01:20<00:07, 20.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  78%|███████▊  | 545/700 [01:20<00:07, 20.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  78%|███████▊  | 546/700 [01:20<00:07, 20.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  78%|███████▊  | 547/700 [01:20<00:07, 20.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  78%|███████▊  | 548/700 [01:20<00:07, 20.59it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  78%|███████▊  | 548/700 [01:21<00:07, 20.59it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  78%|███████▊  | 549/700 [01:21<00:07, 20.59it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  79%|███████▊  | 550/700 [01:21<00:07, 20.59it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  79%|███████▊  | 551/700 [01:21<00:09, 15.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  79%|███████▊  | 551/700 [01:21<00:09, 15.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  79%|███████▉  | 552/700 [01:21<00:09, 15.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  79%|███████▉  | 553/700 [01:21<00:09, 15.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  79%|███████▉  | 554/700 [01:21<00:08, 16.53it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  79%|███████▉  | 554/700 [01:21<00:08, 16.53it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  79%|███████▉  | 555/700 [01:21<00:08, 16.53it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  79%|███████▉  | 556/700 [01:21<00:08, 16.53it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  80%|███████▉  | 557/700 [01:21<00:08, 17.59it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  80%|███████▉  | 557/700 [01:21<00:08, 17.59it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  80%|███████▉  | 558/700 [01:21<00:08, 17.59it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  80%|███████▉  | 559/700 [01:21<00:08, 17.59it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  80%|████████  | 560/700 [01:21<00:07, 18.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  80%|████████  | 560/700 [01:21<00:07, 18.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  80%|████████  | 561/700 [01:21<00:07, 18.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  80%|████████  | 562/700 [01:21<00:07, 18.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  80%|████████  | 563/700 [01:21<00:07, 19.01it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  80%|████████  | 563/700 [01:21<00:07, 19.01it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  81%|████████  | 564/700 [01:21<00:07, 19.01it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  81%|████████  | 565/700 [01:22<00:07, 19.01it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  81%|████████  | 566/700 [01:22<00:06, 19.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  81%|████████  | 566/700 [01:22<00:06, 19.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  81%|████████  | 567/700 [01:22<00:06, 19.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  81%|████████  | 568/700 [01:22<00:06, 19.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  81%|████████▏ | 569/700 [01:22<00:06, 19.77it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  81%|████████▏ | 569/700 [01:22<00:06, 19.77it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  81%|████████▏ | 570/700 [01:22<00:06, 19.77it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  82%|████████▏ | 571/700 [01:22<00:06, 19.77it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  82%|████████▏ | 572/700 [01:22<00:06, 20.00it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  82%|████████▏ | 572/700 [01:22<00:06, 20.00it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  82%|████████▏ | 573/700 [01:22<00:06, 20.00it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  82%|████████▏ | 574/700 [01:22<00:06, 20.00it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  82%|████████▏ | 575/700 [01:22<00:06, 20.21it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  82%|████████▏ | 575/700 [01:22<00:06, 20.21it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  82%|████████▏ | 576/700 [01:22<00:06, 20.21it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  82%|████████▏ | 577/700 [01:22<00:06, 20.21it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  83%|████████▎ | 578/700 [01:22<00:06, 20.10it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  83%|████████▎ | 578/700 [01:22<00:06, 20.10it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  83%|████████▎ | 579/700 [01:22<00:06, 20.10it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  83%|████████▎ | 580/700 [01:22<00:05, 20.10it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  83%|████████▎ | 581/700 [01:22<00:05, 20.20it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  83%|████████▎ | 581/700 [01:22<00:05, 20.20it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  83%|████████▎ | 582/700 [01:22<00:05, 20.20it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  83%|████████▎ | 583/700 [01:22<00:05, 20.20it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  83%|████████▎ | 584/700 [01:22<00:05, 20.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  83%|████████▎ | 584/700 [01:22<00:05, 20.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  84%|████████▎ | 585/700 [01:23<00:05, 20.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  84%|████████▎ | 586/700 [01:23<00:05, 20.34it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  84%|████████▍ | 587/700 [01:23<00:05, 19.54it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  84%|████████▍ | 587/700 [01:23<00:05, 19.54it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  84%|████████▍ | 588/700 [01:23<00:05, 19.54it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  84%|████████▍ | 589/700 [01:23<00:05, 19.54it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  84%|████████▍ | 590/700 [01:23<00:05, 19.74it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  84%|████████▍ | 590/700 [01:23<00:05, 19.74it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  84%|████████▍ | 591/700 [01:23<00:05, 19.74it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  85%|████████▍ | 592/700 [01:23<00:05, 18.98it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  85%|████████▍ | 592/700 [01:23<00:05, 18.98it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  85%|████████▍ | 593/700 [01:23<00:05, 18.98it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  85%|████████▍ | 594/700 [01:23<00:05, 18.98it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  85%|████████▌ | 595/700 [01:23<00:05, 19.28it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  85%|████████▌ | 595/700 [01:23<00:05, 19.28it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  85%|████████▌ | 596/700 [01:23<00:05, 19.28it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  85%|████████▌ | 597/700 [01:23<00:05, 19.43it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  85%|████████▌ | 597/700 [01:23<00:05, 19.43it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  85%|████████▌ | 598/700 [01:23<00:05, 19.43it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  86%|████████▌ | 599/700 [01:23<00:05, 19.53it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  86%|████████▌ | 599/700 [01:23<00:05, 19.53it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  86%|████████▌ | 600/700 [01:23<00:05, 19.53it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  86%|████████▌ | 601/700 [01:23<00:07, 13.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  86%|████████▌ | 601/700 [01:23<00:07, 13.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  86%|████████▌ | 602/700 [01:24<00:07, 13.56it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  86%|████████▌ | 603/700 [01:24<00:06, 14.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  86%|████████▌ | 603/700 [01:24<00:06, 14.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  86%|████████▋ | 604/700 [01:24<00:06, 14.18it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  86%|████████▋ | 605/700 [01:24<00:06, 14.98it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  86%|████████▋ | 605/700 [01:24<00:06, 14.98it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  87%|████████▋ | 606/700 [01:24<00:06, 14.98it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  87%|████████▋ | 607/700 [01:24<00:06, 14.98it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  87%|████████▋ | 607/700 [01:24<00:06, 14.98it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  87%|████████▋ | 608/700 [01:24<00:06, 14.98it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  87%|████████▋ | 609/700 [01:24<00:05, 15.75it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  87%|████████▋ | 609/700 [01:24<00:05, 15.75it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  87%|████████▋ | 610/700 [01:24<00:05, 15.75it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  87%|████████▋ | 611/700 [01:24<00:05, 16.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  87%|████████▋ | 611/700 [01:24<00:05, 16.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  87%|████████▋ | 612/700 [01:24<00:05, 16.49it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  88%|████████▊ | 613/700 [01:24<00:05, 16.86it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  88%|████████▊ | 613/700 [01:24<00:05, 16.86it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  88%|████████▊ | 614/700 [01:24<00:05, 16.86it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  88%|████████▊ | 615/700 [01:24<00:05, 16.68it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  88%|████████▊ | 615/700 [01:24<00:05, 16.68it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  88%|████████▊ | 616/700 [01:24<00:05, 16.68it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  88%|████████▊ | 617/700 [01:24<00:04, 17.35it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  88%|████████▊ | 617/700 [01:24<00:04, 17.35it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  88%|████████▊ | 618/700 [01:24<00:04, 17.35it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  88%|████████▊ | 619/700 [01:24<00:04, 17.80it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  88%|████████▊ | 619/700 [01:25<00:04, 17.80it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  89%|████████▊ | 620/700 [01:25<00:04, 17.80it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  89%|████████▊ | 621/700 [01:25<00:04, 18.23it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  89%|████████▊ | 621/700 [01:25<00:04, 18.23it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  89%|████████▉ | 622/700 [01:25<00:04, 18.23it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  89%|████████▉ | 623/700 [01:25<00:04, 18.37it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  89%|████████▉ | 623/700 [01:25<00:04, 18.37it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  89%|████████▉ | 624/700 [01:25<00:04, 18.37it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  89%|████████▉ | 625/700 [01:25<00:04, 18.30it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  89%|████████▉ | 625/700 [01:25<00:04, 18.30it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  89%|████████▉ | 626/700 [01:25<00:04, 18.30it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  90%|████████▉ | 627/700 [01:25<00:04, 18.17it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  90%|████████▉ | 627/700 [01:25<00:04, 18.17it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  90%|████████▉ | 628/700 [01:25<00:03, 18.17it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  90%|████████▉ | 629/700 [01:25<00:03, 17.92it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  90%|████████▉ | 629/700 [01:25<00:03, 17.92it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  90%|█████████ | 630/700 [01:25<00:03, 17.92it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  90%|█████████ | 631/700 [01:25<00:03, 18.01it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  90%|█████████ | 631/700 [01:25<00:03, 18.01it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  90%|█████████ | 632/700 [01:25<00:03, 18.01it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  90%|█████████ | 633/700 [01:25<00:03, 18.03it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  90%|█████████ | 633/700 [01:25<00:03, 18.03it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  91%|█████████ | 634/700 [01:25<00:03, 18.03it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  91%|█████████ | 635/700 [01:25<00:03, 17.27it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  91%|█████████ | 635/700 [01:25<00:03, 17.27it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  91%|█████████ | 636/700 [01:25<00:03, 17.27it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  91%|█████████ | 637/700 [01:25<00:03, 17.76it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  91%|█████████ | 637/700 [01:26<00:03, 17.76it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  91%|█████████ | 638/700 [01:26<00:03, 17.76it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  91%|█████████▏| 639/700 [01:26<00:03, 17.61it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  91%|█████████▏| 639/700 [01:26<00:03, 17.61it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  91%|█████████▏| 640/700 [01:26<00:03, 17.61it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  92%|█████████▏| 641/700 [01:26<00:03, 17.57it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  92%|█████████▏| 641/700 [01:26<00:03, 17.57it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  92%|█████████▏| 642/700 [01:26<00:03, 17.57it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  92%|█████████▏| 643/700 [01:26<00:03, 17.72it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  92%|█████████▏| 643/700 [01:26<00:03, 17.72it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  92%|█████████▏| 644/700 [01:26<00:03, 17.72it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  92%|█████████▏| 645/700 [01:26<00:03, 17.69it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  92%|█████████▏| 645/700 [01:26<00:03, 17.69it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  92%|█████████▏| 646/700 [01:26<00:03, 17.69it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  92%|█████████▏| 647/700 [01:26<00:02, 17.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  92%|█████████▏| 647/700 [01:26<00:02, 17.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  93%|█████████▎| 648/700 [01:26<00:02, 17.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  93%|█████████▎| 649/700 [01:26<00:02, 18.44it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  93%|█████████▎| 649/700 [01:26<00:02, 18.44it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  93%|█████████▎| 650/700 [01:27<00:02, 18.44it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  93%|█████████▎| 651/700 [01:27<00:04, 10.07it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  93%|█████████▎| 651/700 [01:27<00:04, 10.07it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  93%|█████████▎| 652/700 [01:27<00:04, 10.07it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  93%|█████████▎| 653/700 [01:27<00:04, 11.71it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  93%|█████████▎| 653/700 [01:27<00:04, 11.71it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  93%|█████████▎| 654/700 [01:27<00:03, 11.71it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  94%|█████████▎| 655/700 [01:27<00:03, 13.31it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  94%|█████████▎| 655/700 [01:27<00:03, 13.31it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  94%|█████████▎| 656/700 [01:27<00:03, 13.31it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  94%|█████████▍| 657/700 [01:27<00:02, 14.72it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  94%|█████████▍| 657/700 [01:27<00:02, 14.72it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  94%|█████████▍| 658/700 [01:27<00:02, 14.72it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  94%|█████████▍| 659/700 [01:27<00:02, 15.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  94%|█████████▍| 659/700 [01:27<00:02, 15.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  94%|█████████▍| 660/700 [01:27<00:02, 15.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  94%|█████████▍| 661/700 [01:27<00:02, 16.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  94%|█████████▍| 661/700 [01:27<00:02, 16.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  95%|█████████▍| 662/700 [01:27<00:02, 16.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  95%|█████████▍| 663/700 [01:27<00:02, 16.51it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  95%|█████████▍| 663/700 [01:27<00:02, 16.51it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  95%|█████████▍| 664/700 [01:27<00:02, 16.51it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  95%|█████████▌| 665/700 [01:27<00:02, 16.51it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  95%|█████████▌| 666/700 [01:27<00:01, 17.84it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  95%|█████████▌| 666/700 [01:27<00:01, 17.84it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  95%|█████████▌| 667/700 [01:27<00:01, 17.84it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  95%|█████████▌| 668/700 [01:27<00:01, 17.84it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  96%|█████████▌| 669/700 [01:27<00:01, 18.66it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  96%|█████████▌| 669/700 [01:28<00:01, 18.66it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  96%|█████████▌| 670/700 [01:28<00:01, 18.66it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  96%|█████████▌| 671/700 [01:28<00:01, 18.66it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  96%|█████████▌| 672/700 [01:28<00:01, 19.17it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  96%|█████████▌| 672/700 [01:28<00:01, 19.17it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  96%|█████████▌| 673/700 [01:28<00:01, 19.17it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  96%|█████████▋| 674/700 [01:28<00:01, 19.17it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  96%|█████████▋| 675/700 [01:28<00:01, 19.46it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  96%|█████████▋| 675/700 [01:28<00:01, 19.46it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  97%|█████████▋| 676/700 [01:28<00:01, 19.46it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  97%|█████████▋| 677/700 [01:28<00:01, 19.55it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  97%|█████████▋| 677/700 [01:28<00:01, 19.55it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  97%|█████████▋| 678/700 [01:28<00:01, 19.55it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  97%|█████████▋| 679/700 [01:28<00:01, 19.55it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  97%|█████████▋| 680/700 [01:28<00:01, 19.81it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  97%|█████████▋| 680/700 [01:28<00:01, 19.81it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  97%|█████████▋| 681/700 [01:28<00:00, 19.81it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  97%|█████████▋| 682/700 [01:28<00:00, 19.81it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  98%|█████████▊| 683/700 [01:28<00:00, 20.06it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  98%|█████████▊| 683/700 [01:28<00:00, 20.06it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  98%|█████████▊| 684/700 [01:28<00:00, 20.06it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  98%|█████████▊| 685/700 [01:28<00:00, 20.06it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  98%|█████████▊| 686/700 [01:28<00:00, 19.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  98%|█████████▊| 686/700 [01:28<00:00, 19.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  98%|█████████▊| 687/700 [01:28<00:00, 19.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  98%|█████████▊| 688/700 [01:28<00:00, 19.97it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  98%|█████████▊| 689/700 [01:28<00:00, 19.94it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  98%|█████████▊| 689/700 [01:29<00:00, 19.94it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  99%|█████████▊| 690/700 [01:29<00:00, 19.94it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  99%|█████████▊| 691/700 [01:29<00:00, 19.91it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  99%|█████████▊| 691/700 [01:29<00:00, 19.91it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  99%|█████████▉| 692/700 [01:29<00:00, 19.91it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  99%|█████████▉| 693/700 [01:29<00:00, 19.88it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  99%|█████████▉| 693/700 [01:29<00:00, 19.88it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  99%|█████████▉| 694/700 [01:29<00:00, 19.88it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  99%|█████████▉| 695/700 [01:29<00:00, 19.88it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  99%|█████████▉| 696/700 [01:29<00:00, 19.94it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps:  99%|█████████▉| 696/700 [01:29<00:00, 19.94it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps: 100%|█████████▉| 697/700 [01:29<00:00, 19.94it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps: 100%|█████████▉| 698/700 [01:29<00:00, 19.95it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps: 100%|█████████▉| 698/700 [01:29<00:00, 19.95it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps: 100%|█████████▉| 699/700 [01:29<00:00, 19.95it/s, running_success_rate=0.0%][A
+Running rollout with at most 700 steps: 100%|██████████| 700/700 [01:29<00:00, 19.96it/s, running_success_rate=0.0%][A
+                                                                                                                    [AStepping through eval batches:   0%|          | 0/1 [01:43<?, ?it/s, running_success_rate=0.0%]Stepping through eval batches: 100%|██████████| 1/1 [01:43<00:00, 103.06s/it, running_success_rate=0.0%]Stepping through eval batches: 100%|██████████| 1/1 [01:43<00:00, 103.06s/it, running_success_rate=0.0%]
+[stl] wrote eval_logs_stl_pilot/nl/OpenCabinet/traces/OpenCabinet_ep0.json.gz
+INFO 2026-10-31 14:24:44 bot_eval.py:808 Overall Aggregated Metrics:
+INFO 2026-10-31 14:24:44 bot_eval.py:809 {'avg_sum_reward': 0.0, 'avg_max_reward': 0.0, 'pc_success': 0.0, 'n_episodes': 1, 'eval_s': 105.75574588775635, 'eval_ep_s': 105.7557463645935, 'video_paths': ['eval_logs_stl_pilot/nl/OpenCabinet/videos/OpenCabinet_0/eval_episode_0.mp4'], 'predicted_video_paths': []}
+INFO 2026-10-31 14:24:44 bot_eval.py:813 
+Aggregated Metrics for per_task:
+INFO 2026-10-31 14:24:44 bot_eval.py:814 [{'task_group': 'OpenCabinet', 'task_id': 0, 'metrics': {'sum_rewards': [0.0], 'max_rewards': [0.0], 'successes': [False], 'video_paths': ['eval_logs_stl_pilot/nl/OpenCabinet/videos/OpenCabinet_0/eval_episode_0.mp4'], 'predicted_video_paths': []}}]
+INFO 2026-10-31 14:24:44 bot_eval.py:813 
+Aggregated Metrics for per_group:
+INFO 2026-10-31 14:24:44 bot_eval.py:814 {'OpenCabinet': {'avg_sum_reward': 0.0, 'avg_max_reward': 0.0, 'pc_success': 0.0, 'n_episodes': 1, 'video_paths': ['eval_logs_stl_pilot/nl/OpenCabinet/videos/OpenCabinet_0/eval_episode_0.mp4'], 'predicted_video_paths': []}}
+INFO 2026-10-31 14:24:44 bot_eval.py:813 
+Aggregated Metrics for overall:
+INFO 2026-10-31 14:24:44 bot_eval.py:814 {'avg_sum_reward': 0.0, 'avg_max_reward': 0.0, 'pc_success': 0.0, 'n_episodes': 1, 'eval_s': 105.75574588775635, 'eval_ep_s': 105.7557463645935, 'video_paths': ['eval_logs_stl_pilot/nl/OpenCabinet/videos/OpenCabinet_0/eval_episode_0.mp4'], 'predicted_video_paths': []}
+INFO 2026-10-31 14:24:44 bot_eval.py:822 End of eval
