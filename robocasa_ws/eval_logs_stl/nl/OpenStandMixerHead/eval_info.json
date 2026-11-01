@@ -1,0 +1,101 @@
+{
+  "per_task": [
+    {
+      "task_group": "OpenStandMixerHead",
+      "task_id": 0,
+      "metrics": {
+        "sum_rewards": [
+          189.0,
+          0.0,
+          197.0,
+          0.0,
+          0.0,
+          197.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "max_rewards": [
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "successes": [
+          true,
+          false,
+          true,
+          false,
+          false,
+          true,
+          false,
+          false,
+          false,
+          false
+        ],
+        "video_paths": [
+          "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_0.mp4",
+          "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_1.mp4",
+          "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_2.mp4",
+          "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_3.mp4",
+          "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_4.mp4",
+          "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_5.mp4",
+          "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_6.mp4",
+          "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_7.mp4",
+          "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_8.mp4",
+          "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_9.mp4"
+        ],
+        "predicted_video_paths": []
+      }
+    }
+  ],
+  "per_group": {
+    "OpenStandMixerHead": {
+      "avg_sum_reward": 58.3,
+      "avg_max_reward": 0.3,
+      "pc_success": 30.0,
+      "n_episodes": 10,
+      "video_paths": [
+        "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_0.mp4",
+        "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_1.mp4",
+        "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_2.mp4",
+        "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_3.mp4",
+        "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_4.mp4",
+        "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_5.mp4",
+        "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_6.mp4",
+        "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_7.mp4",
+        "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_8.mp4",
+        "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_9.mp4"
+      ],
+      "predicted_video_paths": []
+    }
+  },
+  "overall": {
+    "avg_sum_reward": 58.3,
+    "avg_max_reward": 0.3,
+    "pc_success": 30.0,
+    "n_episodes": 10,
+    "eval_s": 248.9980924129486,
+    "eval_ep_s": 24.899809336662294,
+    "video_paths": [
+      "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_0.mp4",
+      "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_1.mp4",
+      "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_2.mp4",
+      "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_3.mp4",
+      "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_4.mp4",
+      "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_5.mp4",
+      "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_6.mp4",
+      "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_7.mp4",
+      "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_8.mp4",
+      "eval_logs_stl/nl/OpenStandMixerHead/videos/OpenStandMixerHead_0/eval_episode_9.mp4"
+    ],
+    "predicted_video_paths": []
+  }
+}

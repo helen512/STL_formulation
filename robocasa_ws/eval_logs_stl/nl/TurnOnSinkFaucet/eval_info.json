@@ -1,0 +1,101 @@
+{
+  "per_task": [
+    {
+      "task_group": "TurnOnSinkFaucet",
+      "task_id": 0,
+      "metrics": {
+        "sum_rewards": [
+          0.0,
+          179.0,
+          0.0,
+          61.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          192.0,
+          0.0
+        ],
+        "max_rewards": [
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "successes": [
+          false,
+          true,
+          false,
+          true,
+          false,
+          false,
+          false,
+          false,
+          true,
+          false
+        ],
+        "video_paths": [
+          "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_0.mp4",
+          "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_1.mp4",
+          "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_2.mp4",
+          "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_3.mp4",
+          "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_4.mp4",
+          "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_5.mp4",
+          "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_6.mp4",
+          "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_7.mp4",
+          "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_8.mp4",
+          "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_9.mp4"
+        ],
+        "predicted_video_paths": []
+      }
+    }
+  ],
+  "per_group": {
+    "TurnOnSinkFaucet": {
+      "avg_sum_reward": 43.2,
+      "avg_max_reward": 0.3,
+      "pc_success": 30.0,
+      "n_episodes": 10,
+      "video_paths": [
+        "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_0.mp4",
+        "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_1.mp4",
+        "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_2.mp4",
+        "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_3.mp4",
+        "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_4.mp4",
+        "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_5.mp4",
+        "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_6.mp4",
+        "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_7.mp4",
+        "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_8.mp4",
+        "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_9.mp4"
+      ],
+      "predicted_video_paths": []
+    }
+  },
+  "overall": {
+    "avg_sum_reward": 43.2,
+    "avg_max_reward": 0.3,
+    "pc_success": 30.0,
+    "n_episodes": 10,
+    "eval_s": 360.2769784927368,
+    "eval_ep_s": 36.027697920799255,
+    "video_paths": [
+      "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_0.mp4",
+      "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_1.mp4",
+      "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_2.mp4",
+      "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_3.mp4",
+      "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_4.mp4",
+      "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_5.mp4",
+      "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_6.mp4",
+      "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_7.mp4",
+      "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_8.mp4",
+      "eval_logs_stl/nl/TurnOnSinkFaucet/videos/TurnOnSinkFaucet_0/eval_episode_9.mp4"
+    ],
+    "predicted_video_paths": []
+  }
+}

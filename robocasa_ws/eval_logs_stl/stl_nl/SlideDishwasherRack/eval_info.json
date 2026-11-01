@@ -1,0 +1,101 @@
+{
+  "per_task": [
+    {
+      "task_group": "SlideDishwasherRack",
+      "task_id": 0,
+      "metrics": {
+        "sum_rewards": [
+          0.0,
+          0.0,
+          79.0,
+          123.0,
+          0.0,
+          0.0,
+          0.0,
+          85.0,
+          4.0,
+          0.0
+        ],
+        "max_rewards": [
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "successes": [
+          false,
+          false,
+          true,
+          true,
+          false,
+          false,
+          false,
+          true,
+          true,
+          false
+        ],
+        "video_paths": [
+          "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_0.mp4",
+          "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_1.mp4",
+          "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_2.mp4",
+          "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_3.mp4",
+          "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_4.mp4",
+          "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_5.mp4",
+          "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_6.mp4",
+          "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_7.mp4",
+          "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_8.mp4",
+          "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_9.mp4"
+        ],
+        "predicted_video_paths": []
+      }
+    }
+  ],
+  "per_group": {
+    "SlideDishwasherRack": {
+      "avg_sum_reward": 29.1,
+      "avg_max_reward": 0.4,
+      "pc_success": 40.0,
+      "n_episodes": 10,
+      "video_paths": [
+        "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_0.mp4",
+        "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_1.mp4",
+        "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_2.mp4",
+        "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_3.mp4",
+        "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_4.mp4",
+        "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_5.mp4",
+        "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_6.mp4",
+        "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_7.mp4",
+        "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_8.mp4",
+        "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_9.mp4"
+      ],
+      "predicted_video_paths": []
+    }
+  },
+  "overall": {
+    "avg_sum_reward": 29.1,
+    "avg_max_reward": 0.4,
+    "pc_success": 40.0,
+    "n_episodes": 10,
+    "eval_s": 246.51523780822754,
+    "eval_ep_s": 24.651523852348326,
+    "video_paths": [
+      "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_0.mp4",
+      "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_1.mp4",
+      "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_2.mp4",
+      "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_3.mp4",
+      "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_4.mp4",
+      "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_5.mp4",
+      "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_6.mp4",
+      "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_7.mp4",
+      "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_8.mp4",
+      "eval_logs_stl/stl_nl/SlideDishwasherRack/videos/SlideDishwasherRack_0/eval_episode_9.mp4"
+    ],
+    "predicted_video_paths": []
+  }
+}

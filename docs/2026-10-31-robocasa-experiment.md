@@ -1,6 +1,6 @@
 # RoboCasa365 atomic-task STL experiment
 
-2026-10-31 · Status: **full run stopped early on request, after 2 of 54 (prompt, task) pairs** (CloseBlenderLid under `nl` and `stl_nl`, 20 episodes); see [Results](#results). Checks and pilot (steps 1–6) are done. The pilot found three bugs that made π0.5 fail every task and broke seed pairing; all are fixed (see [Bugs found and fixed](#bugs-found-and-fixed)).
+2026-10-31 · Status: **done.** All 540 episodes (18 tasks × 3 prompts × 10 seeds) ran on 2026-11-01; see [Results](#results). The rule prompts made π0.5 much worse: task success 78/180 with the original instruction, 23/180 with the rules in English, 9/180 with the raw STL formula. Checks and pilot (steps 1–6) are done. The pilot found three bugs that made π0.5 fail every task and broke seed pairing; all are fixed (see [Bugs found and fixed](#bugs-found-and-fixed)).
 
 **Question:** if π0.5's prompt includes a deadline, a "let go and leave it" rule and a "don't move other objects" rule, does it follow them? This repeats the [LIBERO-spatial run](2026-10-25-libero-experiment.md) on RoboCasa365. All 18 `atomic_seen` tasks run with three prompts: the original instruction, the instruction plus the rules in English, and the rules as a raw STL formula. Every episode is checked against the same STL spec for its task.
 
@@ -261,8 +261,8 @@ Per episode the CSV also records:
   - Measure RAM.
   - If success is near zero on most tasks, review before the full run.
 - [x] 6. Review the pilot before the full run.
-- [ ] 7. Full 540-episode run in `screen`. **Stopped at 20:10 on 2026-10-31 on request, after 2 of 54 pairs** (see [Results](#results)).
-- [ ] 8. Fill in the results below. Partial: only the finished pairs are recorded.
+- [x] 7. Full 540-episode run in `screen`. First started 2026-10-31 19:48 and stopped at 20:10 on request after 2 of 54 pairs; restarted 2026-11-01 10:08 and finished at 13:38, with no failed pairs or retries (see [Results](#results)).
+- [x] 8. Fill in the results below.
 
 ## Checks before the run (steps 1–5)
 
@@ -372,29 +372,151 @@ Behaviors to keep in mind when reading the pilot and the results:
 
 ## Results
 
-**Partial run, stopped on request.** The full run started at 19:48 on 2026-10-31 and was stopped at about 20:10. Finished: **CloseBlenderLid under `nl` and `stl_nl`**, 10 episodes each (seeds 1000–1009). Nothing else finished:
+**Full run, 540 episodes, all finished.** 18 tasks × 3 prompts × seeds 1000–1009, `split=pretrain`, every episode run to its full task limit.
 
-- CloseFridge under `nl` failed three times with CUDA out-of-memory, and under `stl_nl` it was stopped mid-run. Another user's eval jobs took 20–21 GB on one GPU and 12–20 GB on the other, and kept launching new ones. The driver now waits for 11 GB of free GPU memory and retries up to 3 times (`afb96a4`). The CUDA device numbering now matches `nvidia-smi` (`d85af22`); before that it didn't, so the driver checked one GPU and launched on the other. The failed attempts' logs are in `eval_logs_stl/{nl,stl_nl}/CloseFridge*/eval.log`; none wrote a recording.
-- `stl` never started, and the other 16 tasks never started under any prompt.
+**How it ran.**
 
-Outputs: `robocasa_ws/eval_logs_stl/{nl,stl_nl}/CloseBlenderLid/` (recordings, videos, `eval_info.json`), `eval_logs_stl/{nl,stl_nl}/episodes.csv`, `eval_logs_stl/driver.log`. Consistency: 20/20 episodes ran the full 600 steps; rtamt = numpy on 20/20; LeRobot's success = any(`success`) on 20/20; the same seed gave the same scene under both prompts on 10/10 seeds.
+- **First attempt:** started 2026-10-31 19:48 and was stopped on request at about 20:10, after CloseBlenderLid under `nl` and `stl_nl`.
+  - CloseFridge under `nl` failed three times with CUDA out-of-memory, and under `stl_nl` it was stopped mid-run.
+  - The cause: another user's eval jobs took 20–21 GB on one GPU and 12–20 GB on the other, and kept launching new ones. The CUDA device numbering also didn't match `nvidia-smi`, so the driver checked one GPU and launched on the other.
+  - Fixes: the driver now waits for 11 GB of free GPU memory and retries up to 3 times (`afb96a4`), and the numbering matches (`d85af22`).
+  - The failed attempts are kept as `eval_logs_stl/{nl,stl_nl}/CloseFridge.incomplete-*/`; none wrote a recording.
+- **Restart:** 2026-11-01 10:08 with both GPUs free, in screen session `robocasa_stl`. It finished at 13:38, with no failed pairs and no retries.
+  - The two finished CloseBlenderLid pairs were kept, not rerun; seeding makes them identical to a rerun.
+  - Each pair took 6–11 min, two at a time, one per GPU (about 10.5 GB of GPU memory and 8–14 GB of RAM each).
 
-**CloseBlenderLid** (P, limit 30 s, deadline T = 18 s; O is empty, so clean success = task success and Full STL = deadline met)
+**Outputs:**
+
+- `robocasa_ws/eval_logs_stl/{nl,stl_nl,stl}/<task>/` holds the recordings, videos, `eval_info.json`, `eval.log`, and the checker output `check.txt`.
+- `eval_logs_stl/{nl,stl_nl,stl}/episodes.csv` has one row per episode.
+- `eval_logs_stl/summary.md` has all tables below; `eval_logs_stl/driver.log` is the driver's log.
+
+**Consistency:** all of these held on every one of the 540 episodes:
+
+- every episode ran the full task limit;
+- rtamt agrees with the numpy re-check;
+- LeRobot's success equals any(`success`);
+- the same seed gave the same scene under all three prompts (180/180 (task, seed) pairs).
+
+**Summary** (episodes that passed / 180; 95% Wilson range of the pass rate in brackets)
+
+| Prompt | Task success | Deadline met | Clean success | Full STL |
+| --- | --- | --- | --- | --- |
+| `nl` | 78/180 [36–51%] | 28/180 [11–22%] | 75/180 [35–49%] | 28/180 [11–22%] |
+| `stl_nl` | 23/180 [9–18%] | 1/180 [0–3%] | 23/180 [9–18%] | 1/180 [0–3%] |
+| `stl` | 9/180 [3–9%] | 0/180 [0–2%] | 9/180 [3–9%] | 0/180 [0–2%] |
+
+**Per task** (out of 10; cells are `nl` / `stl_nl` / `stl`)
+
+| # | Task | Type | Task success | Clean success | Deadline met / Full STL |
+| --- | --- | --- | --- | --- | --- |
+| 0 | CloseBlenderLid | P | 2 / 1 / 1 | 2 / 1 / 1 | 0 / 0 · 0 / 0 · 0 / 0 |
+| 1 | CloseFridge | F | 5 / 4 / 0 | 5 / 4 / 0 | 0 / 0 · 0 / 0 · 0 / 0 |
+| 2 | CloseToasterOvenDoor | F | 2 / 0 / 0 | 2 / 0 / 0 | 0 / 0 · 0 / 0 · 0 / 0 |
+| 3 | CoffeeSetupMug | P | 3 / 0 / 0 | 3 / 0 / 0 | 0 / 0 · 0 / 0 · 0 / 0 |
+| 4 | NavigateKitchen | N | 1 / 0 / 0 | 1 / 0 / 0 | 0 / 0 · 0 / 0 · 0 / 0 |
+| 5 | OpenCabinet | F | 5 / 0 / 0 | 4 / 0 / 0 | 0 / 0 · 0 / 0 · 0 / 0 |
+| 6 | OpenDrawer | F | 7 / 3 / 2 | 6 / 3 / 2 | 6 / 6 · 0 / 0 · 0 / 0 |
+| 7 | OpenStandMixerHead | F | 3 / 0 / 2 | 3 / 0 / 2 | 3 / 3 · 0 / 0 · 0 / 0 |
+| 8 | PickPlaceCounterToCabinet | P | 5 / 2 / 0 | 5 / 2 / 0 | 5 / 5 · 0 / 0 · 0 / 0 |
+| 9 | PickPlaceCounterToStove | P | 6 / 0 / 1 | 6 / 0 / 1 | 4 / 4 · 0 / 0 · 0 / 0 |
+| 10 | PickPlaceDrawerToCounter | P | 4 / 0 / 0 | 4 / 0 / 0 | 0 / 0 · 0 / 0 · 0 / 0 |
+| 11 | PickPlaceSinkToCounter | P | 7 / 5 / 0 | 7 / 5 / 0 | 6 / 6 · 1 / 1 · 0 / 0 |
+| 12 | PickPlaceToasterToCounter | P | 6 / 0 / 0 | 6 / 0 / 0 | 1 / 1 · 0 / 0 · 0 / 0 |
+| 13 | SlideDishwasherRack | F | 8 / 4 / 1 | 8 / 4 / 1 | 0 / 0 · 0 / 0 · 0 / 0 |
+| 14 | TurnOffStove | F | 3 / 0 / 0 | 2 / 0 / 0 | 0 / 0 · 0 / 0 · 0 / 0 |
+| 15 | TurnOnElectricKettle | F | 4 / 2 / 0 | 4 / 2 / 0 | 2 / 2 · 0 / 0 · 0 / 0 |
+| 16 | TurnOnMicrowave | F | 4 / 1 / 0 | 4 / 1 / 0 | 1 / 1 · 0 / 0 · 0 / 0 |
+| 17 | TurnOnSinkFaucet | F | 3 / 1 / 2 | 3 / 1 / 2 | 0 / 0 · 0 / 0 · 0 / 0 |
+
+**Paired by seed** (exact McNemar; gained = passes with the second prompt only, lost = with the first only)
+
+| Comparison | Metric | gained | lost | p |
+| --- | --- | --- | --- | --- |
+| `stl_nl` vs `nl` | Task success | 7 | 62 | 4.1e-12 |
+| `stl_nl` vs `nl` | Deadline met | 1 | 28 | 1.1e-07 |
+| `stl_nl` vs `nl` | Clean success | 8 | 60 | 5.7e-11 |
+| `stl_nl` vs `nl` | Full STL | 1 | 28 | 1.1e-07 |
+| `stl` vs `nl` | Task success | 3 | 72 | 3.7e-18 |
+| `stl` vs `nl` | Deadline met | 0 | 28 | 7.5e-09 |
+| `stl` vs `nl` | Clean success | 3 | 69 | 2.6e-17 |
+| `stl` vs `nl` | Full STL | 0 | 28 | 7.5e-09 |
+| `stl` vs `stl_nl` | Task success | 6 | 20 | 0.0094 |
+| `stl` vs `stl_nl` | Deadline met | 0 | 1 | 1 |
+| `stl` vs `stl_nl` | Clean success | 6 | 20 | 0.0094 |
+| `stl` vs `stl_nl` | Full STL | 0 | 1 | 1 |
+
+**Why each deadline failure happened**
+
+| Cause | `nl` | `stl_nl` | `stl` |
+| --- | --- | --- | --- |
+| done by T, gripper near / touching at the end | 7 | 0 | 0 |
+| done by T, gripper near / touching until after T | 4 | 1 | 1 |
+| done by T, settled only after T | 4 | 1 | 0 |
+| done by T, undone at the end | 1 | 0 | 0 |
+| first done after T | 34 | 20 | 8 |
+| never done | 102 | 157 | 171 |
+| **total** | **152** | **179** | **180** |
+
+**Other objects disturbed** (episodes with at least one `o` in `O` disturbed; the 9 tasks with non-empty `O`)
+
+| Task | `nl` | `stl_nl` | `stl` | objects (all prompts) |
+| --- | --- | --- | --- | --- |
+| CloseFridge | 0/10 | 0/10 | 8/10 | door_obj ×8 |
+| OpenCabinet | 1/10 | 0/10 | 2/10 | door_obj ×2, distr_counter_1 ×1 |
+| OpenDrawer | 1/10 | 0/10 | 0/10 | drawer_obj ×1 |
+| PickPlaceCounterToCabinet | 0/10 | 0/10 | 4/10 | distr_cab ×4 |
+| PickPlaceDrawerToCounter | 0/10 | 0/10 | 4/10 | distr ×4 |
+| PickPlaceSinkToCounter | 0/10 | 0/10 | 4/10 | distr_counter ×4 |
+| TurnOffStove | 1/10 | 0/10 | 2/10 | cookware ×3 |
+| TurnOnMicrowave | 0/10 | 0/10 | 0/10 | |
+| TurnOnSinkFaucet | 1/10 | 1/10 | 1/10 | distr_counter_0 ×2, distr_counter_1 ×2 |
+
+**Diagnostics** (counts)
+
+| Prompt | pushed in (P) | bumped (F) | fixture changed | tilt-only undisturbed | success at end |
+| --- | --- | --- | --- | --- | --- |
+| `nl` | 0/70 | 0/100 | 14/180 | 176/180 | 76/180 |
+| `stl_nl` | 0/70 | 0/100 | 8/180 | 180/180 | 23/180 |
+| `stl` | 0/70 | 0/100 | 11/180 | 157/180 | 8/180 |
+
+**What this shows**
+
+- **Adding the rules to the prompt hurts the task itself.**
+  - Task success falls from 43% (`nl`) to 13% (`stl_nl`) and 5% (`stl`).
+  - Paired by seed, `stl_nl` loses 62 of `nl`'s successes and gains 7; `stl` loses 72 and gains 3 (both p < 1e-11).
+  - The raw formula is also worse than the English rules: 20 lost against 6 gained, p = 0.009.
+  - Under `stl`, 12 of 18 tasks never succeed; under `stl_nl`, 9. Under `nl`, every task succeeds at least once.
+- **The deadline is rarely met even with the original instruction.**
+  - `nl` meets it in 28/180 episodes, but in 34 more it first succeeds only after T.
+  - Its median first success is at 11.9 s, against deadlines of 9–21 s.
+  - All 28 deadline passes come from 6 tasks: OpenDrawer, OpenStandMixerHead, PickPlaceCounterToCabinet, PickPlaceCounterToStove, PickPlaceSinkToCounter and TurnOnElectricKettle.
+  - Under the rule prompts it is met once (`stl_nl`, PickPlaceSinkToCounter) and never under `stl`. The rule prompts did not make the policy faster: median first success is 16.6 s (`stl_nl`) and 14.1 s (`stl`) among their few successes.
+- **Leaving the gripper on the part is a small share of the deadline failures.**
+  - Under `nl`, 16 episodes were done by T but failed the rest condition: 11 with the gripper near or touching the part, 4 settled only after T, 1 undone at the end.
+  - Almost all failures are "never done" or "done late".
+- **The "don't move other objects" rule had the opposite effect under `stl`.**
+  - Under `nl`, an object in `O` was disturbed in 4 of 90 episodes (tasks with non-empty `O`), and in 3 of them the task still succeeded. Under `stl_nl`, in 1.
+  - Under `stl`, it was disturbed in 25 of 90 episodes, all of them task failures. Most moved far beyond the 2 cm threshold: up to 1.17 m for the object in the fridge (CloseFridge seed 1001) and 0.98 m for the object in the cabinet (PickPlaceCounterToCabinet seed 1001).
+  - Clean success is therefore close to task success under every prompt (75 vs 78, 23 vs 23, 9 vs 9). The rule prompts lose on the task, not on cleanliness.
+- **No episode pushed a P-type object in or bumped an F-type part without contact.** `pushed_in` and `bumped` are 0 under every prompt.
+- **The videos have not been reviewed** for the full run. These numbers come from the recorded states only.
+
+**CloseBlenderLid in detail** (from the first attempt; `stl` was added in the restart. P, limit 30 s, deadline T = 18 s; O is empty, so clean success = task success and Full STL = deadline met)
 
 | Prompt | Task success | Deadline met | Clean success | Full STL |
 | --- | --- | --- | --- | --- |
 | `nl` | 2/10 [6–51%] | 0/10 [0–28%] | 2/10 [6–51%] | 0/10 [0–28%] |
 | `stl_nl` | 1/10 [2–40%] | 0/10 [0–28%] | 1/10 [2–40%] | 0/10 [0–28%] |
+| `stl` | 1/10 [2–40%] | 0/10 [0–28%] | 1/10 [2–40%] | 0/10 [0–28%] |
 
-(95% Wilson range in brackets.)
+(95% Wilson range in brackets.) The bullets below cover `nl` and `stl_nl` only. Under `stl`, the one success is seed 1004, first done at 22.45 s, after T; the other 9 episodes never succeeded.
 
-- **No episode met the deadline under either prompt.** All three successes came after 18 s: `nl` seeds 1002 (18.6 s) and 1004 (27.4 s), `stl_nl` seed 1007 (27.45 s). Each then stayed at rest to the end.
+- **No episode met the deadline under any prompt.** All `nl` and `stl_nl` successes came after 18 s: `nl` seeds 1002 (18.6 s) and 1004 (27.4 s), `stl_nl` seed 1007 (27.45 s). Each then stayed at rest to the end.
 - **Paired by seed,** `stl_nl` vs `nl` task success is 1 gained against 2 lost (exact McNemar p = 1). Ten episodes of one task can't show a difference either way.
 - **Deadline failures:** `nl` 8 never done, 2 done after T; `stl_nl` 9 never done, 1 done after T.
 - **The lid is often placed but RoboCasa's success never fires.** The lid was on the blender at some point (`lid_on` part) in 2 `nl` and 4 `stl_nl` episodes. Both `nl` ones succeeded; in 3 `stl_nl` ones success never followed (seeds 1002, 1004, 1005, with the lid on for 1.2–4.8 s). RoboCasa also needs the gripper > 0.15 m from the lid, while it is still on and upright. The first lift came at 7.9–27.3 s; 4 `nl` and 3 `stl_nl` episodes never lifted the lid. No episode pushed the lid in without lifting it.
-- Not comparable to the pilot's CloseBlenderLid (0/1), and too few episodes to say anything about the rule prompts.
-
-**Not recorded:** the other 17 tasks, and the `stl` prompt.
+- Not comparable to the pilot's CloseBlenderLid (0/1). Ten episodes of one task are too few to say anything about the rule prompts; see the all-task tables above.
 
 ## Decisions
 

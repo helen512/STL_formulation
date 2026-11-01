@@ -1,0 +1,37 @@
+
+thresholds: Thresholds(still_speed=0.01, still_spin=0.25, part_still=0.01, base_speed=0.02, base_turn=0.05, disturb_disp=0.02, disturb_rot=10.0, disturb_tilt=10.0, fixture_changed=0.2, grasp_lift=0.02)  velocities: sim  Disturbed reference: settle
+
+**Summary** (episodes that passed / episodes run; 95% Wilson range of the pass rate in brackets)
+
+| Prompt | Task success | Deadline met | Clean success | Full STL |
+| --- | --- | --- | --- | --- |
+| `nl` | 3/10 [11–60%] | 0/10 [0–28%] | 2/10 [6–51%] | 0/10 [0–28%] |
+
+**Per task** (out of the episodes run; cells are `nl`)
+
+| # | Task | Type | Task success | Clean success | Deadline met / Full STL |
+| --- | --- | --- | --- | --- | --- |
+| 14 | TurnOffStove | F | 3 | 2 | 0 / 0 |
+
+**Why each deadline failure happened**
+
+| Cause | `nl` |
+| --- | --- |
+| done by T, gripper near / touching at the end | 1 |
+| first done after T | 2 |
+| never done | 7 |
+| **total** | **10** |
+
+**Other objects disturbed** (episodes with at least one o in O disturbed; tasks with O non-empty)
+
+| Task | `nl` | objects (all prompts) |
+| --- | --- | --- |
+| TurnOffStove | 1/10 | cookware ×1 |
+
+**Diagnostics** (counts)
+
+| Prompt | pushed in (P) | bumped (F) | fixture changed | tilt-only undisturbed | success at end |
+| --- | --- | --- | --- | --- | --- |
+| `nl` | 0/0 | 0/10 | 2/10 | 9/10 | 3/10 |
+
+consistency: steps == task limit in 10/10; rtamt == numpy in 10/10; lerobot-eval success == any(success) in 10/10

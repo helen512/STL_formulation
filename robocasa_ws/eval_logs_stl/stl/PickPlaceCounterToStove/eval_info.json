@@ -1,0 +1,101 @@
+{
+  "per_task": [
+    {
+      "task_group": "PickPlaceCounterToStove",
+      "task_id": 0,
+      "metrics": {
+        "sum_rewards": [
+          0.0,
+          0.0,
+          5.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "max_rewards": [
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "successes": [
+          false,
+          false,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "video_paths": [
+          "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_0.mp4",
+          "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_1.mp4",
+          "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_2.mp4",
+          "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_3.mp4",
+          "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_4.mp4",
+          "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_5.mp4",
+          "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_6.mp4",
+          "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_7.mp4",
+          "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_8.mp4",
+          "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_9.mp4"
+        ],
+        "predicted_video_paths": []
+      }
+    }
+  ],
+  "per_group": {
+    "PickPlaceCounterToStove": {
+      "avg_sum_reward": 0.5,
+      "avg_max_reward": 0.1,
+      "pc_success": 10.0,
+      "n_episodes": 10,
+      "video_paths": [
+        "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_0.mp4",
+        "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_1.mp4",
+        "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_2.mp4",
+        "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_3.mp4",
+        "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_4.mp4",
+        "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_5.mp4",
+        "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_6.mp4",
+        "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_7.mp4",
+        "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_8.mp4",
+        "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_9.mp4"
+      ],
+      "predicted_video_paths": []
+    }
+  },
+  "overall": {
+    "avg_sum_reward": 0.5,
+    "avg_max_reward": 0.1,
+    "pc_success": 10.0,
+    "n_episodes": 10,
+    "eval_s": 374.7612419128418,
+    "eval_ep_s": 37.476124262809755,
+    "video_paths": [
+      "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_0.mp4",
+      "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_1.mp4",
+      "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_2.mp4",
+      "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_3.mp4",
+      "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_4.mp4",
+      "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_5.mp4",
+      "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_6.mp4",
+      "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_7.mp4",
+      "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_8.mp4",
+      "eval_logs_stl/stl/PickPlaceCounterToStove/videos/PickPlaceCounterToStove_0/eval_episode_9.mp4"
+    ],
+    "predicted_video_paths": []
+  }
+}

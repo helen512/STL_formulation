@@ -1,0 +1,101 @@
+{
+  "per_task": [
+    {
+      "task_group": "OpenDrawer",
+      "task_id": 0,
+      "metrics": {
+        "sum_rewards": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          157.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          171.0
+        ],
+        "max_rewards": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "successes": [
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          false,
+          false,
+          false,
+          true
+        ],
+        "video_paths": [
+          "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_0.mp4",
+          "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_1.mp4",
+          "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_2.mp4",
+          "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_3.mp4",
+          "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_4.mp4",
+          "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_5.mp4",
+          "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_6.mp4",
+          "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_7.mp4",
+          "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_8.mp4",
+          "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_9.mp4"
+        ],
+        "predicted_video_paths": []
+      }
+    }
+  ],
+  "per_group": {
+    "OpenDrawer": {
+      "avg_sum_reward": 32.8,
+      "avg_max_reward": 0.2,
+      "pc_success": 20.0,
+      "n_episodes": 10,
+      "video_paths": [
+        "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_0.mp4",
+        "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_1.mp4",
+        "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_2.mp4",
+        "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_3.mp4",
+        "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_4.mp4",
+        "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_5.mp4",
+        "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_6.mp4",
+        "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_7.mp4",
+        "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_8.mp4",
+        "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_9.mp4"
+      ],
+      "predicted_video_paths": []
+    }
+  },
+  "overall": {
+    "avg_sum_reward": 32.8,
+    "avg_max_reward": 0.2,
+    "pc_success": 20.0,
+    "n_episodes": 10,
+    "eval_s": 382.9122006893158,
+    "eval_ep_s": 38.29122011661529,
+    "video_paths": [
+      "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_0.mp4",
+      "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_1.mp4",
+      "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_2.mp4",
+      "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_3.mp4",
+      "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_4.mp4",
+      "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_5.mp4",
+      "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_6.mp4",
+      "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_7.mp4",
+      "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_8.mp4",
+      "eval_logs_stl/stl/OpenDrawer/videos/OpenDrawer_0/eval_episode_9.mp4"
+    ],
+    "predicted_video_paths": []
+  }
+}
