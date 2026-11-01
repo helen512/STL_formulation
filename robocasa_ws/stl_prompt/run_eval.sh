@@ -11,7 +11,8 @@ set -euo pipefail
 VARIANT=$1 TASK=$2 GPU=$3 N=$4 OUT=$5
 D="$OUT/$VARIANT/$TASK"
 mkdir -p "$D"
-CUDA_VISIBLE_DEVICES=$GPU MUJOCO_GL=egl \
+# CUDA_DEVICE_ORDER=PCI_BUS_ID: number GPUs as nvidia-smi does (the driver picks the GPU from nvidia-smi).
+CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=$GPU MUJOCO_GL=egl \
 STL_VARIANT="$VARIANT" STL_NO_EARLY_STOP=1 STL_TRACE_DIR="$D/traces" STL_SEED0=1000 \
 pixi run python stl_prompt/launch_eval.py \
   --policy.path=lerobot/pi05_robocasa --policy.n_action_steps=50 --policy.compile_model=false \
