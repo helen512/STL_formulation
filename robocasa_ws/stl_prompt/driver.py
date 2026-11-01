@@ -5,9 +5,11 @@ Usage (from robocasa_ws/):
                               [--episodes 10] [--slots 2] [--gpus 0,1]
 
 Order: the first two variants interleaved task by task (nl, stl_nl, nl, stl_nl, ...), then the rest.
-Slot i runs on GPU gpus[i % len(gpus)]. A pair is done when <out>/<variant>/<task>/eval_info.json exists
+Each pair starts on the listed GPU with the most free memory, and only if at least --need-gb is free
+(the GPUs are shared; a pair that started less than 3 min ago counts as using --need-gb already).
+Otherwise the driver waits. A pair is done when <out>/<variant>/<task>/eval_info.json exists
 and all its recordings are there; done pairs are skipped, so a restart picks up where it stopped. A pair
-that fails or is incomplete is moved aside to <task>.incomplete-<time> and run again (once per driver run).
+that fails or is incomplete is moved aside to <task>.incomplete-<time> and run again (up to --retries times).
 After each eval the checker (monitor.py, rtamt venv) runs on that pair and writes check.txt next to it.
 Every minute the driver logs free RAM and the RSS of each running eval.
 """
@@ -73,6 +75,15 @@ def tree_rss_gb(pid: int) -> float:
     return total / 2**20
 
 
+def gpu_free_gb(idx: str) -> float:
+    out = subprocess.run(["nvidia-smi", "--query-gpu=memory.free", "--format=csv,noheader,nounits", "-i", idx],
+                         capture_output=True, text=True)
+    try:
+        return float(out.stdout.strip()) / 1024
+    except ValueError:
+        return 0.0
+
+
 def queue(variants: list[str], tasks: list[str]) -> list[tuple[str, str]]:
     first, rest = variants[:2], variants[2:]
     q = [(v, t) for t in tasks for v in first]
@@ -95,6 +106,8 @@ def main():
     ap.add_argument("--episodes", type=int, default=10)
     ap.add_argument("--slots", type=int, default=2)
     ap.add_argument("--gpus", default="0,1")
+    ap.add_argument("--need-gb", type=float, default=11.0, help="free GPU memory needed to start a pair")
+    ap.add_argument("--retries", type=int, default=3)
     a = ap.parse_args()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -103,30 +116,41 @@ def main():
     gpus = a.gpus.split(",")
     pending = [p for p in queue(variants, tasks) if not is_done(out, *p, a.episodes)]
     log(f"driver start: {len(pending)} pairs to run, slots={a.slots}, gpus={gpus}, episodes={a.episodes}")
-    running: dict[int, tuple[tuple[str, str], subprocess.Popen, float]] = {}
-    retried: set[tuple[str, str]] = set()
+    running: dict[int, tuple[tuple[str, str], subprocess.Popen, float, str]] = {}
+    tries: dict[tuple[str, str], int] = {}
+    last_wait = 0.0
     failed: list[tuple[str, str]] = []
     last_mem = 0.0
     while pending or running:
         for slot in range(a.slots):
             if slot in running or not pending:
                 continue
+            # pick the GPU with the most free memory, minus what recently started pairs will still take
+            free = {}
+            for g in gpus:
+                recent = sum(1 for (_, _, t0, gg) in running.values() if gg == g and time.time() - t0 < 180)
+                free[g] = gpu_free_gb(g) - recent * a.need_gb
+            gpu = max(free, key=free.get)
+            if free[gpu] < a.need_gb:
+                if time.time() - last_wait > 600:
+                    last_wait = time.time()
+                    log(f"waiting for GPU memory: free {', '.join(f'gpu{g} {f:.1f} GB' for g, f in free.items())}")
+                break
             v, t = pending.pop(0)
             d = pair_dir(out, v, t)
             if d.exists() and any(d.iterdir()):
                 stale = d.with_name(f"{t}.incomplete-{time.strftime('%Y%m%d-%H%M%S')}")
                 shutil.move(str(d), str(stale))
                 log(f"moved incomplete {d} -> {stale.name}")
-            gpu = gpus[slot % len(gpus)]
             cmd = ["bash", str(HERE / "run_eval.sh"), v, t, gpu, str(a.episodes), str(out)]
-            running[slot] = ((v, t), subprocess.Popen(cmd, cwd=WS), time.time())
+            running[slot] = ((v, t), subprocess.Popen(cmd, cwd=WS), time.time(), gpu)
             log(f"slot {slot} gpu {gpu}: start {v} {t}")
         time.sleep(5)
         if time.time() - last_mem > 60:
             last_mem = time.time()
             rss = ", ".join(f"{p[0][0]}/{p[0][1]} {tree_rss_gb(p[1].pid):.1f} GB" for p in running.values())
             log(f"mem: available {mem_available_gb():.1f} GB; running: {rss}")
-        for slot, ((v, t), proc, t0) in list(running.items()):
+        for slot, ((v, t), proc, t0, _) in list(running.items()):
             if proc.poll() is None:
                 continue
             del running[slot]
@@ -134,10 +158,10 @@ def main():
             log(f"slot {slot}: {v} {t} finished code={proc.returncode} ok={ok} in {(time.time() - t0) / 60:.1f} min")
             if ok:
                 check_pair(out, v, t)
-            elif (v, t) not in retried:
-                retried.add((v, t))
+            elif tries.get((v, t), 0) < a.retries:
+                tries[(v, t)] = tries.get((v, t), 0) + 1
                 pending.insert(0, (v, t))
-                log(f"retrying {v} {t}")
+                log(f"retrying {v} {t} ({tries[(v, t)]}/{a.retries})")
             else:
                 failed.append((v, t))
     log(f"driver done; failed pairs: {failed or 'none'}")

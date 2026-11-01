@@ -64,7 +64,8 @@ def find_traces(d: Path) -> list[Path]:
         task, ep = stem.rsplit("_ep", 1)
         return (TASKS[task].index if task in TASKS else 99, task, int(ep))
 
-    return sorted(d.rglob("*.json.gz"), key=key)
+    # skip pairs the driver moved aside as incomplete (<task>.incomplete-<time>/)
+    return sorted((p for p in d.rglob("*.json.gz") if ".incomplete-" not in str(p.relative_to(d))), key=key)
 
 
 def scene_key(t: dict) -> str:
