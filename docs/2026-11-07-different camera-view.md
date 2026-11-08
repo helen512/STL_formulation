@@ -1,0 +1,3 @@
+- attach different camera view to ot libero and robocasa env
+- one camera on the gripper, so the camera view changes as the gripper move, for both libero and robocasa
+- one third person camera view that on top 

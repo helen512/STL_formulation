@@ -1,4 +1,0 @@
-[2026-10-31 16:51:32] driver start: 18 pairs to run, slots=2, gpus=['0', '1'], episodes=1
-[2026-10-31 16:51:32] slot 0 gpu 0: start nl CloseBlenderLid
-[2026-10-31 16:51:32] slot 1 gpu 1: start nl CloseFridge
-[2026-10-31 16:51:37] mem: available 50.1 GB; running: nl/CloseBlenderLid 0.9 GB, nl/CloseFridge 0.9 GB

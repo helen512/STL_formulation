@@ -1,0 +1,59 @@
+{
+  "per_task": [
+    {
+      "task_group": "NavigateKitchen",
+      "task_id": 0,
+      "metrics": {
+        "sum_rewards": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "max_rewards": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "successes": [
+          false,
+          false,
+          false
+        ],
+        "video_paths": [
+          "eval_logs_thirdperson/nl/NavigateKitchen_ep1-3/videos/NavigateKitchen_0/eval_episode_1.mp4",
+          "eval_logs_thirdperson/nl/NavigateKitchen_ep1-3/videos/NavigateKitchen_0/eval_episode_2.mp4",
+          "eval_logs_thirdperson/nl/NavigateKitchen_ep1-3/videos/NavigateKitchen_0/eval_episode_3.mp4"
+        ],
+        "predicted_video_paths": []
+      }
+    }
+  ],
+  "per_group": {
+    "NavigateKitchen": {
+      "avg_sum_reward": 0.0,
+      "avg_max_reward": 0.0,
+      "pc_success": 0.0,
+      "n_episodes": 3,
+      "video_paths": [
+        "eval_logs_thirdperson/nl/NavigateKitchen_ep1-3/videos/NavigateKitchen_0/eval_episode_1.mp4",
+        "eval_logs_thirdperson/nl/NavigateKitchen_ep1-3/videos/NavigateKitchen_0/eval_episode_2.mp4",
+        "eval_logs_thirdperson/nl/NavigateKitchen_ep1-3/videos/NavigateKitchen_0/eval_episode_3.mp4"
+      ],
+      "predicted_video_paths": []
+    }
+  },
+  "overall": {
+    "avg_sum_reward": 0.0,
+    "avg_max_reward": 0.0,
+    "pc_success": 0.0,
+    "n_episodes": 3,
+    "eval_s": 98.02837896347046,
+    "eval_ep_s": 32.6761265595754,
+    "video_paths": [
+      "eval_logs_thirdperson/nl/NavigateKitchen_ep1-3/videos/NavigateKitchen_0/eval_episode_1.mp4",
+      "eval_logs_thirdperson/nl/NavigateKitchen_ep1-3/videos/NavigateKitchen_0/eval_episode_2.mp4",
+      "eval_logs_thirdperson/nl/NavigateKitchen_ep1-3/videos/NavigateKitchen_0/eval_episode_3.mp4"
+    ],
+    "predicted_video_paths": []
+  }
+}

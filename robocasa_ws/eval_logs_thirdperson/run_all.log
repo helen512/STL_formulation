@@ -1,0 +1,11 @@
+session=thirdperson_rec
+started_at=2026-11-08T08:53:25-05:00
+cwd=/mnt/samsung_2tb/mingyue/lerobot-libero
+command=bash robocasa_ws/eval_logs_thirdperson/run_all.sh 
+libero_spatial_1 exit 0
+NavigateKitchen eval_logs_thirdperson/nl/NavigateKitchen exit 0
+TurnOnElectricKettle eval_logs_thirdperson/nl/TurnOnElectricKettle exit 0
+NavigateKitchen eval_logs_thirdperson/nl/NavigateKitchen_ep1-3 exit 0
+rename exit 0
+exit_code=0
+finished_at=2026-11-08T09:06:15-05:00

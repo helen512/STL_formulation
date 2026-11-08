@@ -159,7 +159,7 @@ Example prompts for episode 0 (seed 1000, pretrain kitchens). `#` is the row in 
 
 | # | Task | `nl` (original) | `stl_nl` (original + rules) | `stl` (raw STL) |
 | --- | --- | --- | --- | --- |
-| 0 | CloseBlenderLid | Close the lid blender by securely placing the lid on top. | Close the lid blender by securely placing the lid on top. Finish within 18 seconds, then let go and leave it there until the end. Do not move any other object. | `F[0,18] G resting_on(lid, blender) & G !moved(other_objects)` |
+| 0 | CloseBlenderLid | Close the lid blender by securely placing the lid on top. | Close the lid blender by securely placing the lid on top. Finish within 18 seconds, then let go and leave it there until the end. Do not move any other object. | `F[0,18] G on(lid, blender) & G !moved(other_objects)` |
 | 1 | CloseFridge | Close the fridge door. | Close the fridge door. Finish within 18 seconds, then let go and leave it closed until the end. Do not move any other object. | `F[0,18] G (closed(fridge_door) & released(fridge_door)) & G !moved(other_objects)` |
 | 2 | CloseToasterOvenDoor | Close the toaster oven door. | Close the toaster oven door. Finish within 9 seconds, then let go and leave it closed until the end. Do not move any other object. | `F[0,9] G (closed(toaster_oven_door) & released(toaster_oven_door)) & G !moved(other_objects)` |
 | 3 | CoffeeSetupMug | Pick the mug from the counter and place it under the coffee machine dispenser. | Pick the mug from the counter and place it under the coffee machine dispenser. Finish within 12 seconds, then let go and leave it there until the end. Do not move any other object. | `F[0,12] G resting_under(mug, coffee_dispenser) & G !moved(other_objects)` |

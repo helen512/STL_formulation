@@ -1,0 +1,47 @@
+{
+  "per_task": [
+    {
+      "task_group": "libero_spatial",
+      "task_id": 1,
+      "metrics": {
+        "sum_rewards": [
+          170.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [
+          "eval_logs_cams/nl/videos/libero_spatial_1/eval_episode_0.mp4"
+        ],
+        "predicted_video_paths": []
+      }
+    }
+  ],
+  "per_group": {
+    "libero_spatial": {
+      "avg_sum_reward": 170.0,
+      "avg_max_reward": 1.0,
+      "pc_success": 100.0,
+      "n_episodes": 1,
+      "video_paths": [
+        "eval_logs_cams/nl/videos/libero_spatial_1/eval_episode_0.mp4"
+      ],
+      "predicted_video_paths": []
+    }
+  },
+  "overall": {
+    "avg_sum_reward": 170.0,
+    "avg_max_reward": 1.0,
+    "pc_success": 100.0,
+    "n_episodes": 1,
+    "eval_s": 97.93897724151611,
+    "eval_ep_s": 97.93897771835327,
+    "video_paths": [
+      "eval_logs_cams/nl/videos/libero_spatial_1/eval_episode_0.mp4"
+    ],
+    "predicted_video_paths": []
+  }
+}
